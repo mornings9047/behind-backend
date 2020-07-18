@@ -28,7 +28,11 @@ data class User(
         var comments: MutableList<Comment> = mutableListOf<Comment>(),
 
         @ManyToMany
-        @JoinTable(name = "Scrap")
-        var scrapPost: MutableList<Post> = mutableListOf<Post>()
+        @JoinTable(name = "scrap")
+        var scrapPost: MutableList<Post> = mutableListOf<Post>(),
+
+        @ManyToMany
+        @JoinTable(name = "postLike")
+        var likePost: MutableList<Post> = mutableListOf<Post>()
 
 ) {}

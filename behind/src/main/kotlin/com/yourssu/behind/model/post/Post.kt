@@ -29,5 +29,8 @@ data class Post(
         var user: User,
 
         @ManyToMany(mappedBy = "scrapPost")
-        var scrapUser: MutableList<User> = mutableListOf<User>()
+        var scrapUser: MutableList<User> = mutableListOf<User>(),
+
+        @ManyToMany(mappedBy = "likePost")
+        var likeUser: MutableList<User> = mutableListOf<User>()
 ) {}
