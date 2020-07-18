@@ -1,4 +1,4 @@
-package com.yourssu.behindbackend.model.post
+package com.yourssu.behind.model.post
 
 enum class PostType {
     QUESTION,INFORMATION,FREE

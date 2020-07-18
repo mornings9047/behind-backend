@@ -1,2 +1,2 @@
-rootProject.name = "behind_backend"
+rootProject.name = "behind"
 rootProject.buildFileName = "build.gradle.kts"
