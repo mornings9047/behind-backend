@@ -17,11 +17,13 @@ class AuthService {
 
     fun isUserSignUpRequestDtoValid(userSignUpRequestDto: UserSignUpRequestDto): Boolean {
         if (!isSchoolIdValid(userSignUpRequestDto.schoolId))
-            throw InvalidSchoolIdException("유효하지 않은 학번입니다")
+            throw InvalidSchoolIdException()
+        if (userRepository.existsBySchoolId(userSignUpRequestDto.schoolId))
+            throw UserAlreadyExistsException()
         if (!isUsernameValid(userSignUpRequestDto.username))
-            throw InvalidUsernameException("유효하지 않은 아이디입니다")
+            throw InvalidUsernameException()
         if (!isPasswordValid(userSignUpRequestDto.password))
-            throw InvalidPasswordException("유효하지 않은 비밀번호입니다")
+            throw InvalidPasswordException()
         return true
     }
 
@@ -42,14 +44,10 @@ class AuthService {
 
     fun signUp(userSignUpRequestDto: UserSignUpRequestDto) {
         if (isUserSignUpRequestDtoValid(userSignUpRequestDto))
-            if (userRepository.existsBySchoolId(userSignUpRequestDto.schoolId))
-                throw UserAlreadyExistsException("이미 존재하는 학번입니다.")
-
-        userRepository.save(User(
-                schoolId = userSignUpRequestDto.schoolId,
-                userName = userSignUpRequestDto.username,
-                password = userSignUpRequestDto.password
-        ))
+            userRepository.save(User(
+                    schoolId = userSignUpRequestDto.schoolId,
+                    userName = userSignUpRequestDto.username,
+                    password = userSignUpRequestDto.password
+            ))
     }
-
 }
