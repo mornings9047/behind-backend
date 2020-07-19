@@ -1,8 +1,8 @@
-package com.yourssu.behind.model.lecture
+package com.yourssu.behind.model.entity.lecture
 
-import com.yourssu.behind.model.post.Post
-import com.yourssu.behind.model.professor.Professor
-import com.yourssu.behind.model.user.User
+import com.yourssu.behind.model.entity.post.Post
+import com.yourssu.behind.model.entity.professor.Professor
+import com.yourssu.behind.model.entity.user.User
 import javax.persistence.*
 
 @Entity

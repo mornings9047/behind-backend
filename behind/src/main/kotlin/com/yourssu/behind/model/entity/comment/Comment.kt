@@ -1,6 +1,6 @@
-package com.yourssu.behind.model.comment
+package com.yourssu.behind.model.entity.comment
 
-import com.yourssu.behind.model.user.User
+import com.yourssu.behind.model.entity.user.User
 import java.time.LocalDateTime
 import javax.persistence.*
 

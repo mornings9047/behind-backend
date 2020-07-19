@@ -1,6 +1,6 @@
-package com.yourssu.behind.model.professor
+package com.yourssu.behind.model.entity.professor
 
-import com.yourssu.behind.model.lecture.Lecture
+import com.yourssu.behind.model.entity.lecture.Lecture
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.Id

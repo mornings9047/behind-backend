@@ -1,8 +1,8 @@
-package com.yourssu.behind.model.user
+package com.yourssu.behind.model.entity.user
 
-import com.yourssu.behind.model.comment.Comment
-import com.yourssu.behind.model.lecture.Lecture
-import com.yourssu.behind.model.post.Post
+import com.yourssu.behind.model.entity.comment.Comment
+import com.yourssu.behind.model.entity.lecture.Lecture
+import com.yourssu.behind.model.entity.post.Post
 import java.time.LocalDateTime
 import javax.persistence.*
 
@@ -32,7 +32,7 @@ data class User(
         var scrapPost: MutableList<Post> = mutableListOf<Post>(),
 
         @ManyToMany
-        @JoinTable(name = "postLike")
+        @JoinTable(name = "thumbsUp")
         var likePost: MutableList<Post> = mutableListOf<Post>()
 
 ) {}

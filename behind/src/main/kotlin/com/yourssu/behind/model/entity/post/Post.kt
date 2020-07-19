@@ -1,7 +1,7 @@
-package com.yourssu.behind.model.post
+package com.yourssu.behind.model.entity.post
 
-import com.yourssu.behind.model.lecture.Lecture
-import com.yourssu.behind.model.user.User
+import com.yourssu.behind.model.entity.lecture.Lecture
+import com.yourssu.behind.model.entity.user.User
 import java.time.LocalDateTime
 import javax.persistence.*
 
