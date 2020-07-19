@@ -1,11 +1,11 @@
-package com.yourssu.behindbackend
+package com.yourssu.behind
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class BehindbackendApplication
+class BehindApplication
 
 fun main(args: Array<String>) {
-	runApplication<BehindbackendApplication>(*args)
+    runApplication<BehindApplication>(*args)
 }
