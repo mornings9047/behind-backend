@@ -8,7 +8,7 @@ import javax.persistence.*
 
 @Entity
 data class User(
-        @Id @GeneratedValue val id: Long?,
+        @Id @GeneratedValue val id: Long? = null,
         val userName: String,
 
         val schoolId: String,
