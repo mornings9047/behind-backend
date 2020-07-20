@@ -12,7 +12,7 @@ import javax.validation.Valid
 class AuthController @Autowired constructor(val authService: AuthService) {
 
     @PostMapping("/signup")
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     fun signUpNewUser(@Valid @RequestBody signUpRequestDto: UserSignUpRequestDto) {
         return authService.signUp(signUpRequestDto)
     }
