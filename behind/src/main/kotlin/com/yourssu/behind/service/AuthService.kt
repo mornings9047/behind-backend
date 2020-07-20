@@ -12,9 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
-class AuthService {
-    @Autowired
-    lateinit var userRepository: UserRepository
+class AuthService @Autowired constructor(val userRepository: UserRepository) {
 
     fun isUserSignUpRequestDtoValid(userSignUpRequestDto: UserSignUpRequestDto): Boolean {
         if (!isSchoolIdValid(userSignUpRequestDto.schoolId))

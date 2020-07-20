@@ -3,21 +3,18 @@ package com.yourssu.behind.controller
 import com.yourssu.behind.model.dto.UserSignUpRequestDto
 import com.yourssu.behind.service.AuthService
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RestController
-import org.springframework.web.server.ResponseStatusException
+import org.springframework.http.HttpStatus
+import org.springframework.web.bind.annotation.*
+import javax.validation.Valid
 
 @RestController
-class AuthController {
-    @Autowired
-    lateinit var authService: AuthService
+@RequestMapping("/auth")
+class AuthController @Autowired constructor(val authService: AuthService) {
 
-    fun signUpNewUser(@RequestBody signUpRequestDto: UserSignUpRequestDto) {
-        try {
-            return authService.signUp(signUpRequestDto)
-        } catch (e: ResponseStatusException) {
-            throw ResponseStatusException(e.status, e.message, e)
-        }
+    @PostMapping("/signup")
+    @ResponseStatus(HttpStatus.CREATED)
+    fun signUpNewUser(@Valid @RequestBody signUpRequestDto: UserSignUpRequestDto) {
+        return authService.signUp(signUpRequestDto)
     }
 
 }
