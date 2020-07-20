@@ -7,6 +7,7 @@ import com.yourssu.behind.exception.UserAlreadyExistsException
 import com.yourssu.behind.model.dto.UserSignUpRequestDto
 import com.yourssu.behind.model.entity.user.User
 import com.yourssu.behind.repository.UserRepository
+import org.mindrot.jbcrypt.BCrypt
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -43,11 +44,12 @@ class AuthService {
     }
 
     fun signUp(userSignUpRequestDto: UserSignUpRequestDto) {
+
         if (isUserSignUpRequestDtoValid(userSignUpRequestDto))
             userRepository.save(User(
                     schoolId = userSignUpRequestDto.schoolId,
                     userName = userSignUpRequestDto.username,
-                    password = userSignUpRequestDto.password
+                    password = BCrypt.hashpw(userSignUpRequestDto.password, BCrypt.gensalt())
             ))
     }
 }
