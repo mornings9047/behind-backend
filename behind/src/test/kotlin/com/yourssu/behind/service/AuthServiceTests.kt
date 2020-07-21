@@ -1,7 +1,8 @@
 package com.yourssu.behind.service
 
-import com.yourssu.behind.model.dto.UserSignUpRequestDto
-import com.yourssu.behind.repository.UserRepository
+import com.yourssu.behind.model.dto.user.request.UserSignUpRequestDto
+import com.yourssu.behind.repository.user.UserRepository
+import com.yourssu.behind.service.auth.AuthService
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired

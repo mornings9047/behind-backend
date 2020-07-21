@@ -1,5 +1,6 @@
 package com.yourssu.behind.model.entity.post
 
+import com.yourssu.behind.model.entity.comment.Comment
 import com.yourssu.behind.model.entity.lecture.Lecture
 import com.yourssu.behind.model.entity.user.User
 import java.time.LocalDateTime
@@ -15,12 +16,18 @@ data class Post(
 
         var title: String,
 
+        var imgUrl: String,
+
         @Lob
         var content: String,
 
         var createdAt: LocalDateTime = LocalDateTime.now(),
 
         var isDeleted: Boolean = false,
+
+
+        @OneToMany(mappedBy = "post")
+        var comments: MutableList<Comment> = mutableListOf<Comment>(),
 
         @ManyToOne
         var lecture: Lecture,

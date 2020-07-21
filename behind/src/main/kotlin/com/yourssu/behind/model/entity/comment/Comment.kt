@@ -1,5 +1,6 @@
 package com.yourssu.behind.model.entity.comment
 
+import com.yourssu.behind.model.entity.post.Post
 import com.yourssu.behind.model.entity.user.User
 import java.time.LocalDateTime
 import javax.persistence.*
@@ -18,5 +19,8 @@ data class Comment(
         val isDeleted: Boolean = false,
 
         @ManyToOne
-        val user: User
+        val user: User,
+
+        @ManyToOne
+        val post: Post
 ) {}

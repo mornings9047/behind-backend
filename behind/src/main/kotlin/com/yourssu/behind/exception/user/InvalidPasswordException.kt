@@ -1,4 +1,4 @@
-package com.yourssu.behind.exception
+package com.yourssu.behind.exception.user
 
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.ResponseStatus

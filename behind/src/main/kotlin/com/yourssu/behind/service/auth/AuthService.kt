@@ -1,12 +1,11 @@
-package com.yourssu.behind.service
+package com.yourssu.behind.service.auth
 
-import com.yourssu.behind.exception.InvalidPasswordException
-import com.yourssu.behind.exception.InvalidSchoolIdException
-import com.yourssu.behind.exception.InvalidUsernameException
-import com.yourssu.behind.exception.UserAlreadyExistsException
-import com.yourssu.behind.model.dto.UserSignUpRequestDto
+import com.yourssu.behind.exception.user.InvalidPasswordException
+import com.yourssu.behind.exception.user.InvalidSchoolIdException
+import com.yourssu.behind.exception.user.UserAlreadyExistsException
+import com.yourssu.behind.model.dto.user.request.UserSignUpRequestDto
 import com.yourssu.behind.model.entity.user.User
-import com.yourssu.behind.repository.UserRepository
+import com.yourssu.behind.repository.user.UserRepository
 import org.mindrot.jbcrypt.BCrypt
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -19,8 +18,6 @@ class AuthService @Autowired constructor(val userRepository: UserRepository) {
             throw InvalidSchoolIdException()
         if (userRepository.existsBySchoolId(userSignUpRequestDto.schoolId))
             throw UserAlreadyExistsException()
-        if (!isUsernameValid(userSignUpRequestDto.username))
-            throw InvalidUsernameException()
         if (!isPasswordValid(userSignUpRequestDto.password))
             throw InvalidPasswordException()
         return true
@@ -46,7 +43,6 @@ class AuthService @Autowired constructor(val userRepository: UserRepository) {
         if (isUserSignUpRequestDtoValid(userSignUpRequestDto))
             userRepository.save(User(
                     schoolId = userSignUpRequestDto.schoolId,
-                    userName = userSignUpRequestDto.username,
                     password = BCrypt.hashpw(userSignUpRequestDto.password, BCrypt.gensalt())
             ))
     }
