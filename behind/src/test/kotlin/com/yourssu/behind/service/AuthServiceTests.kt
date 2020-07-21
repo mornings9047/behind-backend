@@ -1,9 +1,13 @@
 package com.yourssu.behind.service
 
+import com.yourssu.behind.exception.PasswordNotMatchedException
+import com.yourssu.behind.exception.UserNotExistsException
+import com.yourssu.behind.model.dto.UserSignInRequestDto
 import com.yourssu.behind.model.dto.UserSignUpRequestDto
 import com.yourssu.behind.repository.UserRepository
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 
@@ -30,19 +34,6 @@ class AuthServiceTests {
     }
 
     @Test
-    fun isUsernameValidTest() {
-        Assertions.assertTrue(authService.isUsernameValid("VALID_ID"))
-        Assertions.assertTrue(authService.isUsernameValid("valid_id"))
-        Assertions.assertTrue(authService.isUsernameValid("@valid_Id@"))
-
-        Assertions.assertFalse(authService.isUsernameValid("INVALID"))
-        Assertions.assertFalse(authService.isUsernameValid("invalid"))
-        Assertions.assertFalse(authService.isUsernameValid("!@#$%^&"))
-        Assertions.assertFalse(authService.isUsernameValid("NUM_123"))
-        Assertions.assertFalse(authService.isUsernameValid("@TOO_LONG_USERNAME@"))
-    }
-
-    @Test
     fun isPasswordValidTest() {
         Assertions.assertTrue(authService.isPasswordValid("MinLength1"))
         Assertions.assertTrue(authService.isPasswordValid("MaxLength12345678900"))
@@ -58,10 +49,22 @@ class AuthServiceTests {
 
     @Test
     fun signUpTest() {
-        val user = UserSignUpRequestDto("20170503", "user_name", "Password123")
+        val user = UserSignUpRequestDto("20170503", "Password123")
         val before = userRepository.findAll().size
         authService.signUp(user)
         val after = userRepository.findAll().size
         Assertions.assertEquals(before + 1, after)
+    }
+
+    @Test
+    fun signInTest() {
+        val user = UserSignUpRequestDto("20170503", "Password123")
+        val incorrectId = UserSignInRequestDto("20170501", "Password123")
+        val incorrectPassword = UserSignInRequestDto("20170503", "Password1234")
+        authService.signUp(user)
+
+        assertThrows<UserNotExistsException> { authService.signIn(incorrectId) }
+        assertThrows<PasswordNotMatchedException> { authService.signIn(incorrectPassword) }
+        Assertions.assertTrue(authService.signIn(UserSignInRequestDto(user.schoolId, user.password)))
     }
 }
