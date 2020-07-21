@@ -12,8 +12,8 @@ import javax.validation.constraints.Size
 
 @Entity
 data class User(
-        @NotBlank(message = "학번 8자리")
-        @Size(min = 8, max = 8)
+        @Id @GeneratedValue val id: Long?,
+
         val schoolId: String,
 
         @NotBlank(message = "영문, 특수문자로 구성")
