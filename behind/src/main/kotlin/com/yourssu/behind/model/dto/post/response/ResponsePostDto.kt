@@ -10,6 +10,7 @@ class ResponsePostDto(post: Post) {
     val title: String = post.title
     val type: PostType = post.type
     val content: String = post.content
+    val imgUrl : String? = post.imgUrl
     val createdAt: LocalDateTime = post.createdAt
     val lectureId = ReturnLectureDto(post.lecture)
 

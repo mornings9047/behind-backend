@@ -11,6 +11,7 @@ import com.yourssu.behind.model.entity.user.User
 import com.yourssu.behind.repository.lecture.LectureRepository
 import com.yourssu.behind.repository.post.PostRepository
 import com.yourssu.behind.repository.user.UserRepository
+import com.yourssu.behind.service.post.function.CreatePostFunction
 import com.yourssu.behind.service.post.function.ImgUploadFunction
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -22,12 +23,15 @@ class PostService @Autowired constructor(val postRepository: PostRepository
                                          val lectureRepository: LectureRepository) {
 
     private val imgUploadFunction = ImgUploadFunction()
+    private val createPostFunction = CreatePostFunction(postRepository)
 
-    fun createPost(createOrUpdateRequestPostDto: CreateOrUpdateRequestPostDto, imgFile: MultipartFile): Unit {
-        var imgUrl: String = imgUploadFunction.storeImg(imgFile)
+    fun createPost(createOrUpdateRequestPostDto: CreateOrUpdateRequestPostDto, imgFile: MultipartFile?): Unit {
+        var imgUrl: String? = null
         var user: User = userRepository.findBySchoolId(createOrUpdateRequestPostDto.schoolId).orElseThrow { UserNotExistException() }
         var lecture: Lecture = lectureRepository.findById(createOrUpdateRequestPostDto.lectureId).orElseThrow { LectureNotExistException() }
 
+        if (imgFile != null)
+            imgUrl = imgUploadFunction.storeImg(imgFile)
 
         postRepository.save(Post(user = user,
                 type = createOrUpdateRequestPostDto.type,
@@ -40,19 +44,10 @@ class PostService @Autowired constructor(val postRepository: PostRepository
 
     fun getPosts(lectureId: Long, type: PostType?): List<ResponsePostsDto> {
         var lecture = lectureRepository.findById(lectureId).orElseThrow { LectureNotExistException() }
-        if (type == null)
-            return getAllPosts(lecture)
+        return if (type == null)
+            createPostFunction.getAllPosts(lecture)
         else {
-            return getPostsByType(lecture, type)
+            createPostFunction.getPostsByType(lecture, type)
         }
     }
-
-    fun getAllPosts(lecture: Lecture): List<ResponsePostsDto> {
-        return postRepository.findAllByLecture(lecture).map { ResponsePostsDto(it) }
-    }
-
-    fun getPostsByType(lecture: Lecture, type: PostType): List<ResponsePostsDto> {
-        return postRepository.findAllByLectureAndTypeEquals(lecture, type).map { ResponsePostsDto(it) }
-    }
-
 }

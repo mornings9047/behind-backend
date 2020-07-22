@@ -7,7 +7,7 @@ import java.util.*
 class ImgUploadFunction {
     fun storeImg(file: MultipartFile): String {
         val directory: File = File("./uploads")
-        val fileName: String = UUID.randomUUID().toString()
+        val fileName: String = file.originalFilename+UUID.randomUUID().toString()
 
         if (!directory.exists())
             directory.mkdir()
@@ -16,6 +16,6 @@ class ImgUploadFunction {
         var target: File = File(filePath)
         file.transferTo(target)
 
-        return "img/${fileName}"
+        return "img/${fileName}.jpeg"
     }
 }

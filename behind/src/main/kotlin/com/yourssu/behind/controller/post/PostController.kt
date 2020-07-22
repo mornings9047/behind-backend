@@ -16,7 +16,7 @@ class PostController @Autowired constructor(val postService: PostService) {
 
     @PostMapping("/", consumes = [MediaType.ALL_VALUE])
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    fun createPost(@RequestPart imgFile: MultipartFile,
+    fun createPost(@RequestPart imgFile: MultipartFile?,
                    @RequestPart createOrUpdateRequestPostDto: CreateOrUpdateRequestPostDto
     ): Unit {
         postService.createPost(createOrUpdateRequestPostDto, imgFile)

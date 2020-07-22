@@ -12,6 +12,7 @@ class ResponsePostsDto(post: Post) {
     val postId: Long? = post.id
     val title: String = post.title
     val type: PostType = post.type
+    val imgUrl: String? = post.imgUrl
     val content: String = post.content
     val createdAt: LocalDateTime = post.createdAt
     val thumbsUp = post.likeUser.size
