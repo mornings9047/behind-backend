@@ -3,6 +3,7 @@ package com.yourssu.behind.model.entity.user
 import com.yourssu.behind.model.entity.comment.Comment
 import com.yourssu.behind.model.entity.lecture.Lecture
 import com.yourssu.behind.model.entity.post.Post
+import org.springframework.data.jpa.repository.Temporal
 import java.time.LocalDateTime
 import javax.persistence.*
 import javax.validation.constraints.NotBlank
@@ -18,6 +19,7 @@ data class User(
         @Size(min = 8, max = 20)
         val password: String,
 
+        @Temporal
         val regDate: LocalDateTime = LocalDateTime.now(),
 
         @ManyToMany

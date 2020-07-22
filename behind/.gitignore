@@ -1,6 +1,7 @@
 HELP.md
 .gradle
 build/
+uploads/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
@@ -29,6 +30,7 @@ out/
 /dist/
 /nbdist/
 /.nb-gradle/
+
 
 
 # ... except for this one.

@@ -1,16 +1,17 @@
 package com.yourssu.behind.service.post
 
 import com.yourssu.behind.exception.lecture.LectureNotExistException
-import com.yourssu.behind.exception.post.PostNotExistException
 import com.yourssu.behind.exception.user.UserNotExistException
 import com.yourssu.behind.model.dto.post.request.CreateOrUpdateRequestPostDto
-import com.yourssu.behind.model.dto.post.response.ResponsePostDto
+import com.yourssu.behind.model.dto.post.response.ResponsePostsDto
 import com.yourssu.behind.model.entity.lecture.Lecture
 import com.yourssu.behind.model.entity.post.Post
+import com.yourssu.behind.model.entity.post.PostType
 import com.yourssu.behind.model.entity.user.User
 import com.yourssu.behind.repository.lecture.LectureRepository
 import com.yourssu.behind.repository.post.PostRepository
 import com.yourssu.behind.repository.user.UserRepository
+import com.yourssu.behind.service.post.function.ImgUploadFunction
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
@@ -37,16 +38,21 @@ class PostService @Autowired constructor(val postRepository: PostRepository
         ))
     }
 
-    fun findPostById(id: Long): ResponsePostDto {
-        var post: Post = postRepository.findById(id).orElseThrow { PostNotExistException() }
-        return ResponsePostDto(post)
+    fun getPosts(lectureId: Long, type: PostType?): List<ResponsePostsDto> {
+        var lecture = lectureRepository.findById(lectureId).orElseThrow { LectureNotExistException() }
+        if (type == null)
+            return getAllPosts(lecture)
+        else {
+            return getPostsByType(lecture, type)
+        }
     }
 
-    fun findPostListByType(imgFile: MultipartFile) {
-
+    fun getAllPosts(lecture: Lecture): List<ResponsePostsDto> {
+        return postRepository.findAllByLecture(lecture).map { ResponsePostsDto(it) }
     }
 
-    fun createPostImg(imgFile: MultipartFile): String {
-        return imgUploadFunction.storeImg(imgFile)
+    fun getPostsByType(lecture: Lecture, type: PostType): List<ResponsePostsDto> {
+        return postRepository.findAllByLectureAndTypeEquals(lecture, type).map { ResponsePostsDto(it) }
     }
+
 }

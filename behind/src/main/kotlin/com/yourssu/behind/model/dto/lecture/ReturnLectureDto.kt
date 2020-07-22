@@ -9,5 +9,5 @@ class ReturnLectureDto(lecture: Lecture) {
     val year : String = lecture.year
     val semester : LectureSemester = lecture.semester
     val courseName = lecture.courseName
-    val professor = lecture.professor
+    val professor = lecture.professor.name
 }

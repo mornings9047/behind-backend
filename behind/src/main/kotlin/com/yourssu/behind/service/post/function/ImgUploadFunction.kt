@@ -1,4 +1,4 @@
-package com.yourssu.behind.service.post
+package com.yourssu.behind.service.post.function
 
 import org.springframework.web.multipart.MultipartFile
 import java.io.File

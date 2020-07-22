@@ -2,6 +2,7 @@ package com.yourssu.behind.model.entity.comment
 
 import com.yourssu.behind.model.entity.post.Post
 import com.yourssu.behind.model.entity.user.User
+import org.springframework.data.jpa.repository.Temporal
 import java.time.LocalDateTime
 import javax.persistence.*
 
@@ -14,6 +15,7 @@ data class Comment(
         @Lob
         var content: String,
 
+        @Temporal
         val createdAt: LocalDateTime = LocalDateTime.now(),
 
         val isDeleted: Boolean = false,
