@@ -27,7 +27,7 @@ data class Post(
         @Temporal
         var createdAt: LocalDateTime = LocalDateTime.now(),
 
-        var isDeleted: Boolean = false,
+        var deletePost: Boolean = false,
 
 
         @OneToMany(mappedBy = "post")

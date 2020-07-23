@@ -18,7 +18,7 @@ data class Comment(
         @Temporal
         val createdAt: LocalDateTime = LocalDateTime.now(),
 
-        val isDeleted: Boolean = false,
+        val deleteComment: Boolean = false,
 
         @ManyToOne
         val user: User,

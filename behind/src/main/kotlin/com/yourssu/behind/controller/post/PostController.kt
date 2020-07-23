@@ -25,7 +25,7 @@ class PostController @Autowired constructor(val postService: PostService) {
 
     @GetMapping("/{lectureId}")
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    fun getPost(@PathVariable lectureId: Long, @RequestParam type: PostType?): List<ResponsePostsDto> {
-        return postService.getPosts(lectureId,type)
+    fun getPost(@PathVariable lectureId: Long, @RequestParam type: PostType?, @RequestParam page: Int): List<ResponsePostsDto> {
+        return postService.getPosts(lectureId, type, page)
     }
 }

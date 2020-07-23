@@ -11,7 +11,7 @@ import com.yourssu.behind.model.entity.user.User
 import com.yourssu.behind.repository.lecture.LectureRepository
 import com.yourssu.behind.repository.post.PostRepository
 import com.yourssu.behind.repository.user.UserRepository
-import com.yourssu.behind.service.post.function.CreatePostFunction
+import com.yourssu.behind.service.post.function.FindPostFunction
 import com.yourssu.behind.service.post.function.ImgUploadFunction
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -23,7 +23,7 @@ class PostService @Autowired constructor(val postRepository: PostRepository
                                          val lectureRepository: LectureRepository) {
 
     private val imgUploadFunction = ImgUploadFunction()
-    private val createPostFunction = CreatePostFunction(postRepository)
+    private val findPostFunction = FindPostFunction(postRepository)
 
     fun createPost(createOrUpdateRequestPostDto: CreateOrUpdateRequestPostDto, imgFile: MultipartFile?): Unit {
         var imgUrl: String? = null
@@ -42,12 +42,12 @@ class PostService @Autowired constructor(val postRepository: PostRepository
         ))
     }
 
-    fun getPosts(lectureId: Long, type: PostType?): List<ResponsePostsDto> {
+    fun getPosts(lectureId: Long, type: PostType?, page: Int): List<ResponsePostsDto> {
         var lecture = lectureRepository.findById(lectureId).orElseThrow { LectureNotExistException() }
         return if (type == null)
-            createPostFunction.getAllPosts(lecture)
+            findPostFunction.getAllPosts(lecture,page)
         else {
-            createPostFunction.getPostsByType(lecture, type)
+            findPostFunction.getPostsByType(lecture, type,page)
         }
     }
 }
