@@ -1,4 +1,4 @@
-package com.yourssu.behind.service
+package com.yourssu.behind.service.auth
 
 import com.yourssu.behind.exception.user.PasswordNotMatchedException
 import com.yourssu.behind.exception.user.UserNotExistsException
@@ -12,15 +12,15 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
-class AuthService @Autowired constructor(val userRepository: UserRepository) {
-    val authValidFunction: AuthValidFunction = AuthValidFunction(userRepository)
+class AuthService @Autowired constructor(private val userRepository: UserRepository) {
+    val authValidFunction = AuthValidFunction(userRepository)
 
     fun signUp(userSignUpRequestDto: UserSignUpRequestDto) {
         if (authValidFunction.isUserSignUpRequestDtoValid(userSignUpRequestDto))
             userRepository.save(User(
-                        schoolId = userSignUpRequestDto.schoolId,
-                        password = BCrypt.hashpw(userSignUpRequestDto.password, BCrypt.gensalt())
-                ))
+                    schoolId = userSignUpRequestDto.schoolId,
+                    password = BCrypt.hashpw(userSignUpRequestDto.password, BCrypt.gensalt())
+            ))
     }
 
     fun signIn(userSignInRequestDto: UserSignInRequestDto): Boolean {
