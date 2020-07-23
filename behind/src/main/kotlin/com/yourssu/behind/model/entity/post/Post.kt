@@ -1,7 +1,10 @@
 package com.yourssu.behind.model.entity.post
 
+import com.yourssu.behind.model.entity.comment.Comment
 import com.yourssu.behind.model.entity.lecture.Lecture
 import com.yourssu.behind.model.entity.user.User
+import org.springframework.data.jpa.repository.Temporal
+import org.springframework.lang.Nullable
 import java.time.LocalDateTime
 import javax.persistence.*
 
@@ -15,12 +18,20 @@ data class Post(
 
         var title: String,
 
+        @Nullable
+        var imgUrl: String?,
+
         @Lob
         var content: String,
 
+        @Temporal
         var createdAt: LocalDateTime = LocalDateTime.now(),
 
-        var isDeleted: Boolean = false,
+        var deletePost: Boolean = false,
+
+
+        @OneToMany(mappedBy = "post")
+        var comments: MutableList<Comment> = mutableListOf<Comment>(),
 
         @ManyToOne
         var lecture: Lecture,

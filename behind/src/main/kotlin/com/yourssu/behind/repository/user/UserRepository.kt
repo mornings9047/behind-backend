@@ -1,4 +1,4 @@
-package com.yourssu.behind.repository
+package com.yourssu.behind.repository.user
 
 import com.yourssu.behind.model.entity.user.User
 import org.springframework.data.jpa.repository.JpaRepository

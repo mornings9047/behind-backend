@@ -1,6 +1,7 @@
 HELP.md
 .gradle
 build/
+uploads/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
@@ -30,10 +31,7 @@ out/
 /nbdist/
 /.nb-gradle/
 
-### VS Code ###
-.vscode/
-# Ignore all files in this dir...
-*
+
 
 # ... except for this one.
 !.gitignore
