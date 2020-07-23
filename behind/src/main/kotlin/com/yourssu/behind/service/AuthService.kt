@@ -1,9 +1,7 @@
 package com.yourssu.behind.service
 
-import com.yourssu.behind.exception.InvalidPasswordException
-import com.yourssu.behind.exception.InvalidSchoolIdException
-import com.yourssu.behind.exception.InvalidUsernameException
-import com.yourssu.behind.exception.UserAlreadyExistsException
+import com.yourssu.behind.exception.*
+import com.yourssu.behind.model.dto.UserSignInRequestDto
 import com.yourssu.behind.model.dto.UserSignUpRequestDto
 import com.yourssu.behind.model.entity.user.User
 import com.yourssu.behind.repository.UserRepository
@@ -19,8 +17,6 @@ class AuthService @Autowired constructor(val userRepository: UserRepository) {
             throw InvalidSchoolIdException()
         if (userRepository.existsBySchoolId(userSignUpRequestDto.schoolId))
             throw UserAlreadyExistsException()
-        if (!isUsernameValid(userSignUpRequestDto.username))
-            throw InvalidUsernameException()
         if (!isPasswordValid(userSignUpRequestDto.password))
             throw InvalidPasswordException()
         return true
@@ -31,23 +27,24 @@ class AuthService @Autowired constructor(val userRepository: UserRepository) {
         return regex.matches(schoolId)
     }
 
-    fun isUsernameValid(username: String): Boolean {
-        val regex = Regex("^(?=.*[A-Za-z])(?=.*[@\$!%*_#?&])[A-Za-z@$!%*_#?&]{1,16}$")
-        return regex.matches(username)
-    }
-
     fun isPasswordValid(password: String): Boolean {
         val regex = Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,20}$")
         return regex.matches(password)
     }
 
     fun signUp(userSignUpRequestDto: UserSignUpRequestDto) {
-
         if (isUserSignUpRequestDtoValid(userSignUpRequestDto))
             userRepository.save(User(
                     schoolId = userSignUpRequestDto.schoolId,
-                    userName = userSignUpRequestDto.username,
                     password = BCrypt.hashpw(userSignUpRequestDto.password, BCrypt.gensalt())
             ))
+    }
+
+    fun signIn(userSignInRequestDto: UserSignInRequestDto): Boolean {
+        if (!userRepository.existsBySchoolId(userSignInRequestDto.schoolId))
+            throw UserNotExistsException()
+        if (!BCrypt.checkpw(userSignInRequestDto.password, userRepository.findBySchoolId(userSignInRequestDto.schoolId).password))
+            throw PasswordNotMatchedException()
+        return true
     }
 }
