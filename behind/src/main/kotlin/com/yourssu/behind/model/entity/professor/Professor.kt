@@ -13,6 +13,5 @@ data class Professor(
         val name: String,
 
         @OneToMany(mappedBy = "professor")
-        var letcures : MutableList<Lecture> = mutableListOf<Lecture>()
-        ) {
-}
+        var letcures: MutableList<Lecture> = mutableListOf()
+)

@@ -15,6 +15,7 @@ import com.yourssu.behind.service.post.function.FindPostFunction
 import com.yourssu.behind.service.post.function.ImgUploadFunction
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.multipart.MultipartFile
 
 @Service
@@ -27,8 +28,8 @@ class PostService @Autowired constructor(private val postRepository: PostReposit
 
     fun createPost(createOrUpdateRequestPostDto: CreateOrUpdateRequestPostDto, imgFile: MultipartFile?) {
         var imgUrl: String? = null
-        val user: User = userRepository.findBySchoolId(createOrUpdateRequestPostDto.schoolId).orElseThrow { UserNotExistException() }
-        val lecture: Lecture = lectureRepository.findById(createOrUpdateRequestPostDto.lectureId).orElseThrow { LectureNotExistException() }
+        val user = userRepository.findBySchoolId(createOrUpdateRequestPostDto.schoolId).orElseThrow { UserNotExistException() }
+        val lecture = lectureRepository.findById(createOrUpdateRequestPostDto.lectureId).orElseThrow { LectureNotExistException() }
 
         if (imgFile != null)
             imgUrl = imgUploadFunction.storeImg(imgFile)
@@ -46,9 +47,8 @@ class PostService @Autowired constructor(private val postRepository: PostReposit
         val lecture = lectureRepository.findById(lectureId).orElseThrow { LectureNotExistException() }
         return if (type == null)
             findPostFunction.getAllPosts(lecture, page)
-        else {
+        else
             findPostFunction.getPostsByType(lecture, type, page)
-        }
     }
 
     fun searchPosts(keyword: String): List<ResponsePostsDto> {

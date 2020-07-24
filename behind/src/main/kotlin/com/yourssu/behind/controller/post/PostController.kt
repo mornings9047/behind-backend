@@ -23,7 +23,6 @@ class PostController @Autowired constructor(val postService: PostService) {
         postService.createPost(createOrUpdateRequestPostDto, imgFile)
     }
 
-
     @GetMapping("/{lectureId}")
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     fun getPost(@PathVariable lectureId: Long, @RequestParam type: PostType?, @RequestParam page: Int): List<ResponsePostsDto> {
@@ -34,4 +33,5 @@ class PostController @Autowired constructor(val postService: PostService) {
     fun searchPosts(@PathVariable keyword: String): List<ResponsePostsDto> {
         return postService.searchPosts(keyword)
     }
+
 }
