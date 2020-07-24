@@ -1,5 +1,6 @@
 package com.yourssu.behind.service.post.function
 
+import com.yourssu.behind.exception.post.PostNotExistException
 import com.yourssu.behind.model.dto.post.response.ResponsePostsDto
 import com.yourssu.behind.model.entity.lecture.Lecture
 import com.yourssu.behind.model.entity.post.PostPage
@@ -16,6 +17,9 @@ class FindPostFunction(private val postRepository: PostRepository) {
     }
 
     fun searchPostsByKeyword(keyword: String): List<ResponsePostsDto> {
-        return postRepository.findByTitleContainingOrContentContaining(keyword, keyword).map { ResponsePostsDto(it) }
+        val posts = postRepository.findByTitleContainingOrContentContaining(keyword, keyword)
+        if (posts.isEmpty())
+            throw PostNotExistException()
+        return posts.map { ResponsePostsDto(it) }
     }
 }
