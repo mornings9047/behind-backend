@@ -13,6 +13,7 @@ import com.yourssu.behind.repository.post.PostRepository
 import com.yourssu.behind.repository.user.UserRepository
 import com.yourssu.behind.service.post.function.FindPostFunction
 import com.yourssu.behind.service.post.function.ImgUploadFunction
+import com.yourssu.behind.service.post.function.ThumbsUpFunction
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
@@ -24,6 +25,7 @@ class PostService @Autowired constructor(val postRepository: PostRepository
 
     private val imgUploadFunction = ImgUploadFunction()
     private val findPostFunction = FindPostFunction(postRepository)
+    private val thumbsUpFunction = ThumbsUpFunction(userRepository, postRepository)
 
     fun createPost(createOrUpdateRequestPostDto: CreateOrUpdateRequestPostDto, imgFile: MultipartFile?): Unit {
         var imgUrl: String? = null
@@ -45,9 +47,13 @@ class PostService @Autowired constructor(val postRepository: PostRepository
     fun getPosts(lectureId: Long, type: PostType?, page: Int): List<ResponsePostsDto> {
         var lecture = lectureRepository.findById(lectureId).orElseThrow { LectureNotExistException() }
         return if (type == null)
-            findPostFunction.getAllPosts(lecture,page)
+            findPostFunction.getAllPosts(lecture, page)
         else {
-            findPostFunction.getPostsByType(lecture, type,page)
+            findPostFunction.getPostsByType(lecture, type, page)
         }
+    }
+
+    fun thumbsUp(schoolId: String, postId: Long) {
+        return thumbsUpFunction.thumbsUp(schoolId, postId)
     }
 }
