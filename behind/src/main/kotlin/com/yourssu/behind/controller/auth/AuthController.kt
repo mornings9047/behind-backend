@@ -1,7 +1,7 @@
 package com.yourssu.behind.controller
 
-import com.yourssu.behind.model.dto.UserSignInRequestDto
-import com.yourssu.behind.model.dto.UserSignUpRequestDto
+import com.yourssu.behind.model.dto.user.request.UserSignInRequestDto
+import com.yourssu.behind.model.dto.user.request.UserSignUpRequestDto
 import com.yourssu.behind.service.AuthService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
@@ -18,10 +18,10 @@ class AuthController @Autowired constructor(val authService: AuthService) {
         return authService.signUp(signUpRequestDto)
     }
 
-    @PostMapping("/signin")
+    /*@PostMapping("/signin")
     @ResponseStatus(HttpStatus.OK)
     fun signIn(@Valid @RequestBody signInRequestDto: UserSignInRequestDto): Boolean {
         return authService.signIn(signInRequestDto)
-    }
+    }*/
 
 }
