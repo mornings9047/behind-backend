@@ -18,17 +18,17 @@ import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
 
 @Service
-class PostService @Autowired constructor(val postRepository: PostRepository
-                                         , val userRepository: UserRepository,
+class PostService @Autowired constructor(private val postRepository: PostRepository,
+                                         val userRepository: UserRepository,
                                          val lectureRepository: LectureRepository) {
 
     private val imgUploadFunction = ImgUploadFunction()
     private val findPostFunction = FindPostFunction(postRepository)
 
-    fun createPost(createOrUpdateRequestPostDto: CreateOrUpdateRequestPostDto, imgFile: MultipartFile?): Unit {
+    fun createPost(createOrUpdateRequestPostDto: CreateOrUpdateRequestPostDto, imgFile: MultipartFile?) {
         var imgUrl: String? = null
-        var user: User = userRepository.findBySchoolId(createOrUpdateRequestPostDto.schoolId).orElseThrow { UserNotExistException() }
-        var lecture: Lecture = lectureRepository.findById(createOrUpdateRequestPostDto.lectureId).orElseThrow { LectureNotExistException() }
+        val user: User = userRepository.findBySchoolId(createOrUpdateRequestPostDto.schoolId).orElseThrow { UserNotExistException() }
+        val lecture: Lecture = lectureRepository.findById(createOrUpdateRequestPostDto.lectureId).orElseThrow { LectureNotExistException() }
 
         if (imgFile != null)
             imgUrl = imgUploadFunction.storeImg(imgFile)
@@ -43,11 +43,15 @@ class PostService @Autowired constructor(val postRepository: PostRepository
     }
 
     fun getPosts(lectureId: Long, type: PostType?, page: Int): List<ResponsePostsDto> {
-        var lecture = lectureRepository.findById(lectureId).orElseThrow { LectureNotExistException() }
+        val lecture = lectureRepository.findById(lectureId).orElseThrow { LectureNotExistException() }
         return if (type == null)
-            findPostFunction.getAllPosts(lecture,page)
+            findPostFunction.getAllPosts(lecture, page)
         else {
-            findPostFunction.getPostsByType(lecture, type,page)
+            findPostFunction.getPostsByType(lecture, type, page)
         }
+    }
+
+    fun searchPosts(keyword: String): List<ResponsePostsDto> {
+        return findPostFunction.searchPostsByKeyword(keyword)
     }
 }

@@ -2,16 +2,19 @@ package com.yourssu.behind.service
 
 import com.yourssu.behind.exception.user.PasswordNotMatchedException
 import com.yourssu.behind.exception.user.UserNotExistsException
-import com.yourssu.behind.model.dto.UserSignInRequestDto
-import com.yourssu.behind.model.dto.UserSignUpRequestDto
+import com.yourssu.behind.model.dto.user.request.UserSignInRequestDto
+import com.yourssu.behind.model.dto.user.request.UserSignUpRequestDto
 import com.yourssu.behind.repository.user.UserRepository
 import com.yourssu.behind.service.auth.AuthService
-import com.yourssu.behind.service.auth.function.AuthValidFunction
 import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.test.annotation.Rollback
+import org.springframework.test.context.event.annotation.AfterTestExecution
+import org.springframework.transaction.annotation.Transactional
 
 @SpringBootTest
 class AuthServiceTests {
@@ -22,39 +25,43 @@ class AuthServiceTests {
     @Autowired
     final lateinit var userRepository: UserRepository
 
-    val authValidFunction = AuthValidFunction(userRepository)
+    @AfterTestExecution
+    @Test
+    fun deleteAll() {
+        userRepository.deleteAll()
+    }
 
     @Test
     fun isSchoolValidTest() {
-        Assertions.assertTrue(authValidFunction.isSchoolIdValid("20170000"))
-        Assertions.assertTrue(authValidFunction.isSchoolIdValid("20121092"))
+        assertTrue(authService.authValidFunction.isSchoolIdValid("20170000"))
+        assertTrue(authService.authValidFunction.isSchoolIdValid("20121092"))
 
-        Assertions.assertFalse(authValidFunction.isSchoolIdValid("21010001"))
-        Assertions.assertFalse(authValidFunction.isSchoolIdValid("12345678"))
-        Assertions.assertFalse(authValidFunction.isSchoolIdValid("2017"))
-        Assertions.assertFalse(authValidFunction.isSchoolIdValid("201705030"))
+        Assertions.assertFalse(authService.authValidFunction.isSchoolIdValid("21010001"))
+        Assertions.assertFalse(authService.authValidFunction.isSchoolIdValid("12345678"))
+        Assertions.assertFalse(authService.authValidFunction.isSchoolIdValid("2017"))
+        Assertions.assertFalse(authService.authValidFunction.isSchoolIdValid("201705030"))
 
-        Assertions.assertFalse(authValidFunction.isSchoolIdValid("2012a092"))
-        Assertions.assertFalse(authValidFunction.isSchoolIdValid("string"))
+        Assertions.assertFalse(authService.authValidFunction.isSchoolIdValid("2012a092"))
+        Assertions.assertFalse(authService.authValidFunction.isSchoolIdValid("string"))
     }
 
     @Test
     fun isPasswordValidTest() {
-        Assertions.assertTrue(authValidFunction.isPasswordValid("MinLength1"))
-        Assertions.assertTrue(authValidFunction.isPasswordValid("MaxLength12345678900"))
-        Assertions.assertTrue(authValidFunction.isPasswordValid("ValidPassword123"))
+        assertTrue(authService.authValidFunction.isPasswordValid("MinLength1"))
+        assertTrue(authService.authValidFunction.isPasswordValid("MaxLength12345678900"))
+        assertTrue(authService.authValidFunction.isPasswordValid("ValidPassword123"))
 
-        Assertions.assertFalse(authValidFunction.isPasswordValid("Short00"))
-        Assertions.assertFalse(authValidFunction.isPasswordValid("TooLongPassword12345678"))
-        Assertions.assertFalse(authValidFunction.isPasswordValid("OnlyString"))
-        Assertions.assertFalse(authValidFunction.isPasswordValid("NOSMALL123"))
-        Assertions.assertFalse(authValidFunction.isPasswordValid("nolarge123"))
-        Assertions.assertFalse(authValidFunction.isPasswordValid("12345678"))
+        Assertions.assertFalse(authService.authValidFunction.isPasswordValid("Short00"))
+        Assertions.assertFalse(authService.authValidFunction.isPasswordValid("TooLongPassword12345678"))
+        Assertions.assertFalse(authService.authValidFunction.isPasswordValid("OnlyString"))
+        Assertions.assertFalse(authService.authValidFunction.isPasswordValid("NOSMALL123"))
+        Assertions.assertFalse(authService.authValidFunction.isPasswordValid("nolarge123"))
+        Assertions.assertFalse(authService.authValidFunction.isPasswordValid("12345678"))
     }
 
     @Test
     fun signUpTest() {
-        val user = UserSignUpRequestDto("20170503", "Password123")
+        val user = UserSignUpRequestDto("20171111", "Password123")
         val before = userRepository.findAll().size
         authService.signUp(user)
         val after = userRepository.findAll().size
@@ -63,13 +70,13 @@ class AuthServiceTests {
 
     @Test
     fun signInTest() {
-        val user = UserSignUpRequestDto("20170503", "Password123")
-        val incorrectId = UserSignInRequestDto("20170501", "Password123")
-        val incorrectPassword = UserSignInRequestDto("20170503", "Password1234")
+        val user = UserSignUpRequestDto("20170000", "Password123")
+        val incorrectId = UserSignInRequestDto("20170001", "Password123")
+        val incorrectPassword = UserSignInRequestDto("20170000", "Password1234")
         authService.signUp(user)
 
         assertThrows<UserNotExistsException> { authService.signIn(incorrectId) }
         assertThrows<PasswordNotMatchedException> { authService.signIn(incorrectPassword) }
-        Assertions.assertTrue(authService.signIn(UserSignInRequestDto(user.schoolId, user.password)))
+        assertTrue(authService.signIn(UserSignInRequestDto(user.schoolId, user.password)))
     }
 }

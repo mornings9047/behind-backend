@@ -1,7 +1,7 @@
-package com.yourssu.behind.controller
+package com.yourssu.behind.controller.auth
 
-import com.yourssu.behind.model.dto.UserSignInRequestDto
-import com.yourssu.behind.model.dto.UserSignUpRequestDto
+import com.yourssu.behind.model.dto.user.request.UserSignInRequestDto
+import com.yourssu.behind.model.dto.user.request.UserSignUpRequestDto
 import com.yourssu.behind.service.auth.AuthService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
