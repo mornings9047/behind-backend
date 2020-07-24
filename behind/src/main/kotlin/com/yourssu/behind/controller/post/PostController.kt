@@ -33,4 +33,9 @@ class PostController @Autowired constructor(val postService: PostService) {
     fun increaseThumbsUp(@PathVariable postId: Long, @RequestParam schoolId: String) {
         return postService.thumbsUp(schoolId, postId)
     }
+
+    @GetMapping("/{postId}/scrap")
+    fun scrapPost(@PathVariable postId: Long, @RequestParam schoolId: String) {
+        return postService.scrapPost(schoolId, postId)
+    }
 }

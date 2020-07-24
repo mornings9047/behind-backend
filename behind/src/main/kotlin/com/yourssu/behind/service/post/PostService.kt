@@ -13,6 +13,7 @@ import com.yourssu.behind.repository.post.PostRepository
 import com.yourssu.behind.repository.user.UserRepository
 import com.yourssu.behind.service.post.function.FindPostFunction
 import com.yourssu.behind.service.post.function.ImgUploadFunction
+import com.yourssu.behind.service.post.function.ScrapFunction
 import com.yourssu.behind.service.post.function.ThumbsUpFunction
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -26,6 +27,7 @@ class PostService @Autowired constructor(val postRepository: PostRepository
     private val imgUploadFunction = ImgUploadFunction()
     private val findPostFunction = FindPostFunction(postRepository)
     private val thumbsUpFunction = ThumbsUpFunction(userRepository, postRepository)
+    private val scrapFunction = ScrapFunction(userRepository, postRepository)
 
     fun createPost(createOrUpdateRequestPostDto: CreateOrUpdateRequestPostDto, imgFile: MultipartFile?): Unit {
         var imgUrl: String? = null
@@ -55,5 +57,9 @@ class PostService @Autowired constructor(val postRepository: PostRepository
 
     fun thumbsUp(schoolId: String, postId: Long) {
         return thumbsUpFunction.thumbsUp(schoolId, postId)
+    }
+
+    fun scrapPost(schoolId: String, postId: Long) {
+        return scrapFunction.createScrapPost(schoolId, postId)
     }
 }

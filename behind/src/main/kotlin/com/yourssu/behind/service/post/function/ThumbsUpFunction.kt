@@ -12,14 +12,14 @@ import com.yourssu.behind.repository.user.UserRepository
 class ThumbsUpFunction(private val userRepository: UserRepository, private val postRepository: PostRepository) {
 
     fun thumbsUp(schoolId: String, postId: Long) {
-        var targetPost: Post = postRepository.findById(postId).orElseThrow { PostNotExistException() }
-        var targetUser: User = userRepository.findBySchoolId(schoolId).orElseThrow { UserNotExistsException() }
+        var likePost: Post = postRepository.findById(postId).orElseThrow { PostNotExistException() }
+        var likeUser: User = userRepository.findBySchoolId(schoolId).orElseThrow { UserNotExistsException() }
 
-        if (targetPost.user == targetUser) //자신의 글에는 좋아요를 누를 수 없음
+        if (likePost.user == likeUser) //자신의 글에는 좋아요를 누를 수 없음
             throw WriterThumbsUpException()
-        else if (targetUser.likePost.contains(targetPost))
+        else if (likeUser.likePost.contains(likePost))
             throw AlreadyThumbsUpException()
-        targetUser.likePost.add(targetPost)
-        userRepository.save(targetUser)
+        likeUser.likePost.add(likePost)
+        userRepository.save(likeUser)
     }
 }
