@@ -22,16 +22,15 @@ import org.springframework.web.multipart.MultipartFile
 
 @Service
 class PostService @Autowired constructor(private val postRepository: PostRepository,
-                                         val userRepository: UserRepository,
+                                         private val userRepository: UserRepository,
                                          val lectureRepository: LectureRepository) {
 
     private val imgUploadFunction = ImgUploadFunction()
-            private val findPostFunction = FindPostFunction(postRepository)
-            private val thumbsUpFunction = ThumbsUpFunction(userRepository, postRepository)
-            private val scrapFunction = ScrapFunction(userRepository, postRepository)
+    private val findPostFunction = FindPostFunction(postRepository)
+    private val thumbsUpFunction = ThumbsUpFunction(userRepository, postRepository)
+    private val scrapFunction = ScrapFunction(userRepository, postRepository)
 
     fun createPost(createOrUpdateRequestPostDto: CreateOrUpdateRequestPostDto, imgFile: MultipartFile?) {
-            fun createPost(createOrUpdateRequestPostDto: CreateOrUpdateRequestPostDto, imgFile: MultipartFile?) {
         var imgUrl: String? = null
         val user = userRepository.findBySchoolId(createOrUpdateRequestPostDto.schoolId).orElseThrow { UserNotExistException() }
         val lecture = lectureRepository.findById(createOrUpdateRequestPostDto.lectureId).orElseThrow { LectureNotExistException() }
@@ -52,7 +51,6 @@ class PostService @Autowired constructor(private val postRepository: PostReposit
         val lecture = lectureRepository.findById(lectureId).orElseThrow { LectureNotExistException() }
         return if (type == null)
             findPostFunction.getAllPosts(lecture, page)
-<<<<<<< behind/src/main/kotlin/com/yourssu/behind/service/post/PostService.kt
         else
             findPostFunction.getPostsByType(lecture, type, page)
     }

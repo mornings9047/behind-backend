@@ -1,7 +1,7 @@
 package com.yourssu.behind.service.post.function
 
 import com.yourssu.behind.exception.post.PostNotExistException
-import com.yourssu.behind.exception.post.WritterScrapException
+import com.yourssu.behind.exception.post.WriterScrapException
 import com.yourssu.behind.exception.user.UserNotExistsException
 import com.yourssu.behind.model.entity.post.Post
 import com.yourssu.behind.model.entity.user.User
@@ -15,7 +15,7 @@ class ScrapFunction(private val userRepository: UserRepository, private val post
         val user: User = userRepository.findBySchoolId(schoolId).orElseThrow { UserNotExistsException() }
 
         when {
-            post.user == user -> throw WritterScrapException()
+            post.user == user -> throw WriterScrapException()
             user.scrapPost.contains(post) -> deleteScrapPost(user, post)
             else -> user.scrapPost.add(post)
         }

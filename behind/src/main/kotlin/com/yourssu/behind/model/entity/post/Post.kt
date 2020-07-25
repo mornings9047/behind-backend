@@ -41,14 +41,14 @@ data class Post(
         var user: User,
 
         @ManyToMany(mappedBy = "scrapPost")
-        var scrapUser: List<User> = mutableListOf<User>(),
+        var scrapUser: List<User> = mutableListOf(),
 
         @ManyToMany(mappedBy = "likePost")
-        var likeUser: MutableList<User> = mutableListOf<User>()
+        var likeUser: MutableList<User> = mutableListOf()
 ) {
     @Override
     override fun toString(): String {
         return ToStringBuilder
-                .reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+                .reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE)
     }
 }

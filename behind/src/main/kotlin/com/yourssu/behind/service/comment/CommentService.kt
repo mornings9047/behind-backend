@@ -13,8 +13,8 @@ import org.springframework.stereotype.Service
 @Service
 class CommentService @Autowired constructor(val postRepository: PostRepository, val userRepository: UserRepository, val commentRepository: CommentRepository) {
     fun createComment(postId: Long, createOrUpdateRequestCommentDto: CreateOrUpdateRequestCommentDto) {
-        var commentUser = userRepository.findBySchoolId(createOrUpdateRequestCommentDto.schoolId).orElseThrow { UserNotExistsException() }
-        var targetPost = postRepository.findById(postId).orElseThrow { PostNotExistException() }
+        val commentUser = userRepository.findBySchoolId(createOrUpdateRequestCommentDto.schoolId).orElseThrow { UserNotExistsException() }
+        val targetPost = postRepository.findById(postId).orElseThrow { PostNotExistException() }
 
         commentRepository.save(Comment(
                 user = commentUser,

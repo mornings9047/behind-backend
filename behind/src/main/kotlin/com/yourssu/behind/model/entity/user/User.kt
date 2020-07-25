@@ -24,26 +24,26 @@ data class User(
 
         @ManyToMany
         @JoinTable(name = "courses")
-        var lectures: MutableList<Lecture> = mutableListOf<Lecture>(),
+        var lectures: MutableList<Lecture> = mutableListOf(),
 
         @OneToMany(mappedBy = "user")
-        var posts: MutableList<Post> = mutableListOf<Post>(),
+        var posts: MutableList<Post> = mutableListOf(),
 
         @OneToMany(mappedBy = "user")
-        var comments: MutableList<Comment> = mutableListOf<Comment>(),
+        var comments: MutableList<Comment> = mutableListOf(),
 
         @ManyToMany
         @JoinTable(name = "scrap")
-        var scrapPost: MutableList<Post> = mutableListOf<Post>(),
+        var scrapPost: MutableList<Post> = mutableListOf(),
 
         @ManyToMany
         @JoinTable(name = "thumbsUp")
-        var likePost: MutableList<Post> = mutableListOf<Post>()
+        var likePost: MutableList<Post> = mutableListOf()
 
 ) {
     @Override
     override fun toString(): String {
         return ToStringBuilder
-                .reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+                .reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE)
     }
 }

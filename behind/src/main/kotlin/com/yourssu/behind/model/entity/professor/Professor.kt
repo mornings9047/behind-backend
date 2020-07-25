@@ -15,11 +15,11 @@ data class Professor(
         val name: String,
 
         @OneToMany(mappedBy = "professor")
-        var letcures: MutableList<Lecture> = mutableListOf<Lecture>()
+        var lectures: MutableList<Lecture> = mutableListOf()
 ) {
     @Override
     override fun toString(): String {
         return ToStringBuilder
-                .reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+                .reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE)
     }
 }
