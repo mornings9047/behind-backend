@@ -39,7 +39,6 @@ class PostServiceTest @Autowired constructor(val postService: PostService, val p
     @Transactional
     fun createPostTest() {
         postService.createPost(testCreateOrUpdateRequestPostDto, imgFile)
-        println(imgFile)
         Assertions.assertNotNull(postRepository.findByTitle(testCreateOrUpdateRequestPostDto.title))
     }
 
