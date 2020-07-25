@@ -31,33 +31,33 @@ class AuthServiceTests {
         userRepository.deleteAll()
     }
 
-    @Test
-    fun isSchoolValidTest() {
-        assertTrue(authService.authValidFunction.isSchoolIdValid("20170000"))
-        assertTrue(authService.authValidFunction.isSchoolIdValid("20121092"))
+//    @Test
+//    fun isSchoolValidTest() {
+//        assertTrue(authService.authValidFunction.isSchoolIdValid("20170000"))
+//        assertTrue(authService.authValidFunction.isSchoolIdValid("20121092"))
+//
+//        Assertions.assertFalse(authService.authValidFunction.isSchoolIdValid("21010001"))
+//        Assertions.assertFalse(authService.authValidFunction.isSchoolIdValid("12345678"))
+//        Assertions.assertFalse(authService.authValidFunction.isSchoolIdValid("2017"))
+//        Assertions.assertFalse(authService.authValidFunction.isSchoolIdValid("201705030"))
+//
+//        Assertions.assertFalse(authService.authValidFunction.isSchoolIdValid("2012a092"))
+//        Assertions.assertFalse(authService.authValidFunction.isSchoolIdValid("string"))
+//    }
 
-        Assertions.assertFalse(authService.authValidFunction.isSchoolIdValid("21010001"))
-        Assertions.assertFalse(authService.authValidFunction.isSchoolIdValid("12345678"))
-        Assertions.assertFalse(authService.authValidFunction.isSchoolIdValid("2017"))
-        Assertions.assertFalse(authService.authValidFunction.isSchoolIdValid("201705030"))
-
-        Assertions.assertFalse(authService.authValidFunction.isSchoolIdValid("2012a092"))
-        Assertions.assertFalse(authService.authValidFunction.isSchoolIdValid("string"))
-    }
-
-    @Test
-    fun isPasswordValidTest() {
-        assertTrue(authService.authValidFunction.isPasswordValid("MinLength1"))
-        assertTrue(authService.authValidFunction.isPasswordValid("MaxLength12345678900"))
-        assertTrue(authService.authValidFunction.isPasswordValid("ValidPassword123"))
-
-        Assertions.assertFalse(authService.authValidFunction.isPasswordValid("Short00"))
-        Assertions.assertFalse(authService.authValidFunction.isPasswordValid("TooLongPassword12345678"))
-        Assertions.assertFalse(authService.authValidFunction.isPasswordValid("OnlyString"))
-        Assertions.assertFalse(authService.authValidFunction.isPasswordValid("NOSMALL123"))
-        Assertions.assertFalse(authService.authValidFunction.isPasswordValid("nolarge123"))
-        Assertions.assertFalse(authService.authValidFunction.isPasswordValid("12345678"))
-    }
+//    @Test
+//    fun isPasswordValidTest() {
+//        assertTrue(authService.authValidFunction.isPasswordValid("MinLength1"))
+//        assertTrue(authService.authValidFunction.isPasswordValid("MaxLength12345678900"))
+//        assertTrue(authService.authValidFunction.isPasswordValid("ValidPassword123"))
+//
+//        Assertions.assertFalse(authService.authValidFunction.isPasswordValid("Short00"))
+//        Assertions.assertFalse(authService.authValidFunction.isPasswordValid("TooLongPassword12345678"))
+//        Assertions.assertFalse(authService.authValidFunction.isPasswordValid("OnlyString"))
+//        Assertions.assertFalse(authService.authValidFunction.isPasswordValid("NOSMALL123"))
+//        Assertions.assertFalse(authService.authValidFunction.isPasswordValid("nolarge123"))
+//        Assertions.assertFalse(authService.authValidFunction.isPasswordValid("12345678"))
+//    }
 
     @Test
     fun signUpTest() {

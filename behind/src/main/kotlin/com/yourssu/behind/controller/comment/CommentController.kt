@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/comments")
 class CommentController @Autowired constructor(val commentService: CommentService) {
     @PostMapping("/{postId}")
-    fun createComment(@PathVariable postId: Long, @RequestBody createOrUpdateRequestCommentDto: CreateOrUpdateRequestCommentDto): Unit {
+    fun createComment(@PathVariable postId: Long, @RequestBody createOrUpdateRequestCommentDto: CreateOrUpdateRequestCommentDto) {
         return commentService.createComment(postId, createOrUpdateRequestCommentDto)
     }
 }

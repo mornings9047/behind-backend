@@ -46,9 +46,8 @@ class PostServiceTest @Autowired constructor(val postService: PostService, val p
     @Transactional
     fun getPostTest() {
         Assertions.assertNotNull(postService.getPosts(existId, null, 0))
-        Assertions.assertThrows(LectureNotExistException::class.java,
-                Executable { postService.getPosts(fakeId, null, 0) }
-        )
+        Assertions.assertThrows(LectureNotExistException::class.java
+        ) { postService.getPosts(fakeId, null, 0) }
     }
 
     @Test
@@ -68,6 +67,4 @@ class PostServiceTest @Autowired constructor(val postService: PostService, val p
 
         Assertions.assertNotEquals(0, post.likeUser.size)
     }
-
-
 }
