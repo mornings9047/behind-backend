@@ -26,7 +26,7 @@ data class Lecture(
         val professor: Professor,
 
         @OneToMany(mappedBy = "lecture")
-        var posts: MutableList<Post> = mutableListOf<Post>(),
+        var posts: MutableList<Post> = mutableListOf(),
 
         @ManyToMany(mappedBy = "lectures")
         var users: MutableList<User> = mutableListOf<User>()

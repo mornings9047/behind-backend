@@ -32,7 +32,7 @@ data class Post(
         var deletePost: Boolean = false,
 
         @OneToMany(mappedBy = "post")
-        var comments: MutableList<Comment> = mutableListOf<Comment>(),
+        var comments: MutableList<Comment> = mutableListOf(),
 
         @ManyToOne
         var lecture: Lecture,

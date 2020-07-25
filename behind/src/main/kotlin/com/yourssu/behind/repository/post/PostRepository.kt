@@ -12,5 +12,6 @@ import java.util.*
 interface PostRepository : JpaRepository<Post, Long> {
     fun findAllByLectureAndDeletePostIsFalse(lecture: Lecture, pageable: Pageable): List<Post>
     fun findAllByLectureAndTypeEqualsAndDeletePostIsFalse(lecture: Lecture, type: PostType, pageable: Pageable): List<Post>
+    fun findByTitleContainingOrContentContaining(title: String, content: String, pageable: Pageable): List<Post>
     fun findByTitle(title: String): Optional<List<Post>>
 }

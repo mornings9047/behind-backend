@@ -18,15 +18,19 @@ class PostController @Autowired constructor(val postService: PostService) {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     fun createPost(@RequestPart imgFile: MultipartFile?,
                    @RequestPart createOrUpdateRequestPostDto: CreateOrUpdateRequestPostDto
-    ): Unit {
+    ) {
         postService.createPost(createOrUpdateRequestPostDto, imgFile)
     }
-
 
     @GetMapping("/{lectureId}")
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     fun getPost(@PathVariable lectureId: Long, @RequestParam type: PostType?, @RequestParam page: Int): List<ResponsePostsDto> {
         return postService.getPosts(lectureId, type, page)
+    }
+
+    @GetMapping("/search/{keyword}")
+    fun searchPosts(@PathVariable keyword: String, @RequestParam page: Int): List<ResponsePostsDto> {
+        return postService.searchPosts(keyword, page)
     }
 
     @GetMapping("/{postId}/thumbsUp")

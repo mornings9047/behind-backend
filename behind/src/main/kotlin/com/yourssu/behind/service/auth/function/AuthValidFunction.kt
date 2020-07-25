@@ -6,7 +6,7 @@ import com.yourssu.behind.exception.user.UserAlreadyExistsException
 import com.yourssu.behind.model.dto.user.request.UserSignUpRequestDto
 import com.yourssu.behind.repository.user.UserRepository
 
-class AuthValidFunction(val userRepository: UserRepository) {
+class AuthValidFunction(private val userRepository: UserRepository) {
     fun isUserSignUpRequestDtoValid(userSignUpRequestDto: UserSignUpRequestDto): Boolean {
         if (!isSchoolIdValid(userSignUpRequestDto.schoolId))
             throw InvalidSchoolIdException()

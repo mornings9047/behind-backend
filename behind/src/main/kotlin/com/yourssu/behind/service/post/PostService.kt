@@ -17,11 +17,12 @@ import com.yourssu.behind.service.post.function.ScrapFunction
 import com.yourssu.behind.service.post.function.ThumbsUpFunction
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.multipart.MultipartFile
 
 @Service
-class PostService @Autowired constructor(val postRepository: PostRepository
-                                         , val userRepository: UserRepository,
+class PostService @Autowired constructor(private val postRepository: PostRepository,
+                                         val userRepository: UserRepository,
                                          val lectureRepository: LectureRepository) {
 
     private val imgUploadFunction = ImgUploadFunction()
@@ -29,10 +30,11 @@ class PostService @Autowired constructor(val postRepository: PostRepository
             private val thumbsUpFunction = ThumbsUpFunction(userRepository, postRepository)
             private val scrapFunction = ScrapFunction(userRepository, postRepository)
 
-            fun createPost(createOrUpdateRequestPostDto: CreateOrUpdateRequestPostDto, imgFile: MultipartFile?): Unit {
+    fun createPost(createOrUpdateRequestPostDto: CreateOrUpdateRequestPostDto, imgFile: MultipartFile?) {
+            fun createPost(createOrUpdateRequestPostDto: CreateOrUpdateRequestPostDto, imgFile: MultipartFile?) {
         var imgUrl: String? = null
-        var user: User = userRepository.findBySchoolId(createOrUpdateRequestPostDto.schoolId).orElseThrow { UserNotExistException() }
-        var lecture: Lecture = lectureRepository.findById(createOrUpdateRequestPostDto.lectureId).orElseThrow { LectureNotExistException() }
+        val user = userRepository.findBySchoolId(createOrUpdateRequestPostDto.schoolId).orElseThrow { UserNotExistException() }
+        val lecture = lectureRepository.findById(createOrUpdateRequestPostDto.lectureId).orElseThrow { LectureNotExistException() }
 
         if (imgFile != null)
             imgUrl = imgUploadFunction.storeImg(imgFile)
@@ -47,13 +49,16 @@ class PostService @Autowired constructor(val postRepository: PostRepository
     }
 
     fun getPosts(lectureId: Long, type: PostType?, page: Int): List<ResponsePostsDto> {
-        var lecture = lectureRepository.findById(lectureId).orElseThrow { LectureNotExistException() }
+        val lecture = lectureRepository.findById(lectureId).orElseThrow { LectureNotExistException() }
         return if (type == null)
             findPostFunction.getAllPosts(lecture, page)
-        else {
+<<<<<<< behind/src/main/kotlin/com/yourssu/behind/service/post/PostService.kt
+        else
             findPostFunction.getPostsByType(lecture, type, page)
-        }
-        println("Finish")
+    }
+
+    fun searchPosts(keyword: String, page: Int): List<ResponsePostsDto> {
+        return findPostFunction.searchPostsByKeyword(keyword, page)
     }
 
     fun thumbsUp(schoolId: String, postId: Long) {
