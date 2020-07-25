@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.event.annotation.BeforeTestExecution
+import org.springframework.transaction.annotation.Transactional
 
 @SpringBootTest
 class PostServiceTests {
@@ -43,6 +44,7 @@ class PostServiceTests {
     }
 
     @Test
+    @Transactional
     fun searchPostsTest() {
         for (responsePostDto in postService.searchPosts(keyword = "1"))
             println(responsePostDto)
