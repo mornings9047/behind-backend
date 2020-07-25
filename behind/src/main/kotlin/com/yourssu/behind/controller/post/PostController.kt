@@ -2,7 +2,6 @@ package com.yourssu.behind.controller.post
 
 import com.yourssu.behind.model.dto.post.request.CreateOrUpdateRequestPostDto
 import com.yourssu.behind.model.dto.post.response.ResponsePostsDto
-import com.yourssu.behind.model.entity.post.Post
 import com.yourssu.behind.model.entity.post.PostType
 import com.yourssu.behind.service.post.PostService
 import org.springframework.beans.factory.annotation.Autowired
@@ -30,8 +29,8 @@ class PostController @Autowired constructor(val postService: PostService) {
     }
 
     @GetMapping("/search/{keyword}")
-    fun searchPosts(@PathVariable keyword: String): List<ResponsePostsDto> {
-        return postService.searchPosts(keyword)
+    fun searchPosts(@PathVariable keyword: String, @RequestParam page: Int): List<ResponsePostsDto> {
+        return postService.searchPosts(keyword, page)
     }
 
 }

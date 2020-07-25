@@ -7,6 +7,7 @@ import com.yourssu.behind.model.entity.lecture.LectureSemester
 import com.yourssu.behind.model.entity.post.PostType
 import com.yourssu.behind.model.entity.professor.Professor
 import com.yourssu.behind.repository.lecture.LectureRepository
+import com.yourssu.behind.repository.post.PostRepository
 import com.yourssu.behind.repository.professor.ProfessorRepository
 import com.yourssu.behind.service.auth.AuthService
 import com.yourssu.behind.service.post.PostService
@@ -39,14 +40,16 @@ class PostServiceTests {
         professorRepository.save(professor)
         lectureRepository.save(Lecture(major = "computer", year = "20", semester = LectureSemester.SPRING, courseName = "OOP", professor = professor))
 
-        for (i in 1..20)
+        for (i in 1..100) {
             postService.createPost(CreateOrUpdateRequestPostDto(schoolId = "20170000", title = "title$i", type = PostType.FREE, content = "content$i", lectureId = 3), imgFile = null)
+            Thread.sleep(300)
+        }
     }
 
     @Test
     @Transactional
     fun searchPostsTest() {
-        for (responsePostDto in postService.searchPosts(keyword = "1"))
-            println(responsePostDto)
+        for (responsePostDto in postService.searchPosts(keyword = "1", page = 1))
+            println("${responsePostDto.title}   ${responsePostDto.createdAt.second}")
     }
 }

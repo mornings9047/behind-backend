@@ -51,7 +51,7 @@ class PostService @Autowired constructor(private val postRepository: PostReposit
             findPostFunction.getPostsByType(lecture, type, page)
     }
 
-    fun searchPosts(keyword: String): List<ResponsePostsDto> {
-        return findPostFunction.searchPostsByKeyword(keyword)
+    fun searchPosts(keyword: String, page: Int): List<ResponsePostsDto> {
+        return findPostFunction.searchPostsByKeyword(keyword, page)
     }
 }
