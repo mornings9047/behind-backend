@@ -25,11 +25,11 @@ class PostService @Autowired constructor(val postRepository: PostRepository
                                          val lectureRepository: LectureRepository) {
 
     private val imgUploadFunction = ImgUploadFunction()
-    private val findPostFunction = FindPostFunction(postRepository)
-    private val thumbsUpFunction = ThumbsUpFunction(userRepository, postRepository)
-    private val scrapFunction = ScrapFunction(userRepository, postRepository)
+            private val findPostFunction = FindPostFunction(postRepository)
+            private val thumbsUpFunction = ThumbsUpFunction(userRepository, postRepository)
+            private val scrapFunction = ScrapFunction(userRepository, postRepository)
 
-    fun createPost(createOrUpdateRequestPostDto: CreateOrUpdateRequestPostDto, imgFile: MultipartFile?): Unit {
+            fun createPost(createOrUpdateRequestPostDto: CreateOrUpdateRequestPostDto, imgFile: MultipartFile?): Unit {
         var imgUrl: String? = null
         var user: User = userRepository.findBySchoolId(createOrUpdateRequestPostDto.schoolId).orElseThrow { UserNotExistException() }
         var lecture: Lecture = lectureRepository.findById(createOrUpdateRequestPostDto.lectureId).orElseThrow { LectureNotExistException() }
@@ -53,6 +53,7 @@ class PostService @Autowired constructor(val postRepository: PostRepository
         else {
             findPostFunction.getPostsByType(lecture, type, page)
         }
+        println("Finish")
     }
 
     fun thumbsUp(schoolId: String, postId: Long) {

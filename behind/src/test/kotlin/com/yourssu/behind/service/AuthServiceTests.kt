@@ -1,10 +1,10 @@
 package com.yourssu.behind.service
 
-import com.yourssu.behind.exception.PasswordNotMatchedException
-import com.yourssu.behind.exception.UserNotExistsException
+import com.yourssu.behind.exception.user.PasswordNotMatchedException
+import com.yourssu.behind.exception.user.UserNotExistsException
 import com.yourssu.behind.model.dto.user.request.UserSignInRequestDto
 import com.yourssu.behind.model.dto.user.request.UserSignUpRequestDto
-import com.yourssu.behind.repository.UserRepository
+import com.yourssu.behind.repository.user.UserRepository
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows

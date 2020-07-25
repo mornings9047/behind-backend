@@ -17,12 +17,12 @@ class AuthValidFunction(val userRepository: UserRepository) {
         return true
     }
 
-    fun isSchoolIdValid(schoolId: String): Boolean {
+    private fun isSchoolIdValid(schoolId: String): Boolean {
         val regex = Regex("^(20)([0-9]){6}$")
         return regex.matches(schoolId)
     }
 
-    fun isPasswordValid(password: String): Boolean {
+    private fun isPasswordValid(password: String): Boolean {
         val regex = Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,20}$")
         return regex.matches(password)
     }
