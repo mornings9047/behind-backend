@@ -2,8 +2,8 @@ package com.yourssu.behind.service
 
 import com.yourssu.behind.exception.user.PasswordNotMatchedException
 import com.yourssu.behind.exception.user.UserNotExistsException
-import com.yourssu.behind.model.dto.UserSignInRequestDto
-import com.yourssu.behind.model.dto.UserSignUpRequestDto
+import com.yourssu.behind.model.dto.user.request.UserSignInRequestDto
+import com.yourssu.behind.model.dto.user.request.UserSignUpRequestDto
 import com.yourssu.behind.model.entity.user.User
 import com.yourssu.behind.repository.user.UserRepository
 import com.yourssu.behind.service.auth.function.AuthValidFunction
