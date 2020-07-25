@@ -3,6 +3,8 @@ package com.yourssu.behind.model.entity.post
 import com.yourssu.behind.model.entity.comment.Comment
 import com.yourssu.behind.model.entity.lecture.Lecture
 import com.yourssu.behind.model.entity.user.User
+import org.apache.commons.lang3.builder.ToStringBuilder
+import org.apache.commons.lang3.builder.ToStringStyle
 import org.springframework.data.jpa.repository.Temporal
 import org.springframework.lang.Nullable
 import java.time.LocalDateTime
@@ -39,8 +41,14 @@ data class Post(
         var user: User,
 
         @ManyToMany(mappedBy = "scrapPost")
-        var scrapUser: MutableList<User> = mutableListOf(),
+        var scrapUser: List<User> = mutableListOf<User>(),
 
         @ManyToMany(mappedBy = "likePost")
-        var likeUser: MutableList<User> = mutableListOf()
-)
+        var likeUser: MutableList<User> = mutableListOf<User>()
+) {
+    @Override
+    override fun toString(): String {
+        return ToStringBuilder
+                .reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+    }
+}

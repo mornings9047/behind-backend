@@ -3,11 +3,11 @@ package com.yourssu.behind.model.entity.user
 import com.yourssu.behind.model.entity.comment.Comment
 import com.yourssu.behind.model.entity.lecture.Lecture
 import com.yourssu.behind.model.entity.post.Post
-import sun.security.util.Length
+import org.apache.commons.lang3.builder.ToStringBuilder
+import org.apache.commons.lang3.builder.ToStringStyle
 import java.time.LocalDateTime
 import javax.persistence.*
 import javax.validation.constraints.NotBlank
-import javax.validation.constraints.NotNull
 import javax.validation.constraints.Size
 
 @Entity
@@ -40,4 +40,10 @@ data class User(
         @JoinTable(name = "thumbsUp")
         var likePost: MutableList<Post> = mutableListOf<Post>()
 
-) {}
+) {
+    @Override
+    override fun toString(): String {
+        return ToStringBuilder
+                .reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+    }
+}

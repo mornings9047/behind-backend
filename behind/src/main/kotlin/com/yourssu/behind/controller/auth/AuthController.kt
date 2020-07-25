@@ -18,10 +18,10 @@ class AuthController @Autowired constructor(val authService: AuthService) {
         return authService.signUp(signUpRequestDto)
     }
 
-    @PostMapping("/signin")
+    /*@PostMapping("/signin")
     @ResponseStatus(HttpStatus.OK)
     fun signIn(@Valid @RequestBody signInRequestDto: UserSignInRequestDto): Boolean {
         return authService.signIn(signInRequestDto)
-    }
+    }*/
 
 }

@@ -2,6 +2,8 @@ package com.yourssu.behind.model.entity.comment
 
 import com.yourssu.behind.model.entity.post.Post
 import com.yourssu.behind.model.entity.user.User
+import org.apache.commons.lang3.builder.ToStringBuilder
+import org.apache.commons.lang3.builder.ToStringStyle
 import org.springframework.data.jpa.repository.Temporal
 import java.time.LocalDateTime
 import javax.persistence.*
@@ -25,4 +27,10 @@ data class Comment(
 
         @ManyToOne
         val post: Post
-) {}
+) {
+    @Override
+    override fun toString(): String {
+        return ToStringBuilder
+                .reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+    }
+}
