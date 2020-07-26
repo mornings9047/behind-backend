@@ -28,7 +28,6 @@ class CommentServiceTest @Autowired constructor(val commentService: CommentServi
     val existId: Long = 1
 
     @Test
-    @Transactional
     fun createCommentTest() {
         val createOrUpdateRequestCommentDto = CreateOrUpdateRequestCommentDto("20202020", "TestComment")
         commentService.createComment(existId, createOrUpdateRequestCommentDto)

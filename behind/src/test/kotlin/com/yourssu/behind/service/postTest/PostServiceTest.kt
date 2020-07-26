@@ -65,6 +65,6 @@ class PostServiceTest @Autowired constructor(val postService: PostService, val p
         postService.scrapPost("20202020", existId)
         val post = postRepository.findById(existId).orElseThrow { PostNotExistException() }
 
-        Assertions.assertNotEquals(0, post.likeUser.size)
+        Assertions.assertNotEquals(0, post.scrapUser.size)
     }
 }
