@@ -1,6 +1,7 @@
 package com.yourssu.behind.controller.comment
 
 import com.yourssu.behind.model.dto.comment.request.CreateOrUpdateRequestCommentDto
+import com.yourssu.behind.model.dto.comment.response.ResponseCommentDto
 import com.yourssu.behind.service.comment.CommentService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
@@ -11,5 +12,15 @@ class CommentController @Autowired constructor(val commentService: CommentServic
     @PostMapping("/{postId}")
     fun createComment(@PathVariable postId: Long, @RequestBody createOrUpdateRequestCommentDto: CreateOrUpdateRequestCommentDto) {
         return commentService.createComment(postId, createOrUpdateRequestCommentDto)
+    }
+
+    @PostMapping("/{postId}/recomment/{commentId}")
+    fun createReComment(@PathVariable postId: Long, @PathVariable commentId: Long, @RequestBody createOrUpdateRequestCommentDto: CreateOrUpdateRequestCommentDto) {
+        commentService.createRecomment(postId, createOrUpdateRequestCommentDto, commentId)
+    }
+
+    @GetMapping("/{postId}")
+    fun getComment(@PathVariable postId: Long): List<ResponseCommentDto> {
+        return commentService.getComment(postId)
     }
 }

@@ -22,6 +22,14 @@ data class Comment(
 
         val deleteComment: Boolean = false,
 
+        var postOwner: Boolean = false,
+
+        @ManyToOne
+        val parent: Comment?,
+
+        @OneToMany(mappedBy = "parent")
+        var children: MutableList<Comment> = mutableListOf<Comment>(),
+
         @ManyToOne
         val user: User,
 
@@ -32,5 +40,10 @@ data class Comment(
     override fun toString(): String {
         return ToStringBuilder
                 .reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE)
+    }
+
+    fun saveRecomment(reComment: Comment) {
+        this.children.add(reComment)
+
     }
 }
