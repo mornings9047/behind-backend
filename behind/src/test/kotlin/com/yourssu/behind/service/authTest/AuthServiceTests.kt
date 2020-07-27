@@ -1,4 +1,4 @@
-package com.yourssu.behind.service
+package com.yourssu.behind.service.authTest
 
 import com.yourssu.behind.exception.user.PasswordNotMatchedException
 import com.yourssu.behind.exception.user.UserNotExistsException
