@@ -39,4 +39,31 @@ class CommentServiceTest @Autowired constructor(val commentService: CommentServi
 
     }
 
+    @Test
+    @Transactional
+    fun getCommentsTest() {
+        for (i in 1..3)
+            commentService.createComment(450, CreateOrUpdateRequestCommentDto("20170000", "comment$i"))
+        for (i in 1..4)
+            commentService.createComment(451, CreateOrUpdateRequestCommentDto("20170000", "comment$i"))
+        for (i in 1..2)
+            commentService.createComment(452, CreateOrUpdateRequestCommentDto("20170000", "comment$i"))
+        for (i in 3..4)
+            commentService.createComment(452, CreateOrUpdateRequestCommentDto("20170000", "comment$i"))
+
+        var comments = commentRepository.findAllByPostIdAndDeleteCommentIsFalse(450)
+        println("size: ${comments.size}")
+        for (comment in comments)
+            println("${comment.content}   ${comment.createdAt}")
+        println("==========================================================")
+        comments = commentRepository.findAllByPostIdAndDeleteCommentIsFalse(451)
+        println("size: ${comments.size}")
+        for (comment in comments)
+            println("${comment.content}   ${comment.createdAt}")
+        println("==========================================================")
+        comments = commentRepository.findAllByPostIdAndDeleteCommentIsFalse(452)
+        println("size: ${comments.size}")
+        for (comment in comments)
+            println("${comment.content}   ${comment.createdAt}")
+    }
 }

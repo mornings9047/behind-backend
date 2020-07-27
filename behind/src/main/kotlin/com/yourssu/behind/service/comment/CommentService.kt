@@ -3,6 +3,7 @@ package com.yourssu.behind.service.comment
 import com.yourssu.behind.exception.post.PostNotExistException
 import com.yourssu.behind.exception.user.UserNotExistsException
 import com.yourssu.behind.model.dto.comment.request.CreateOrUpdateRequestCommentDto
+import com.yourssu.behind.model.dto.comment.response.ResponseCommentDto
 import com.yourssu.behind.model.entity.comment.Comment
 import com.yourssu.behind.repository.comment.CommentRepository
 import com.yourssu.behind.repository.post.PostRepository
@@ -20,5 +21,9 @@ class CommentService @Autowired constructor(val postRepository: PostRepository, 
                 user = commentUser,
                 post = targetPost,
                 content = createOrUpdateRequestCommentDto.content))
+    }
+
+    fun getComments(postId: Long): List<ResponseCommentDto> {
+        return commentRepository.findAllByPostIdAndDeleteCommentIsFalse(postId).map { ResponseCommentDto(it) }
     }
 }

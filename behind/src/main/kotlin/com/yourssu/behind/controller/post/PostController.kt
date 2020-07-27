@@ -1,6 +1,7 @@
 package com.yourssu.behind.controller.post
 
 import com.yourssu.behind.model.dto.post.request.CreateOrUpdateRequestPostDto
+import com.yourssu.behind.model.dto.post.response.ResponsePostDto
 import com.yourssu.behind.model.dto.post.response.ResponsePostsDto
 import com.yourssu.behind.model.entity.post.PostType
 import com.yourssu.behind.service.post.PostService
@@ -36,5 +37,10 @@ class PostController @Autowired constructor(val postService: PostService) {
     @GetMapping("/{postId}/scrap")
     fun scrapPost(@PathVariable postId: Long, @RequestParam schoolId: String) {
         return postService.scrapPost(schoolId, postId)
+    }
+
+    @GetMapping("/{postId}")
+    fun getPostDetails(@PathVariable postId: Long): ResponsePostDto {
+        return postService.getPostDetails(postId)
     }
 }
