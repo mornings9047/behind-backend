@@ -2,6 +2,7 @@ package com.yourssu.behind.service
 
 import com.yourssu.behind.exception.user.UserNotExistsException
 import com.yourssu.behind.model.dto.post.response.ResponsePostsDto
+import com.yourssu.behind.model.entity.post.Post
 import com.yourssu.behind.model.entity.post.PostSearch
 import com.yourssu.behind.repository.comment.CommentRepository
 import com.yourssu.behind.repository.user.UserRepository
@@ -18,13 +19,10 @@ class UserService @Autowired constructor(val userRepository: UserRepository, val
             PostSearch.SCRAP -> {
                 user.scrapPost.map { ResponsePostsDto(it) }
             }
-            PostSearch.LIKE -> {
-                user.likePost.map { ResponsePostsDto(it) }
-            }
             PostSearch.COMMENT -> {
-                val returnPost: MutableSet<ResponsePostsDto> = mutableSetOf()
-                commentRepository.findByUser(user).map { returnPost.add(ResponsePostsDto(it.post)) }
-                returnPost
+                val returnPost: MutableSet<Post> = mutableSetOf()
+                commentRepository.findByUser(user).map { returnPost.add(it.post) }
+                returnPost.map { ResponsePostsDto(it) }
             }
             PostSearch.POST -> {
                 user.posts.map { ResponsePostsDto(it) }
