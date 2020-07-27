@@ -41,10 +41,7 @@ data class Post(
         var user: User,
 
         @ManyToMany(mappedBy = "scrapPost")
-        var scrapUser: List<User> = mutableListOf(),
-
-        @ManyToMany(mappedBy = "likePost")
-        var likeUser: MutableList<User> = mutableListOf()
+        var scrapUser: List<User> = mutableListOf()
 ) {
     @Override
     override fun toString(): String {

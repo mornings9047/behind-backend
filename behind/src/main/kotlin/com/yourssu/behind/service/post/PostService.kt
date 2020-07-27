@@ -5,20 +5,16 @@ import com.yourssu.behind.exception.user.UserNotExistException
 import com.yourssu.behind.model.dto.post.request.CreateOrUpdateRequestPostDto
 import com.yourssu.behind.model.dto.post.response.ResponsePostDto
 import com.yourssu.behind.model.dto.post.response.ResponsePostsDto
-import com.yourssu.behind.model.entity.lecture.Lecture
 import com.yourssu.behind.model.entity.post.Post
 import com.yourssu.behind.model.entity.post.PostType
-import com.yourssu.behind.model.entity.user.User
 import com.yourssu.behind.repository.lecture.LectureRepository
 import com.yourssu.behind.repository.post.PostRepository
 import com.yourssu.behind.repository.user.UserRepository
 import com.yourssu.behind.service.post.function.FindPostFunction
 import com.yourssu.behind.service.post.function.ImgUploadFunction
 import com.yourssu.behind.service.post.function.ScrapFunction
-import com.yourssu.behind.service.post.function.ThumbsUpFunction
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.multipart.MultipartFile
 
 @Service
@@ -28,7 +24,6 @@ class PostService @Autowired constructor(private val postRepository: PostReposit
 
     private val imgUploadFunction = ImgUploadFunction()
     private val findPostFunction = FindPostFunction(postRepository)
-    private val thumbsUpFunction = ThumbsUpFunction(userRepository, postRepository)
     private val scrapFunction = ScrapFunction(userRepository, postRepository)
 
     fun createPost(createOrUpdateRequestPostDto: CreateOrUpdateRequestPostDto, imgFile: MultipartFile?) {
@@ -60,11 +55,6 @@ class PostService @Autowired constructor(private val postRepository: PostReposit
     fun searchPosts(keyword: String, page: Int): List<ResponsePostsDto> {
         return findPostFunction.searchPostsByKeyword(keyword, page)
     }
-
-    fun thumbsUp(schoolId: String, postId: Long) {
-        return thumbsUpFunction.thumbsUp(schoolId, postId)
-    }
-
     fun scrapPost(schoolId: String, postId: Long) {
         return scrapFunction.createScrapPost(schoolId, postId)
     }

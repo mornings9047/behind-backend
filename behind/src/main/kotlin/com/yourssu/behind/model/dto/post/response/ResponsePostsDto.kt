@@ -12,8 +12,6 @@ class ResponsePostsDto(post: Post) {
     val content: String = resizeText(post.content, 50)
     val imgUrl: String? = post.imgUrl
     val createdAt: LocalDateTime = post.createdAt
-    val thumbsUp = post.likeUser.size
-    val scrapNum = post.scrapUser.size
     val commentsNum = post.comments.size
 
     private fun resizeText(text: String, size: Int): String {

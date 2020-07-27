@@ -16,11 +16,12 @@ import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.mock.web.MockMultipartFile
+import org.springframework.test.context.event.annotation.BeforeTestExecution
 import org.springframework.web.multipart.MultipartFile
 import javax.transaction.Transactional
 
 /*
-  schoolId가 2020인 유저가 DB에있고, PK가 1번인 POST가 DB에있다고 가정하고 진행했습니다.
+  schoolId가 2020인 유저가 DB에있다고 가정했습니다.
  */
 
 @SpringBootTest
@@ -44,6 +45,7 @@ class PostServiceTest @Autowired constructor(val postService: PostService,
 
     @Test
     @Transactional
+    @BeforeTestExecution
     fun createPostTest() {
         postService.createPost(testCreateOrUpdateRequestPostDto, imgFile)
         Assertions.assertNotNull(postRepository.findByTitle(testCreateOrUpdateRequestPostDto.title))
@@ -59,20 +61,11 @@ class PostServiceTest @Autowired constructor(val postService: PostService,
 
     @Test
     @Transactional
-    fun thumbsUpTest() {
-        postService.thumbsUp("20202020", existId)
-        val post = postRepository.findById(existId).orElseThrow { PostNotExistException() }
-
-        Assertions.assertNotEquals(0, post.likeUser.size)
-    }
-
-    @Test
-    @Transactional
     fun scrapTest() {
         postService.scrapPost("20202020", existId)
         val post = postRepository.findById(existId).orElseThrow { PostNotExistException() }
 
-        Assertions.assertNotEquals(0, post.likeUser.size)
+        Assertions.assertNotEquals(0, post.scrapUser.size)
     }
 
     @Test
