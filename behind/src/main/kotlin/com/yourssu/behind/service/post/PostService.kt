@@ -52,9 +52,10 @@ class PostService @Autowired constructor(private val postRepository: PostReposit
             findPostFunction.getPostsByType(lecture, type, page)
     }
 
-    fun searchPosts(keyword: String, page: Int): List<ResponsePostsDto> {
-        return findPostFunction.searchPostsByKeyword(keyword, page)
+    fun searchPosts(keyword: String, type: PostType?, page: Int): List<ResponsePostsDto> {
+        return findPostFunction.searchPostsByKeyword(keyword, type, page)
     }
+
     fun scrapPost(schoolId: String, postId: Long) {
         return scrapFunction.createScrapPost(schoolId, postId)
     }

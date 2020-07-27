@@ -19,8 +19,11 @@ class FindPostFunction(private val postRepository: PostRepository) {
         return postRepository.findAllByLectureAndTypeEqualsAndDeletePostIsFalse(lecture, type, PostPage(page)).map { ResponsePostsDto(it) }
     }
 
-    fun searchPostsByKeyword(keyword: String, page: Int): List<ResponsePostsDto> {
-        val posts = postRepository.findByTitleContainingOrContentContainingAndDeletePostIsFalse(keyword, keyword, PostPage(page))
+    fun searchPostsByKeyword(keyword: String, type: PostType?, page: Int): List<ResponsePostsDto> {
+        val posts = if (type == null)
+            postRepository.findByTitleContainingOrContentContainingAndDeletePostIsFalse(keyword, keyword, PostPage(page))
+        else
+            postRepository.findByTitleContainingOrContentContainingAndTypeAndDeletePostIsFalse(keyword, keyword, type, PostPage(page))
         if (posts.isEmpty())
             throw PostNotExistException()
         return posts.map { ResponsePostsDto(it) }
