@@ -3,12 +3,16 @@ package com.yourssu.behind.service.postTest
 import com.yourssu.behind.exception.lecture.LectureNotExistException
 import com.yourssu.behind.exception.post.PostNotExistException
 import com.yourssu.behind.model.dto.post.request.CreateOrUpdateRequestPostDto
+import com.yourssu.behind.model.entity.lecture.Lecture
+import com.yourssu.behind.model.entity.lecture.LectureSemester
 import com.yourssu.behind.model.entity.post.PostType
+import com.yourssu.behind.model.entity.professor.Professor
+import com.yourssu.behind.repository.lecture.LectureRepository
 import com.yourssu.behind.repository.post.PostRepository
+import com.yourssu.behind.repository.professor.ProfessorRepository
 import com.yourssu.behind.service.post.PostService
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.function.Executable
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.mock.web.MockMultipartFile
@@ -20,7 +24,10 @@ import javax.transaction.Transactional
  */
 
 @SpringBootTest
-class PostServiceTest @Autowired constructor(val postService: PostService, val postRepository: PostRepository) {
+class PostServiceTest @Autowired constructor(val postService: PostService,
+                                             val postRepository: PostRepository,
+                                             val professorRepository: ProfessorRepository,
+                                             val lectureRepository: LectureRepository) {
 
     val testCreateOrUpdateRequestPostDto =
             CreateOrUpdateRequestPostDto(schoolId = "20202020",
@@ -66,5 +73,27 @@ class PostServiceTest @Autowired constructor(val postService: PostService, val p
         val post = postRepository.findById(existId).orElseThrow { PostNotExistException() }
 
         Assertions.assertNotEquals(0, post.likeUser.size)
+    }
+
+    @Test
+    @Transactional
+    fun createPostsTest() {
+        val professor = Professor(name = "JOC")
+        professorRepository.save(professor)
+        lectureRepository.save(Lecture(major = "computer", year = "20", semester = LectureSemester.SPRING, courseName = "OOP", professor = professor))
+
+        for (i in 1..100)
+            postService.createPost(CreateOrUpdateRequestPostDto(schoolId = "20202020", title = "title$i", type = PostType.FREE, content = "www.figma.com/file/gEIPNEmE2KpymmVGFbHdNP/%EB%B9%84%ED%95%98%EC%9D%B8%EB%93%9C---Android?node-id=59%3A1239https://www.figma.com/file/gEIPNEmE2KpymmVGFbHdNP/%EB%B9%84%ED%95%98%EC%9D%B8%EB%93%9C---Android?node-id=59%3A1239$i", lectureId = 422), imgFile = null)
+    }
+
+    @Test
+    fun searchPostsTest() {
+        for (responsePostDto in postService.searchPosts(keyword = "1", page = 1))
+            println("${responsePostDto.title}   ${responsePostDto.content}")
+    }
+
+    @Test
+    fun getPostDetailsTest() {
+        println(postService.getPostDetails(450).content)
     }
 }
