@@ -8,6 +8,7 @@ import com.yourssu.behind.model.entity.post.Post
 import com.yourssu.behind.model.entity.post.PostType
 import com.yourssu.behind.repository.lecture.LectureRepository
 import com.yourssu.behind.repository.post.PostRepository
+import com.yourssu.behind.repository.post.ScrapRepository
 import com.yourssu.behind.repository.user.UserRepository
 import com.yourssu.behind.service.post.function.FindPostFunction
 import com.yourssu.behind.service.post.function.ImgUploadFunction
@@ -19,11 +20,12 @@ import org.springframework.web.multipart.MultipartFile
 @Service
 class PostService @Autowired constructor(private val postRepository: PostRepository,
                                          private val userRepository: UserRepository,
-                                         val lectureRepository: LectureRepository) {
+                                         val lectureRepository: LectureRepository,
+                                         val scrapRepository: ScrapRepository) {
 
     private val imgUploadFunction = ImgUploadFunction()
     private val findPostFunction = FindPostFunction(postRepository)
-    private val scrapFunction = ScrapFunction(userRepository, postRepository)
+    private val scrapFunction = ScrapFunction(userRepository, postRepository, scrapRepository)
 
     fun createPost(createOrUpdateRequestPostDto: CreateOrUpdateRequestPostDto, imgFile: MultipartFile?) {
         var imgUrl: String? = null
@@ -53,6 +55,7 @@ class PostService @Autowired constructor(private val postRepository: PostReposit
     fun searchPosts(keyword: String, page: Int): List<ResponsePostsDto> {
         return findPostFunction.searchPostsByKeyword(keyword, page)
     }
+
     fun scrapPost(schoolId: String, postId: Long) {
         return scrapFunction.createScrapPost(schoolId, postId)
     }

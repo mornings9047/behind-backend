@@ -17,7 +17,7 @@ class UserService @Autowired constructor(val userRepository: UserRepository, val
 
         return when (type) {
             PostSearch.SCRAP -> {
-                user.scrapPost.map { ResponsePostsDto(it) }
+                user.posts.map { ResponsePostsDto(it) }
             }
             PostSearch.COMMENT -> {
                 val returnPost: MutableSet<Post> = mutableSetOf()
