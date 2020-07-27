@@ -3,6 +3,7 @@ package com.yourssu.behind.service.post
 import com.yourssu.behind.exception.lecture.LectureNotExistException
 import com.yourssu.behind.exception.user.UserNotExistException
 import com.yourssu.behind.model.dto.post.request.CreateOrUpdateRequestPostDto
+import com.yourssu.behind.model.dto.post.response.ResponsePostDto
 import com.yourssu.behind.model.dto.post.response.ResponsePostsDto
 import com.yourssu.behind.model.entity.lecture.Lecture
 import com.yourssu.behind.model.entity.post.Post
@@ -43,7 +44,8 @@ class PostService @Autowired constructor(private val postRepository: PostReposit
                 title = createOrUpdateRequestPostDto.title,
                 content = createOrUpdateRequestPostDto.content,
                 imgUrl = imgUrl,
-                lecture = lecture
+                lecture = lecture,
+                deletePost = false
         ))
     }
 
@@ -65,5 +67,9 @@ class PostService @Autowired constructor(private val postRepository: PostReposit
 
     fun scrapPost(schoolId: String, postId: Long) {
         return scrapFunction.createScrapPost(schoolId, postId)
+    }
+
+    fun getPostDetails(postId: Long): ResponsePostDto {
+        return findPostFunction.getPostDetails(postId)
     }
 }

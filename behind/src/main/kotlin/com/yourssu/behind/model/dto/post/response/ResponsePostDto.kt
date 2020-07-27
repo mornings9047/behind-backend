@@ -6,11 +6,11 @@ import com.yourssu.behind.model.entity.post.PostType
 import java.time.LocalDateTime
 
 class ResponsePostDto(post: Post) {
+    val lectureId = ReturnLectureDto(post.lecture)
     val postId: Long? = post.id
     val title: String = post.title
     val type: PostType = post.type
     val content: String = post.content
     val imgUrl: String? = post.imgUrl
     val createdAt: LocalDateTime = post.createdAt
-    val lectureId = ReturnLectureDto(post.lecture)
 }

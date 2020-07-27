@@ -7,7 +7,6 @@ import com.yourssu.behind.model.entity.lecture.LectureSemester
 import com.yourssu.behind.model.entity.post.PostType
 import com.yourssu.behind.model.entity.professor.Professor
 import com.yourssu.behind.repository.lecture.LectureRepository
-import com.yourssu.behind.repository.post.PostRepository
 import com.yourssu.behind.repository.professor.ProfessorRepository
 import com.yourssu.behind.service.auth.AuthService
 import com.yourssu.behind.service.post.PostService
@@ -51,5 +50,10 @@ class PostServiceTests {
     fun searchPostsTest() {
         for (responsePostDto in postService.searchPosts(keyword = "1", page = 1))
             println("${responsePostDto.title}   ${responsePostDto.createdAt.second}")
+    }
+
+    @Test
+    fun getPostDetailsTest() {
+        println(postService.getPostDetails(300).postId)
     }
 }
