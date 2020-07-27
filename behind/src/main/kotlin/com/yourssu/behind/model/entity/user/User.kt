@@ -34,11 +34,7 @@ data class User(
 
         @ManyToMany
         @JoinTable(name = "scrap")
-        var scrapPost: MutableList<Post> = mutableListOf(),
-
-        @ManyToMany
-        @JoinTable(name = "thumbsUp")
-        var likePost: MutableList<Post> = mutableListOf()
+        var scrapPost: MutableList<Post> = mutableListOf()
 
 ) {
     @Override

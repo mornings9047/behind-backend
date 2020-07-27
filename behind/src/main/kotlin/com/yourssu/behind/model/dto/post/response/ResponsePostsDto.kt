@@ -12,7 +12,5 @@ class ResponsePostsDto(post: Post) {
     val imgUrl: String? = post.imgUrl
     val content: String = post.content
     val createdAt: LocalDateTime = post.createdAt
-    val thumbsUp = post.likeUser.size
-    val scrapNum = post.scrapUser.size
     val commentsNum = post.comments.size
 }
