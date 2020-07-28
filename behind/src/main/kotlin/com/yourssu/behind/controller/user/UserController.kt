@@ -1,6 +1,5 @@
 package com.yourssu.behind.controller.user
 
-import com.yourssu.behind.model.dto.post.response.ResponsePostDto
 import com.yourssu.behind.model.dto.post.response.ResponsePostsDto
 import com.yourssu.behind.model.entity.post.PostSearch
 import com.yourssu.behind.service.UserService
