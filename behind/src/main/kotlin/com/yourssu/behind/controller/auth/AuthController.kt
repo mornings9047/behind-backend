@@ -12,27 +12,18 @@ import javax.validation.Valid
 
 @RestController
 @RequestMapping("/auth")
-class AuthController @Autowired constructor(val authService: AuthService, val jstService: JwtService) {
+class AuthController @Autowired constructor(val authService: AuthService, val jwtService: JwtService) {
 
     @PostMapping("/signup")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun signUpNewUser(@Valid @RequestBody signUpRequestDto: UserSignUpRequestDto): ResponseEntity<String> {
-        return try {
-            authService.signUp(signUpRequestDto)
-            ResponseEntity(HttpStatus.CREATED)
-        } catch (e: Exception) {
-            ResponseEntity(HttpStatus.BAD_REQUEST)
-        }
+    fun signUpNewUser(@Valid @RequestBody signUpRequestDto: UserSignUpRequestDto) {
+        authService.signUp(signUpRequestDto)
     }
 
     @PostMapping("/signin")
-    fun signIn(@Valid @RequestBody signInRequestDto: UserSignInRequestDto): ResponseEntity<String> {
-        return try {
-            val user = authService.signIn(signInRequestDto)
-            val token = jstService.createToken(user)
-            ResponseEntity(token, HttpStatus.OK)
-        } catch (e: Exception) {
-            ResponseEntity(e.message, HttpStatus.BAD_REQUEST)
-        }
+    @ResponseStatus(HttpStatus.OK)
+    fun signIn(@Valid @RequestBody signInRequestDto: UserSignInRequestDto): String {
+        val user = authService.signIn(signInRequestDto)
+        return jwtService.createToken(user)
     }
 }

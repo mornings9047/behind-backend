@@ -15,7 +15,7 @@ class JwtService {
     private final val key = "A"
 
     fun createToken(user: User): String {
-        val expiredTime = 100 * 60L // 만료기간 1분
+        val expiredTime = 100 * 60L * 2 // 만료기간 2분
         val now = Date().time + expiredTime
 
         val headers: MutableMap<String, Any> = HashMap()    // 헤더
@@ -37,6 +37,7 @@ class JwtService {
 
     @Throws(InterruptedException::class)
     fun isValid(token: String): Boolean {
+        println("isValid 호출됨@@@")
         try {
             return Jwts.parser()
                     .setSigningKey("A".toByteArray())
@@ -52,7 +53,7 @@ class JwtService {
         val token = request.getHeader("Authorization")
 
         try {
-            return Jwts.parser().setSigningKey("A".toByteArray()).parseClaimsJws(token).body[key] as LinkedHashMap<String, Any>
+            return Jwts.parser().setSigningKey("A".toByteArray()).parseClaimsJws(token).body as LinkedHashMap<String, Any>
         } catch (e: Exception) {
             throw UnAuthorizedException()
         }

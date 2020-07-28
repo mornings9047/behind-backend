@@ -8,6 +8,7 @@ import com.yourssu.behind.service.post.PostService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
 
@@ -16,7 +17,7 @@ import org.springframework.web.multipart.MultipartFile
 class PostController @Autowired constructor(val postService: PostService) {
 
     @PostMapping("/", consumes = [MediaType.ALL_VALUE])
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.CREATED)
     fun createPost(@RequestPart imgFile: MultipartFile?,
                    @RequestPart createOrUpdateRequestPostDto: CreateOrUpdateRequestPostDto
     ) {
@@ -24,22 +25,25 @@ class PostController @Autowired constructor(val postService: PostService) {
     }
 
     @GetMapping("/{lectureId}")
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.OK)
     fun getPost(@PathVariable lectureId: Long, @RequestParam type: PostType?, @RequestParam page: Int): List<ResponsePostsDto> {
         return postService.getPosts(lectureId, type, page)
     }
 
     @GetMapping("/search/{keyword}")
+    @ResponseStatus(HttpStatus.OK)
     fun searchPosts(@PathVariable keyword: String, @RequestParam page: Int): List<ResponsePostsDto> {
         return postService.searchPosts(keyword, page)
     }
 
     @GetMapping("/{postId}/scrap")
+    @ResponseStatus(HttpStatus.OK)
     fun scrapPost(@PathVariable postId: Long, @RequestParam schoolId: String) {
         return postService.scrapPost(schoolId, postId)
     }
 
     @GetMapping("/{postId}")
+    @ResponseStatus(HttpStatus.OK)
     fun getPostDetails(@PathVariable postId: Long): ResponsePostDto {
         return postService.getPostDetails(postId)
     }
