@@ -15,6 +15,7 @@ import com.yourssu.behind.service.post.function.ImgUploadFunction
 import com.yourssu.behind.service.post.function.ScrapFunction
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.multipart.MultipartFile
 
 @Service
@@ -44,6 +45,7 @@ class PostService @Autowired constructor(private val postRepository: PostReposit
         ))
     }
 
+    @Transactional
     fun getPosts(lectureId: Long, type: PostType?, page: Int): List<ResponsePostsDto> {
         val lecture = lectureRepository.findById(lectureId).orElseThrow { LectureNotExistException() }
         return if (type == null)
@@ -52,10 +54,12 @@ class PostService @Autowired constructor(private val postRepository: PostReposit
             findPostFunction.getPostsByType(lecture, type, page)
     }
 
+    @Transactional
     fun searchPosts(keyword: String, page: Int): List<ResponsePostsDto> {
         return findPostFunction.searchPostsByKeyword(keyword, page)
     }
 
+    @Transactional
     fun scrapPost(schoolId: String, postId: Long) {
         return scrapFunction.createScrapPost(schoolId, postId)
     }

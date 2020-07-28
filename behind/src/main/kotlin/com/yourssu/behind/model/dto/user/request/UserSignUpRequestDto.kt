@@ -1,3 +1,11 @@
 package com.yourssu.behind.model.dto.user.request
 
-class UserSignUpRequestDto(val schoolId: String, val password: String)
+import io.swagger.annotations.ApiModel
+import io.swagger.annotations.ApiModelProperty
+
+@ApiModel
+class UserSignUpRequestDto(
+        @ApiModelProperty(value="학번")
+        val schoolId: String,
+        @ApiModelProperty(value = "비밀번호")
+        val password: String)

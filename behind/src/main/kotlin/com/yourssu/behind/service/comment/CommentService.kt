@@ -14,6 +14,7 @@ import com.yourssu.behind.repository.user.UserRepository
 import com.yourssu.behind.service.comment.function.CommentFunction
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
 class CommentService @Autowired constructor(val postRepository: PostRepository, val userRepository: UserRepository, val commentRepository: CommentRepository) {
@@ -31,6 +32,7 @@ class CommentService @Autowired constructor(val postRepository: PostRepository, 
         commentFunction.createComment(newComment)
     }
 
+    @Transactional
     fun createRecomment(postId: Long, createOrUpdateRequestCommentDto: CreateOrUpdateRequestCommentDto, parentCommentId: Long) {
 
         val commentUser = userRepository.findBySchoolId(createOrUpdateRequestCommentDto.schoolId).orElseThrow { UserNotExistsException() }
@@ -41,6 +43,7 @@ class CommentService @Autowired constructor(val postRepository: PostRepository, 
         commentRepository.save(reComment)
     }
 
+    @Transactional
     fun getComment(postId: Long, page: Int): List<ResponseCommentDto> {
         val post: Post = postRepository.findById(postId).orElseThrow { PostNotExistException() }
         return commentRepository.findByPostAndParentIsNull(post, CommentPage(page)).map { ResponseCommentDto(it) }

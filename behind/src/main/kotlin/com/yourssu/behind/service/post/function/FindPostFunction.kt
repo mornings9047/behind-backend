@@ -8,8 +8,10 @@ import com.yourssu.behind.model.entity.post.PostType
 import com.yourssu.behind.repository.post.PostRepository
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
+import javax.transaction.Transactional
 
 class FindPostFunction(private val postRepository: PostRepository) {
+
     fun getAllPosts(lecture: Lecture, page: Int): List<ResponsePostsDto> {
         return postRepository.findAllByLectureAndDeletePostIsFalse(lecture, PostPage(page)).map { ResponsePostsDto(it) }
     }
