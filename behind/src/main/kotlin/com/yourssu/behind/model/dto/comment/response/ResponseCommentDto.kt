@@ -7,5 +7,5 @@ class ResponseCommentDto(comment: Comment) {
     var postOwner: Boolean = comment.postOwner
     val content: String = comment.content
     val createdAt: LocalDateTime = comment.createdAt
-    val reComment = comment.children.map { ResponseCommentDto(it) }
+    val reComment: List<ResponseCommentDto>? = comment.children.map { ResponseCommentDto(it) }
 }

@@ -5,10 +5,10 @@ import com.yourssu.behind.exception.post.PostNotExistException
 import com.yourssu.behind.model.dto.post.request.CreateOrUpdateRequestPostDto
 import com.yourssu.behind.model.entity.post.PostType
 import com.yourssu.behind.repository.post.PostRepository
+import com.yourssu.behind.repository.post.ScrapRepository
 import com.yourssu.behind.service.post.PostService
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.function.Executable
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.mock.web.MockMultipartFile
@@ -21,7 +21,7 @@ import javax.transaction.Transactional
  */
 
 @SpringBootTest
-class PostServiceTest @Autowired constructor(val postService: PostService, val postRepository: PostRepository) {
+class PostServiceTest @Autowired constructor(val postService: PostService, val postRepository: PostRepository, val scrapRepository: ScrapRepository) {
 
     val testCreateOrUpdateRequestPostDto =
             CreateOrUpdateRequestPostDto(schoolId = "20202020",
@@ -58,6 +58,6 @@ class PostServiceTest @Autowired constructor(val postService: PostService, val p
         postService.scrapPost("20202020", existId)
         val post = postRepository.findById(existId).orElseThrow { PostNotExistException() }
 
-        Assertions.assertNotEquals(0, post.scrapUser.size)
+        Assertions.assertNotEquals(0, scrapRepository.countAllByScrapPost(post))
     }
 }

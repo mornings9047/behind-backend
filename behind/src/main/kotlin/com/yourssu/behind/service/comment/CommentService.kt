@@ -6,6 +6,7 @@ import com.yourssu.behind.exception.user.UserNotExistsException
 import com.yourssu.behind.model.dto.comment.request.CreateOrUpdateRequestCommentDto
 import com.yourssu.behind.model.dto.comment.response.ResponseCommentDto
 import com.yourssu.behind.model.entity.comment.Comment
+import com.yourssu.behind.model.entity.comment.CommentPage
 import com.yourssu.behind.model.entity.post.Post
 import com.yourssu.behind.repository.comment.CommentRepository
 import com.yourssu.behind.repository.post.PostRepository
@@ -24,7 +25,7 @@ class CommentService @Autowired constructor(val postRepository: PostRepository, 
         val targetPost = postRepository.findById(postId).orElseThrow { PostNotExistException() }
         val newComment = Comment(user = commentUser, post = targetPost, content = createOrUpdateRequestCommentDto.content, parent = null)
 
-        if(commentUser == targetPost.user)
+        if (commentUser == targetPost.user)
             newComment.postOwner = true
 
         commentFunction.createComment(newComment)
@@ -40,8 +41,8 @@ class CommentService @Autowired constructor(val postRepository: PostRepository, 
         commentRepository.save(reComment)
     }
 
-    fun getComment(postId: Long): List<ResponseCommentDto> {
+    fun getComment(postId: Long, page: Int): List<ResponseCommentDto> {
         val post: Post = postRepository.findById(postId).orElseThrow { PostNotExistException() }
-        return commentRepository.findByPostAndParentIsNull(post).map { ResponseCommentDto(it) }
+        return commentRepository.findByPostAndParentIsNull(post, CommentPage(page)).map { ResponseCommentDto(it) }
     }
 }

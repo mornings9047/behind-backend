@@ -14,4 +14,6 @@ interface ScrapRepository : JpaRepository<Scrap, Long> {
 
     @Transactional
     fun deleteByScrapUserAndScrapPost(user: User, post: Post)
+
+    fun countAllByScrapPost(post: Post): Int
 }

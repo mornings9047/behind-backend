@@ -12,6 +12,7 @@ import com.yourssu.behind.service.comment.CommentService
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.boot.test.context.SpringBootTest
 import javax.transaction.Transactional
 
@@ -38,5 +39,18 @@ class CommentServiceTest @Autowired constructor(val commentService: CommentServi
         Assertions.assertNotNull(commentRepository.findByUserAndPost(user, post))
 
     }
+
+    @Test
+    @Transactional
+    fun getCommentTest() {
+        val nowPage: Int = 0
+        val comments = commentService.getComment(existId, 0)
+
+        for(comment in comments)
+        {
+            println(comment)
+        }
+    }
+
 
 }

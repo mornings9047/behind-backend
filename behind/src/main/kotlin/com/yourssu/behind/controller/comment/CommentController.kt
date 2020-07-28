@@ -9,18 +9,18 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/comments")
 class CommentController @Autowired constructor(val commentService: CommentService) {
-    @PostMapping("/{postId}")
+    @PostMapping("/post/{postId}")
     fun createComment(@PathVariable postId: Long, @RequestBody createOrUpdateRequestCommentDto: CreateOrUpdateRequestCommentDto) {
         return commentService.createComment(postId, createOrUpdateRequestCommentDto)
     }
 
-    @PostMapping("/{postId}/recomment/{commentId}")
+    @PostMapping("/post/{postId}/recomment/{commentId}")
     fun createReComment(@PathVariable postId: Long, @PathVariable commentId: Long, @RequestBody createOrUpdateRequestCommentDto: CreateOrUpdateRequestCommentDto) {
         commentService.createRecomment(postId, createOrUpdateRequestCommentDto, commentId)
     }
 
-    @GetMapping("/{postId}")
-    fun getComment(@PathVariable postId: Long): List<ResponseCommentDto> {
-        return commentService.getComment(postId)
+    @GetMapping("/post/{postId}")
+    fun getComment(@PathVariable postId: Long,@RequestParam page:Int): List<ResponseCommentDto> {
+        return commentService.getComment(postId,page)
     }
 }
