@@ -37,7 +37,6 @@ class JwtService {
 
     @Throws(InterruptedException::class)
     fun isValid(token: String): Boolean {
-        println("isValid 호출됨@@@")
         try {
             return Jwts.parser()
                     .setSigningKey("A".toByteArray())
