@@ -10,6 +10,7 @@ import java.util.*
 @Repository
 interface CommentRepository : JpaRepository<Comment, Long> {
     fun findByUserAndPost(user: User, post: Post): Optional<List<Comment>>
+    fun findAllByPostIdAndDeleteCommentIsFalse(postId: Long): List<Comment>
     fun findByUser(user: User): List<Comment>
     fun findByPostAndParentIsNull(post: Post, pageable: org.springframework.data.domain.Pageable): List<Comment>
 }

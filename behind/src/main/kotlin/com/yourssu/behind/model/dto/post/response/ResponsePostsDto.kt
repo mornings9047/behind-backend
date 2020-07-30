@@ -31,4 +31,10 @@ class ResponsePostsDto(post: Post) {
 
     @ApiModelProperty(value = "댓글 갯수")
     val commentsNum = post.comments.size
+
+    private fun resizeText(text: String, size: Int): String {
+        if (text.length > size)
+            return "${text.dropLast(size)}..."
+        return text
+    }
 }
