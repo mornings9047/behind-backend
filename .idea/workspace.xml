@@ -25,19 +25,10 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3a7fd033-6b74-4fc7-8f4e-f81fe24564a9" name="Default Changelist" comment="heroku">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-07-26__10_54__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-07-26__10_54__Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-07-26__10_54__Default_Changelist_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-07-26__10_54__Default_Changelist_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-07-26__10_55__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-07-26__10_55__Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="3a7fd033-6b74-4fc7-8f4e-f81fe24564a9" name="Default Changelist" comment="Merge오류">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/controller/post/PostController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/controller/post/PostController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/post/PostService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/post/PostService.kt" afterDir="false" />
     </list>
-    <list id="5cb86075-fc19-447d-a0bc-e65e2a90cf83" name="heroku" comment="" />
-    <list id="5f212061-948c-4e13-942e-23e1afcf192b" name="make it better" comment="" />
-    <list id="570f7d8e-e2b8-4f89-aef2-57079b781212" name="pageable수정, imgFile 저장 경로 수정" comment="" />
-    <list id="8f09b1e6-0db8-4d39-9588-c0e0da9e2f38" name="professor 테이블 추가, 학기 enum, 생성자로 초기화" comment="professor 테이블 추가, 학기 enum, 생성자로 초기화" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -78,7 +69,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="heroku" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -252,8 +243,8 @@
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="3a7fd033-6b74-4fc7-8f4e-f81fe24564a9" name="Default Changelist" comment="" />
-      <changelist id="8f09b1e6-0db8-4d39-9588-c0e0da9e2f38" name="professor 테이블 추가, 학기 enum, 생성자로 초기화" comment="" />
-      <changelist id="570f7d8e-e2b8-4f89-aef2-57079b781212" name="pageable수정, imgFile 저장 경로 수정" comment="" />
+      <changelist id="" name="professor 테이블 추가, 학기 enum, 생성자로 초기화" comment="" />
+      <changelist id="" name="pageable수정, imgFile 저장 경로 수정" comment="" />
       <created>1595056848848</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -284,7 +275,7 @@
       <workItem from="1596004058360" duration="6400000" />
       <workItem from="1596018073468" duration="5819000" />
       <workItem from="1596026911231" duration="425000" />
-      <workItem from="1596112976099" duration="174000" />
+      <workItem from="1596112976099" duration="821000" />
     </task>
     <task id="LOCAL-00001" summary="initialize">
       <created>1595056923738</created>
@@ -496,7 +487,14 @@
       <option name="project" value="LOCAL" />
       <updated>1595933241869</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Merge오류">
+      <created>1596113188182</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1596113188182</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -530,7 +528,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/behind" />
     </ignored-roots>
-    <MESSAGE value="DBmodeling" />
     <MESSAGE value="professor 테이블 추가, 학기 enum, 생성자로 초기화" />
     <MESSAGE value="좋아요 추가" />
     <MESSAGE value="구조" />
@@ -555,7 +552,8 @@
     <MESSAGE value="대댓글" />
     <MESSAGE value="댓글 페이징 추가, 테스트 코드" />
     <MESSAGE value="swagger적용(미완)" />
-    <option name="LAST_COMMIT_MESSAGE" value="swagger적용(미완)" />
+    <MESSAGE value="Merge오류" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge오류" />
   </component>
   <component name="WindowStateProjectService">
     <state x="857" y="409" key="#Assign_Data_Sources" timestamp="1595840765702">
@@ -606,6 +604,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="494" y="106" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1596099707806" />
+    <state x="162" y="81" key="DiffContextDialog" timestamp="1596113752029">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="162" y="81" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1596113752029" />
     <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1596113054386">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -682,10 +684,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="652" y="278" key="Vcs.Multiple.Commit.Info.Dialog.Key/0.0.1920.1040@0.0.1920.1040" timestamp="1595504035044" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1595933245608">
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1596113196987">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1595933245608" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1596113196987" />
     <state width="968" height="528" key="XDebugger.FullValuePopup" timestamp="1595580723169">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -698,10 +700,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="672" y="232" key="git4idea.branch.GitSmartOperationDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1596099613670" />
-    <state x="652" y="307" width="615" height="426" key="git4idea.merge.GitPullDialog" timestamp="1596109726459">
+    <state x="652" y="307" width="615" height="426" key="git4idea.merge.GitPullDialog" timestamp="1596113760674">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="652" y="307" width="615" height="426" key="git4idea.merge.GitPullDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1596109726459" />
+    <state x="652" y="307" width="615" height="426" key="git4idea.merge.GitPullDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1596113760674" />
     <state x="684" y="377" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1596099703877">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
