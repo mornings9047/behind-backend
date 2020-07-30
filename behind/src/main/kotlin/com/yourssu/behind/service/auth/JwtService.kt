@@ -2,8 +2,7 @@ package com.yourssu.behind.service.auth
 
 import com.yourssu.behind.exception.user.UnAuthorizedException
 import com.yourssu.behind.model.entity.user.User
-import io.jsonwebtoken.Jwts
-import io.jsonwebtoken.SignatureAlgorithm
+import io.jsonwebtoken.*
 import org.springframework.stereotype.Service
 import org.springframework.web.context.request.RequestContextHolder
 import org.springframework.web.context.request.ServletRequestAttributes
@@ -14,7 +13,7 @@ import javax.servlet.http.HttpServletRequest
 class JwtService {
     private final val key = "A"
 
-    fun createToken(user: User): String {
+    fun createToken(schoolId: String): String {
         val expiredTime = 100 * 60L * 2 // 만료기간 2분
         val now = Date().time + expiredTime
 
@@ -25,7 +24,7 @@ class JwtService {
         headers["alg"] = "HS256" // 알고리즘
 
         payloads["exp"] = now   // 만료시간
-        payloads["data"] = user   // 데이터
+        payloads["schoolId"] = schoolId   // 데이터
 
         return Jwts.builder()
                 .setHeader(headers)
@@ -47,12 +46,11 @@ class JwtService {
         }
     }
 
-    fun getData(key: String): Map<String, Any> {
-        val request: HttpServletRequest = ((RequestContextHolder.currentRequestAttributes()) as ServletRequestAttributes).request
+    fun getSchoolId(): String {
+        val request = ((RequestContextHolder.currentRequestAttributes()) as ServletRequestAttributes).request
         val token = request.getHeader("Authorization")
-
         try {
-            return Jwts.parser().setSigningKey("A".toByteArray()).parseClaimsJws(token).body as LinkedHashMap<String, Any>
+            return Jwts.parser().setSigningKey("A".toByteArray()).parseClaimsJws(token).body["schoolId"] as String
         } catch (e: Exception) {
             throw UnAuthorizedException()
         }

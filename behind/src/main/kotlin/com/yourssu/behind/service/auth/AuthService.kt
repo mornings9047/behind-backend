@@ -23,12 +23,12 @@ class AuthService @Autowired constructor(private val userRepository: UserReposit
             ))
     }
 
-    fun signIn(userSignInRequestDto: UserSignInRequestDto): User {
+    fun signIn(userSignInRequestDto: UserSignInRequestDto): String {
         if (!userRepository.existsBySchoolId(userSignInRequestDto.schoolId))
             throw UserNotExistsException()
         val user = userRepository.findBySchoolId(userSignInRequestDto.schoolId).get()
         if (!BCrypt.checkpw(userSignInRequestDto.password, user.password))
             throw PasswordNotMatchedException()
-        return user
+        return user.schoolId
     }
 }

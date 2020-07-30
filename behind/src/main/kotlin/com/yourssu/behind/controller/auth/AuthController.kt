@@ -24,7 +24,7 @@ class AuthController @Autowired constructor(val authService: AuthService, val jw
     @PostMapping("/signin")
     @ResponseStatus(HttpStatus.OK)
     fun signIn(@Valid @RequestBody signInRequestDto: UserSignInRequestDto): String {
-        val user = authService.signIn(signInRequestDto)
-        return jwtService.createToken(user)
+        val schoolId = authService.signIn(signInRequestDto)
+        return jwtService.createToken(schoolId)
     }
 }

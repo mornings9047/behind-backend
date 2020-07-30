@@ -13,7 +13,8 @@ class GlobalRestExceptionHandler {
     @ExceptionHandler(value = [RuntimeException::class])
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     fun badRequestError(e: Exception): ResponseEntity<String> {
-        return ResponseEntity("Request Failed", HttpStatus.BAD_REQUEST)
+        e.printStackTrace()
+        return ResponseEntity(e.message, HttpStatus.BAD_REQUEST)
     }
 
 }
