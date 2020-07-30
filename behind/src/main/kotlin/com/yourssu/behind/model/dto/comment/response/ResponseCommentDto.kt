@@ -17,6 +17,10 @@ class ResponseCommentDto(comment: Comment) {
     @ApiModelProperty("작성 시간")
     val createdAt: LocalDateTime = comment.createdAt
 
+    @ApiModelProperty("삭제 된 댓글인지 여부")
+    var isDeleted: Boolean = comment.deleteComment
+
     @ApiModelProperty("대 댓글")
     val reComment: List<ResponseCommentDto>? = comment.children.map { ResponseCommentDto(it) }
+
 }

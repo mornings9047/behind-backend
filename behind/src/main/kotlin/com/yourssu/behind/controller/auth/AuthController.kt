@@ -16,14 +16,14 @@ import javax.validation.Valid
 @RequestMapping("/auth")
 class AuthController @Autowired constructor(val authService: AuthService, val jwtService: JwtService) {
 
-    @PostMapping("/signup")
+    @PostMapping("/signUp")
     @ApiOperation(value = "회원가입")
     @ResponseStatus(HttpStatus.CREATED)
     fun signUpNewUser(@Valid @RequestBody signUpRequestDto: UserSignUpRequestDto) {
         authService.signUp(signUpRequestDto)
     }
 
-    @PostMapping("/signin")
+    @PostMapping("/signIn")
     @ApiOperation(value =" 로그인")
     @ResponseStatus(HttpStatus.OK)
     fun signIn(@Valid @RequestBody signInRequestDto: UserSignInRequestDto): String {

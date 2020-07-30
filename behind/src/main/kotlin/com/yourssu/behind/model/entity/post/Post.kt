@@ -20,6 +20,8 @@ data class Post(
 
         var title: String,
 
+        var reportNum: Int = 0,
+
         @Nullable
         var imgUrl: String?,
 
@@ -31,7 +33,7 @@ data class Post(
 
         var deletePost: Boolean = false,
 
-        @OneToMany(mappedBy = "post")
+        @OneToMany(mappedBy = "post", cascade = [CascadeType.ALL])
         var comments: MutableList<Comment> = mutableListOf(),
 
         @ManyToOne

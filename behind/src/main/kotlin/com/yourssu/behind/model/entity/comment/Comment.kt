@@ -20,9 +20,11 @@ data class Comment(
         @Temporal
         val createdAt: LocalDateTime = LocalDateTime.now(),
 
-        val deleteComment: Boolean = false,
+        var deleteComment: Boolean = false,
 
         var postOwner: Boolean = false,
+
+        var reportNum: Int = 0,
 
         @ManyToOne
         val parent: Comment?,

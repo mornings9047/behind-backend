@@ -12,6 +12,7 @@ import com.yourssu.behind.repository.comment.CommentRepository
 import com.yourssu.behind.repository.post.PostRepository
 import com.yourssu.behind.repository.user.UserRepository
 import com.yourssu.behind.service.comment.function.CommentFunction
+import com.yourssu.behind.service.comment.function.ReportCommentFunction
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -20,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional
 class CommentService @Autowired constructor(val postRepository: PostRepository, val userRepository: UserRepository, val commentRepository: CommentRepository) {
 
     private val commentFunction = CommentFunction(commentRepository)
+    private val reportFunction = ReportCommentFunction(commentRepository)
 
     fun createComment(postId: Long, createOrUpdateRequestCommentDto: CreateOrUpdateRequestCommentDto) {
         val commentUser = userRepository.findBySchoolId(createOrUpdateRequestCommentDto.schoolId).orElseThrow { UserNotExistsException() }
@@ -47,5 +49,15 @@ class CommentService @Autowired constructor(val postRepository: PostRepository, 
     fun getComment(postId: Long, page: Int): List<ResponseCommentDto> {
         val post: Post = postRepository.findById(postId).orElseThrow { PostNotExistException() }
         return commentRepository.findByPostAndParentIsNull(post, CommentPage(page)).map { ResponseCommentDto(it) }
+    }
+
+    @Transactional
+    fun reportComment(commentId: Long) {
+        return reportFunction.reportComment(commentId)
+    }
+
+    @Transactional
+    fun deleteComment(commentId: Long) {
+        return commentFunction.deleteComment(commentId)
     }
 }

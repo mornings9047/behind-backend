@@ -5,7 +5,6 @@ import com.yourssu.behind.model.dto.comment.response.ResponseCommentDto
 import com.yourssu.behind.service.comment.CommentService
 import io.swagger.annotations.ApiOperation
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -28,5 +27,17 @@ class CommentController @Autowired constructor(val commentService: CommentServic
     @GetMapping("/post/{postId}")
     fun getComment(@PathVariable postId: Long, @RequestParam page: Int): List<ResponseCommentDto> {
         return commentService.getComment(postId, page)
+    }
+
+    @ApiOperation("댓글 신고하기")
+    @GetMapping("/report/{commentId}")
+    fun reportComment(@PathVariable commentId: Long) {
+        return commentService.reportComment(commentId)
+    }
+
+    @ApiOperation("댓글 삭제하기")
+    @DeleteMapping("/{commentId}")
+    fun deleteComment(@PathVariable commentId: Long) {
+        return commentService.deleteComment(commentId)
     }
 }

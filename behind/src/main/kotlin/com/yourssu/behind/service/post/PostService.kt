@@ -11,9 +11,7 @@ import com.yourssu.behind.repository.lecture.LectureRepository
 import com.yourssu.behind.repository.post.PostRepository
 import com.yourssu.behind.repository.post.ScrapRepository
 import com.yourssu.behind.repository.user.UserRepository
-import com.yourssu.behind.service.post.function.FindPostFunction
-import com.yourssu.behind.service.post.function.ImgUploadFunction
-import com.yourssu.behind.service.post.function.ScrapFunction
+import com.yourssu.behind.service.post.function.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -28,6 +26,8 @@ class PostService @Autowired constructor(private val postRepository: PostReposit
     private val imgUploadFunction = ImgUploadFunction()
     private val findPostFunction = FindPostFunction(postRepository)
     private val scrapFunction = ScrapFunction(userRepository, postRepository, scrapRepository)
+    private val reportFunction = ReportPostFunction(postRepository, scrapRepository)
+    private val deleteFunction = DeletePostFunction(postRepository, scrapRepository)
 
     fun createPost(createOrUpdateRequestPostDto: CreateOrUpdateRequestPostDto, imgFile: MultipartFile?) {
         var imgUrl: String? = null
@@ -67,7 +67,18 @@ class PostService @Autowired constructor(private val postRepository: PostReposit
         return scrapFunction.createScrapPost(schoolId, postId)
     }
 
+    @Transactional
     fun getPostDetails(postId: Long): ResponsePostDto {
         return findPostFunction.getPostDetails(postId)
+    }
+
+    @Transactional
+    fun deletePost(postId: Long) {
+        deleteFunction.deletePost(postId)
+    }
+
+    @Transactional
+    fun reportPost(postId: Long) {
+        reportFunction.reportPost(postId)
     }
 }

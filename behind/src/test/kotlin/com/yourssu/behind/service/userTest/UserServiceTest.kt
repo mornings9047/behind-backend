@@ -1,7 +1,7 @@
 package com.yourssu.behind.service.userTest
 
 import com.yourssu.behind.model.entity.post.PostSearch
-import com.yourssu.behind.service.UserService
+import com.yourssu.behind.service.user.UserService
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
