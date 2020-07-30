@@ -30,11 +30,7 @@ data class User(
         var posts: MutableList<Post> = mutableListOf(),
 
         @OneToMany(mappedBy = "user")
-        var comments: MutableList<Comment> = mutableListOf(),
-
-        @ManyToMany
-        @JoinTable(name = "scrap")
-        var scrapPost: MutableList<Post> = mutableListOf()
+        var comments: MutableList<Comment> = mutableListOf()
 
 ) {
     @Override

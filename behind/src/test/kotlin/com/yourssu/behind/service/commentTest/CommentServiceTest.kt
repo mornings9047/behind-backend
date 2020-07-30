@@ -12,6 +12,7 @@ import com.yourssu.behind.service.comment.CommentService
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.boot.test.context.SpringBootTest
 import javax.transaction.Transactional
 
@@ -41,29 +42,15 @@ class CommentServiceTest @Autowired constructor(val commentService: CommentServi
 
     @Test
     @Transactional
-    fun getCommentsTest() {
-        for (i in 1..3)
-            commentService.createComment(450, CreateOrUpdateRequestCommentDto("20170000", "comment$i"))
-        for (i in 1..4)
-            commentService.createComment(451, CreateOrUpdateRequestCommentDto("20170000", "comment$i"))
-        for (i in 1..2)
-            commentService.createComment(452, CreateOrUpdateRequestCommentDto("20170000", "comment$i"))
-        for (i in 3..4)
-            commentService.createComment(452, CreateOrUpdateRequestCommentDto("20170000", "comment$i"))
+    fun getCommentTest() {
+        val nowPage: Int = 0
+        val comments = commentService.getComment(existId, 0)
 
-        var comments = commentRepository.findAllByPostIdAndDeleteCommentIsFalse(450)
-        println("size: ${comments.size}")
-        for (comment in comments)
-            println("${comment.content}   ${comment.createdAt}")
-        println("==========================================================")
-        comments = commentRepository.findAllByPostIdAndDeleteCommentIsFalse(451)
-        println("size: ${comments.size}")
-        for (comment in comments)
-            println("${comment.content}   ${comment.createdAt}")
-        println("==========================================================")
-        comments = commentRepository.findAllByPostIdAndDeleteCommentIsFalse(452)
-        println("size: ${comments.size}")
-        for (comment in comments)
-            println("${comment.content}   ${comment.createdAt}")
+        for(comment in comments)
+        {
+            println(comment)
+        }
     }
+
+
 }
