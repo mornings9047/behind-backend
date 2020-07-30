@@ -30,8 +30,8 @@ class PostController @Autowired constructor(val postService: PostService) {
     }
 
     @GetMapping("/search/{keyword}")
-    fun searchPosts(@PathVariable keyword: String, @RequestParam page: Int): List<ResponsePostsDto> {
-        return postService.searchPosts(keyword, page)
+    fun searchPosts(@PathVariable keyword: String, @RequestParam type: PostType?, @RequestParam page: Int): List<ResponsePostsDto> {
+        return postService.searchPosts(keyword, type, page)
     }
 
     @GetMapping("/{postId}/scrap")
