@@ -34,9 +34,10 @@ class PostController @Autowired constructor(val postService: PostService) {
 
     @GetMapping("/search/{keyword}")
     @ApiOperation("게시물 검색하기")
-    fun searchPosts(@PathVariable keyword: String, @RequestParam page: Int): List<ResponsePostsDto> {
-        return postService.searchPosts(keyword, page)
+    fun searchPosts(@PathVariable keyword: String, @RequestParam type: PostType?, @RequestParam page: Int): List<ResponsePostsDto> {
+        return postService.searchPosts(keyword, type, page)
     }
+
 
     @ApiOperation("스크랩 하기")
     @GetMapping("/{postId}/scrap")

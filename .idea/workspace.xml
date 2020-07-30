@@ -20,32 +20,22 @@
       <path>
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:reComment" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:master" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </select>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3a7fd033-6b74-4fc7-8f4e-f81fe24564a9" name="Default Changelist" comment="heroku">
-      <change beforePath="$PROJECT_DIR$/behind/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/behind/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/comment/CommentService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/comment/CommentService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-07-26__10_54__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-07-26__10_54__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-07-26__10_54__Default_Changelist_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-07-26__10_54__Default_Changelist_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-07-26__10_55__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-07-26__10_55__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/controller/post/PostController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/controller/post/PostController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/post/PostService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/post/PostService.kt" afterDir="false" />
     </list>
     <list id="5cb86075-fc19-447d-a0bc-e65e2a90cf83" name="heroku" comment="" />
-    <list id="5f212061-948c-4e13-942e-23e1afcf192b" name="make it better" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/2020_behind_backend.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-07-26__10_54__Default_Changelist_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-07-26__10_54__Default_Changelist_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-07-26__10_55__Default_Changelist_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-07-26_오후_10_54_[Default_Changelist]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-07-26_오후_10_54_[Default_Changelist]1/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-07-26_오후_10_55_[Default_Changelist]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/behind/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/resources/application.properties" afterDir="false" />
-    </list>
+    <list id="5f212061-948c-4e13-942e-23e1afcf192b" name="make it better" comment="" />
     <list id="570f7d8e-e2b8-4f89-aef2-57079b781212" name="pageable수정, imgFile 저장 경로 수정" comment="" />
     <list id="8f09b1e6-0db8-4d39-9588-c0e0da9e2f38" name="professor 테이블 추가, 학기 enum, 생성자로 초기화" comment="professor 테이블 추가, 학기 enum, 생성자로 초기화" />
     <option name="SHOW_DIALOG" value="false" />
@@ -91,7 +81,7 @@
         <entry key="$PROJECT_DIR$" value="heroku" />
       </map>
     </option>
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/behind" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1eql9187ghEkRbeRU7bbEw1IsCO" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -110,7 +100,7 @@
     <property name="TODO_SCOPE" value="All Places" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../assignment_3" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -121,6 +111,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -293,6 +284,7 @@
       <workItem from="1596004058360" duration="6400000" />
       <workItem from="1596018073468" duration="5819000" />
       <workItem from="1596026911231" duration="425000" />
+      <workItem from="1596112976099" duration="174000" />
     </task>
     <task id="LOCAL-00001" summary="initialize">
       <created>1595056923738</created>
@@ -521,7 +513,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="reComment" />
+                        <option value="master" />
                       </list>
                     </value>
                   </entry>
@@ -535,6 +527,9 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/behind" />
+    </ignored-roots>
     <MESSAGE value="DBmodeling" />
     <MESSAGE value="professor 테이블 추가, 학기 enum, 생성자로 초기화" />
     <MESSAGE value="좋아요 추가" />
@@ -611,10 +606,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="494" y="106" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1596099707806" />
-    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1595929129994">
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1596113054386">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1595929129994" />
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1596113054386" />
     <state width="1328" height="286" key="GridCell.Tab.0.bottom" timestamp="1596026993040">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -671,6 +666,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="503" y="282" width="1087" height="479" key="MultipleFileMergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1595504182120" />
+    <state x="461" y="164" key="SettingsEditor" timestamp="1596113057916">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="461" y="164" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1596113057916" />
     <state x="92" y="92" width="1736" height="856" key="ShowDiffWithBranchDialog" timestamp="1596109737474">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

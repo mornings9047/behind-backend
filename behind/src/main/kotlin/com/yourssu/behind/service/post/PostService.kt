@@ -57,9 +57,10 @@ class PostService @Autowired constructor(private val postRepository: PostReposit
     }
 
     @Transactional
-    fun searchPosts(keyword: String, page: Int): List<ResponsePostsDto> {
-        return findPostFunction.searchPostsByKeyword(keyword, page)
+    fun searchPosts(keyword: String, type: PostType?, page: Int): List<ResponsePostsDto> {
+        return findPostFunction.searchPostsByKeyword(keyword, type, page)
     }
+
 
     @Transactional
     fun scrapPost(schoolId: String, postId: Long) {
