@@ -8,16 +8,18 @@ import com.yourssu.behind.repository.comment.CommentRepository
 import com.yourssu.behind.repository.user.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
 class UserService @Autowired constructor(val userRepository: UserRepository, val commentRepository: CommentRepository) {
 
+    @Transactional
     fun findUserRelatedPost(userId: Long, type: PostSearch): Collection<ResponsePostsDto> {
         val user = userRepository.findById(userId).orElseThrow { UserNotExistsException() }
 
         return when (type) {
             PostSearch.SCRAP -> {
-                user.scrapPost.map { ResponsePostsDto(it) }
+                user.posts.map { ResponsePostsDto(it) }
             }
             PostSearch.COMMENT -> {
                 val returnPost: MutableSet<Post> = mutableSetOf()

@@ -9,7 +9,7 @@ import com.yourssu.behind.model.entity.post.PostType
 import com.yourssu.behind.model.entity.professor.Professor
 import com.yourssu.behind.repository.lecture.LectureRepository
 import com.yourssu.behind.repository.post.PostRepository
-import com.yourssu.behind.repository.professor.ProfessorRepository
+import com.yourssu.behind.repository.post.ScrapRepository
 import com.yourssu.behind.service.post.PostService
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
@@ -25,10 +25,7 @@ import javax.transaction.Transactional
  */
 
 @SpringBootTest
-class PostServiceTest @Autowired constructor(val postService: PostService,
-                                             val postRepository: PostRepository,
-                                             val professorRepository: ProfessorRepository,
-                                             val lectureRepository: LectureRepository) {
+class PostServiceTest @Autowired constructor(val postService: PostService, val postRepository: PostRepository, val scrapRepository: ScrapRepository) {
 
     val testCreateOrUpdateRequestPostDto =
             CreateOrUpdateRequestPostDto(schoolId = "20202020",
@@ -65,7 +62,7 @@ class PostServiceTest @Autowired constructor(val postService: PostService,
         postService.scrapPost("20202020", existId)
         val post = postRepository.findById(existId).orElseThrow { PostNotExistException() }
 
-        Assertions.assertNotEquals(0, post.scrapUser.size)
+        Assertions.assertNotEquals(0, scrapRepository.countAllByScrapPost(post))
     }
 
     @Test
@@ -80,13 +77,25 @@ class PostServiceTest @Autowired constructor(val postService: PostService,
     }
 
     @Test
+    @Transactional
     fun searchPostsTest() {
-        for (responsePostDto in postService.searchPosts(keyword = "1", page = 1))
-            println("${responsePostDto.title}   ${responsePostDto.content}")
+        for (i in 1..20)
+            postService.createPost(CreateOrUpdateRequestPostDto(schoolId = "20202020", title = "FREE$i", type = PostType.FREE, content = "www.figma.com/file/gEIPNEmE2KpymmVGFbHdNP/%EB%B9%84%ED%95%98%EC%9D%B8%EB%93%9C---Android?node-id=59%3A1239https://www.figma.com/file/gEIPNEmE2KpymmVGFbHdNP/%EB%B9%84%ED%95%98%EC%9D%B8%EB%93%9C---Android?node-id=59%3A1239$i", lectureId = 9), imgFile = null)
+        for (i in 1..20)
+            postService.createPost(CreateOrUpdateRequestPostDto(schoolId = "20202020", title = "QUES$i", type = PostType.QUESTION, content = "www.figma.com/file/gEIPNEmE2KpymmVGFbHdNP/%EB%B9%84%ED%95%98%EC%9D%B8%EB%93%9C---Android?node-id=59%3A1239https://www.figma.com/file/gEIPNEmE2KpymmVGFbHdNP/%EB%B9%84%ED%95%98%EC%9D%B8%EB%93%9C---Android?node-id=59%3A1239$i", lectureId = 9), imgFile = null)
+        for (i in 1..20)
+            postService.createPost(CreateOrUpdateRequestPostDto(schoolId = "20202020", title = "INFO$i", type = PostType.INFORMATION, content = "www.figma.com/file/gEIPNEmE2KpymmVGFbHdNP/%EB%B9%84%ED%95%98%EC%9D%B8%EB%93%9C---Android?node-id=59%3A1239https://www.figma.com/file/gEIPNEmE2KpymmVGFbHdNP/%EB%B9%84%ED%95%98%EC%9D%B8%EB%93%9C---Android?node-id=59%3A1239$i", lectureId = 9), imgFile = null)
+
+        for (responsePostDto in postService.searchPosts(keyword = "FREE", type = null, page = 0))
+            println("${responsePostDto.type}   ${responsePostDto.title}")
+        for (responsePostDto in postService.searchPosts(keyword = "QUES", type = null, page = 0))
+            println("${responsePostDto.type}   ${responsePostDto.title}")
+        for (responsePostDto in postService.searchPosts(keyword = "INFO", type = null, page = 0))
+            println("${responsePostDto.type}   ${responsePostDto.title}")
     }
 
     @Test
     fun getPostDetailsTest() {
-        println(postService.getPostDetails(450).content)
+        println(postService.getPostDetails(160).content)
     }
 }

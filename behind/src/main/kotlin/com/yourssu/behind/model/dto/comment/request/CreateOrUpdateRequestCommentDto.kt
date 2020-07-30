@@ -1,3 +1,11 @@
 package com.yourssu.behind.model.dto.comment.request
 
-class CreateOrUpdateRequestCommentDto(val schoolId: String,val content: String)
+import io.swagger.annotations.ApiModel
+import io.swagger.annotations.ApiModelProperty
+
+@ApiModel
+class CreateOrUpdateRequestCommentDto(
+        @ApiModelProperty(value = "학번")
+        val schoolId: String,
+        @ApiModelProperty(value = "댓글 본문")
+        val content: String)
