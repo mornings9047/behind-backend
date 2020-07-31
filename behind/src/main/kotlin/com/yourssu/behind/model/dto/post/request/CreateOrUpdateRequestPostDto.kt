@@ -6,8 +6,6 @@ import io.swagger.annotations.ApiModelProperty
 
 @ApiModel
 data class CreateOrUpdateRequestPostDto(
-        @ApiModelProperty("학번")
-        val schoolId: String,
         @ApiModelProperty(value = "제목")
         val title: String,
         @ApiModelProperty(value = "글의 종륲 (QUESTION,FREE,INFORMATION)",required = false)

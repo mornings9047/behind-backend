@@ -11,6 +11,7 @@ import com.yourssu.behind.repository.lecture.LectureRepository
 import com.yourssu.behind.repository.post.PostRepository
 import com.yourssu.behind.repository.post.ScrapRepository
 import com.yourssu.behind.repository.user.UserRepository
+import com.yourssu.behind.service.auth.JwtService
 import com.yourssu.behind.service.post.function.FindPostFunction
 import com.yourssu.behind.service.post.function.ImgUploadFunction
 import com.yourssu.behind.service.post.function.ScrapFunction
@@ -21,17 +22,17 @@ import org.springframework.web.multipart.MultipartFile
 
 @Service
 class PostService @Autowired constructor(private val postRepository: PostRepository,
-                                         private val userRepository: UserRepository,
+                                         userRepository: UserRepository,
                                          val lectureRepository: LectureRepository,
-                                         val scrapRepository: ScrapRepository) {
-
+                                         val jwtService: JwtService,
+                                         scrapRepository: ScrapRepository) {
     private val imgUploadFunction = ImgUploadFunction()
     private val findPostFunction = FindPostFunction(postRepository)
     private val scrapFunction = ScrapFunction(userRepository, postRepository, scrapRepository)
 
     fun createPost(createOrUpdateRequestPostDto: CreateOrUpdateRequestPostDto, imgFile: MultipartFile?) {
         var imgUrl: String? = null
-        val user = userRepository.findBySchoolId(createOrUpdateRequestPostDto.schoolId).orElseThrow { UserNotExistException() }
+        val user = jwtService.getUser()
         val lecture = lectureRepository.findById(createOrUpdateRequestPostDto.lectureId).orElseThrow { LectureNotExistException() }
 
         if (imgFile != null)
