@@ -5,7 +5,7 @@ import io.swagger.annotations.ApiModelProperty
 
 @ApiModel
 class UserSignUpRequestDto(
-        @ApiModelProperty(value="학번")
+        @ApiModelProperty(value = "학번")
         val schoolId: String,
         @ApiModelProperty(value = "비밀번호")
         val password: String)

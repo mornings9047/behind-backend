@@ -14,18 +14,21 @@ class CommentController @Autowired constructor(val commentService: CommentServic
 
     @ApiOperation(value = "댓글 작성")
     @PostMapping("/post/{postId}")
+    @ResponseStatus(HttpStatus.CREATED)
     fun createComment(@PathVariable postId: Long, @RequestBody createOrUpdateRequestCommentDto: CreateOrUpdateRequestCommentDto) {
         return commentService.createComment(postId, createOrUpdateRequestCommentDto)
     }
 
     @ApiOperation(value = "대 댓글 작성")
     @PostMapping("/post/{postId}/recomment/{commentId}")
+    @ResponseStatus(HttpStatus.CREATED)
     fun createReComment(@PathVariable postId: Long, @PathVariable commentId: Long, @RequestBody createOrUpdateRequestCommentDto: CreateOrUpdateRequestCommentDto) {
         commentService.createRecomment(postId, createOrUpdateRequestCommentDto, commentId)
     }
 
     @ApiOperation("게시물의 댓글 가져오기")
     @GetMapping("/post/{postId}")
+    @ResponseStatus(HttpStatus.OK)
     fun getComment(@PathVariable postId: Long, @RequestParam page: Int): List<ResponseCommentDto> {
         return commentService.getComment(postId, page)
     }

@@ -27,14 +27,14 @@ class PostController @Autowired constructor(val postService: PostService) {
 
     @GetMapping("/{lectureId}")
     @ApiOperation("강좌 별 게시글 가져오기")
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.OK)
     fun getPost(@PathVariable lectureId: Long, @RequestParam(required = false) type: PostType?, @RequestParam page: Int): List<ResponsePostsDto> {
         return postService.getPosts(lectureId, type, page)
     }
 
     @GetMapping("/search/{keyword}")
-    @ResponseStatus(HttpStatus.OK)
     @ApiOperation("게시물 검색하기")
+    @ResponseStatus(HttpStatus.OK)
     fun searchPosts(@PathVariable keyword: String, @RequestParam type: PostType?, @RequestParam page: Int): List<ResponsePostsDto> {
         return postService.searchPosts(keyword, type, page)
     }
@@ -43,10 +43,11 @@ class PostController @Autowired constructor(val postService: PostService) {
     @ApiOperation("스크랩 하기")
     @GetMapping("/{postId}/scrap")
     @ResponseStatus(HttpStatus.OK)
-    fun scrapPost(@PathVariable postId: Long, @RequestParam schoolId: String) {
-        return postService.scrapPost(schoolId, postId)
+    fun scrapPost(@PathVariable postId: Long) {
+        return postService.scrapPost(postId)
     }
 
+    @ApiOperation("특정 게시글 가져오기")
     @GetMapping("/{postId}")
     @ResponseStatus(HttpStatus.OK)
     fun getPostDetails(@PathVariable postId: Long): ResponsePostDto {
