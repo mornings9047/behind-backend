@@ -11,18 +11,22 @@ import com.yourssu.behind.model.entity.post.Post
 import com.yourssu.behind.repository.comment.CommentRepository
 import com.yourssu.behind.repository.post.PostRepository
 import com.yourssu.behind.repository.user.UserRepository
+import com.yourssu.behind.service.auth.JwtService
 import com.yourssu.behind.service.comment.function.CommentFunction
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
-class CommentService @Autowired constructor(val postRepository: PostRepository, val userRepository: UserRepository, val commentRepository: CommentRepository) {
+class CommentService @Autowired constructor(val postRepository: PostRepository,
+                                            val userRepository: UserRepository,
+                                            private val commentRepository: CommentRepository,
+                                            val jwtService: JwtService) {
 
     private val commentFunction = CommentFunction(commentRepository)
 
     fun createComment(postId: Long, createOrUpdateRequestCommentDto: CreateOrUpdateRequestCommentDto) {
-        val commentUser = userRepository.findBySchoolId(createOrUpdateRequestCommentDto.schoolId).orElseThrow { UserNotExistsException() }
+        val commentUser = userRepository.findBySchoolId(jwtService.getSchoolId()).orElseThrow { UserNotExistsException() }
         val targetPost = postRepository.findById(postId).orElseThrow { PostNotExistException() }
         val newComment = Comment(user = commentUser, post = targetPost, content = createOrUpdateRequestCommentDto.content, parent = null)
 
@@ -35,9 +39,9 @@ class CommentService @Autowired constructor(val postRepository: PostRepository, 
     @Transactional
     fun createRecomment(postId: Long, createOrUpdateRequestCommentDto: CreateOrUpdateRequestCommentDto, parentCommentId: Long) {
 
-        val commentUser = userRepository.findBySchoolId(createOrUpdateRequestCommentDto.schoolId).orElseThrow { UserNotExistsException() }
+        val commentUser = userRepository.findBySchoolId(jwtService.getSchoolId()).orElseThrow { UserNotExistsException() }
         val targetPost = postRepository.findById(postId).orElseThrow { PostNotExistException() }
-        var comment = commentRepository.findById(parentCommentId).orElseThrow { CommentNotExistException() }
+        val comment = commentRepository.findById(parentCommentId).orElseThrow { CommentNotExistException() }
         val reComment = Comment(content = createOrUpdateRequestCommentDto.content, user = commentUser, post = targetPost, parent = comment)
 
         commentRepository.save(reComment)

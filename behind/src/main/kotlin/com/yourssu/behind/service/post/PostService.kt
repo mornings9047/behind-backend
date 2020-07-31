@@ -11,6 +11,7 @@ import com.yourssu.behind.repository.lecture.LectureRepository
 import com.yourssu.behind.repository.post.PostRepository
 import com.yourssu.behind.repository.post.ScrapRepository
 import com.yourssu.behind.repository.user.UserRepository
+import com.yourssu.behind.service.auth.JwtService
 import com.yourssu.behind.service.post.function.FindPostFunction
 import com.yourssu.behind.service.post.function.ImgUploadFunction
 import com.yourssu.behind.service.post.function.ScrapFunction
@@ -23,7 +24,8 @@ import org.springframework.web.multipart.MultipartFile
 class PostService @Autowired constructor(private val postRepository: PostRepository,
                                          private val userRepository: UserRepository,
                                          val lectureRepository: LectureRepository,
-                                         val scrapRepository: ScrapRepository) {
+                                         scrapRepository: ScrapRepository,
+                                         val jwtService: JwtService) {
 
     private val imgUploadFunction = ImgUploadFunction()
     private val findPostFunction = FindPostFunction(postRepository)
@@ -31,7 +33,7 @@ class PostService @Autowired constructor(private val postRepository: PostReposit
 
     fun createPost(createOrUpdateRequestPostDto: CreateOrUpdateRequestPostDto, imgFile: MultipartFile?) {
         var imgUrl: String? = null
-        val user = userRepository.findBySchoolId(createOrUpdateRequestPostDto.schoolId).orElseThrow { UserNotExistException() }
+        val user = userRepository.findBySchoolId(jwtService.getSchoolId()).orElseThrow { UserNotExistException() }
         val lecture = lectureRepository.findById(createOrUpdateRequestPostDto.lectureId).orElseThrow { LectureNotExistException() }
 
         if (imgFile != null)
@@ -63,8 +65,8 @@ class PostService @Autowired constructor(private val postRepository: PostReposit
 
 
     @Transactional
-    fun scrapPost(schoolId: String, postId: Long) {
-        return scrapFunction.createScrapPost(schoolId, postId)
+    fun scrapPost(postId: Long) {
+        return scrapFunction.createScrapPost(jwtService.getSchoolId(), postId)
     }
 
     fun getPostDetails(postId: Long): ResponsePostDto {
