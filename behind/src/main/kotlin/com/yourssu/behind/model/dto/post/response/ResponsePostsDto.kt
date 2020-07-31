@@ -30,7 +30,7 @@ class ResponsePostsDto(post: Post) {
     val createdAt: LocalDateTime = post.createdAt
 
     @ApiModelProperty(value = "댓글 갯수")
-    val commentsNum = post.comments.size
+    val commentsNum = post.comments.filter { !it.deleteComment }.size
 
     private fun resizeText(text: String, size: Int): String {
         if (text.length > size)
