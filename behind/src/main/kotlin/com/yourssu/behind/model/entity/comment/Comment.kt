@@ -26,6 +26,8 @@ data class Comment(
 
         var reportNum: Int = 0,
 
+        var reCommentNum: Int = 0,
+
         @ManyToOne
         val parent: Comment?,
 

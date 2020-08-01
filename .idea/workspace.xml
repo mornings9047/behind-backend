@@ -26,12 +26,17 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3a7fd033-6b74-4fc7-8f4e-f81fe24564a9" name="Default Changelist" comment="댓글삭제, 게시물 삭제, 회원탈티,신고에 따른 삭제">
-      <change afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/exception/post/DeletedPostException.kt" afterDir="false" />
+    <list default="true" id="3a7fd033-6b74-4fc7-8f4e-f81fe24564a9" name="Default Changelist" comment="DeleteDpostException">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/model/dto/post/response/ResponsePostsDto.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/model/dto/post/response/ResponsePostsDto.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/post/function/FindPostFunction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/post/function/FindPostFunction.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/post/function/ImgUploadFunction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/post/function/ImgUploadFunction.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/controller/comment/CommentController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/controller/comment/CommentController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/model/dto/comment/response/ResponseCommentDto.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/model/dto/comment/response/ResponseCommentDto.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/model/entity/comment/Comment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/model/entity/comment/Comment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/repository/comment/CommentRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/repository/comment/CommentRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/comment/CommentService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/comment/CommentService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/comment/function/CommentFunction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/comment/function/CommentFunction.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/post/PostService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/post/PostService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/behind/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/behind/src/test/kotlin/com/yourssu/behind/service/postTest/PostServiceTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/test/kotlin/com/yourssu/behind/service/postTest/PostServiceTest.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,6 +115,9 @@
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\82102\Desktop\2020_behind_backend" />
+    </key>
     <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
       <recent name="com.yourssu.behind.service.user" />
       <recent name="com.yourssu.behind.model.dto.user.request" />
@@ -123,9 +131,6 @@
       <recent name="C:\Users\82102\Desktop\2020_behind_backend\behind\src\main\kotlin\com\yourssu\behind\config" />
       <recent name="C:\Users\82102\Desktop\2020_behind_backend\behind\src\main\kotlin\com\yourssu\behind\controller" />
       <recent name="C:\Users\82102\Desktop\2020_behind_backend\behind\src\main\kotlin\com\yourssu\behind\exception" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\82102\Desktop\2020_behind_backend" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -279,7 +284,9 @@
       <workItem from="1596018073468" duration="5819000" />
       <workItem from="1596026911231" duration="425000" />
       <workItem from="1596112976099" duration="821000" />
-      <workItem from="1596182531670" duration="312000" />
+      <workItem from="1596182531670" duration="977000" />
+      <workItem from="1596183661116" duration="91000" />
+      <workItem from="1596284203518" duration="3971000" />
     </task>
     <task id="LOCAL-00001" summary="initialize">
       <created>1595056923738</created>
@@ -505,7 +512,14 @@
       <option name="project" value="LOCAL" />
       <updated>1596124424194</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="DeleteDpostException">
+      <created>1596182946430</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1596182946430</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -539,7 +553,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/behind" />
     </ignored-roots>
-    <MESSAGE value="좋아요 추가" />
     <MESSAGE value="구조" />
     <MESSAGE value="gitignore" />
     <MESSAGE value="gitkeep" />
@@ -564,7 +577,8 @@
     <MESSAGE value="swagger적용(미완)" />
     <MESSAGE value="Merge오류" />
     <MESSAGE value="댓글삭제, 게시물 삭제, 회원탈티,신고에 따른 삭제" />
-    <option name="LAST_COMMIT_MESSAGE" value="댓글삭제, 게시물 삭제, 회원탈티,신고에 따른 삭제" />
+    <MESSAGE value="DeleteDpostException" />
+    <option name="LAST_COMMIT_MESSAGE" value="DeleteDpostException" />
   </component>
   <component name="WindowStateProjectService">
     <state x="857" y="409" key="#Assign_Data_Sources" timestamp="1595840765702">
@@ -611,10 +625,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1595830810362" />
-    <state x="700" y="295" width="499" height="450" key="#org.jetbrains.kotlin.idea.refactoring.move.moveDeclarations.ui.MoveKotlinTopLevelDeclarationsDialog" timestamp="1596120860787">
+    <state x="700" y="295" width="499" height="450" key="#org.jetbrains.kotlin.idea.refactoring.move.moveDeclarations.ui.MoveKotlinTopLevelDeclarationsDialog" timestamp="1596286716924">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="700" y="295" width="499" height="450" key="#org.jetbrains.kotlin.idea.refactoring.move.moveDeclarations.ui.MoveKotlinTopLevelDeclarationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1596120860787" />
+    <state x="700" y="295" width="499" height="450" key="#org.jetbrains.kotlin.idea.refactoring.move.moveDeclarations.ui.MoveKotlinTopLevelDeclarationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1596286716924" />
     <state x="494" y="106" key="CommitChangelistDialog2" timestamp="1596099707806">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -627,38 +641,38 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1596113054386" />
-    <state width="1328" height="286" key="GridCell.Tab.0.bottom" timestamp="1596128184594">
+    <state width="1328" height="286" key="GridCell.Tab.0.bottom" timestamp="1596288180187">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1328" height="286" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1596128184594" />
-    <state width="1328" height="286" key="GridCell.Tab.0.center" timestamp="1596128184594">
+    <state width="1328" height="286" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1596288180187" />
+    <state width="1328" height="286" key="GridCell.Tab.0.center" timestamp="1596288180187">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1328" height="286" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1596128184594" />
-    <state width="1328" height="286" key="GridCell.Tab.0.left" timestamp="1596128184594">
+    <state width="1328" height="286" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1596288180187" />
+    <state width="1328" height="286" key="GridCell.Tab.0.left" timestamp="1596288180187">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1328" height="286" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1596128184594" />
-    <state width="1328" height="286" key="GridCell.Tab.0.right" timestamp="1596128184594">
+    <state width="1328" height="286" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1596288180187" />
+    <state width="1328" height="286" key="GridCell.Tab.0.right" timestamp="1596288180187">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1328" height="286" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1596128184594" />
-    <state width="1328" height="286" key="GridCell.Tab.1.bottom" timestamp="1596128184595">
+    <state width="1328" height="286" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1596288180187" />
+    <state width="1328" height="286" key="GridCell.Tab.1.bottom" timestamp="1596288180187">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1328" height="286" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1596128184595" />
-    <state width="1328" height="286" key="GridCell.Tab.1.center" timestamp="1596128184594">
+    <state width="1328" height="286" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1596288180187" />
+    <state width="1328" height="286" key="GridCell.Tab.1.center" timestamp="1596288180187">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1328" height="286" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1596128184594" />
-    <state width="1328" height="286" key="GridCell.Tab.1.left" timestamp="1596128184594">
+    <state width="1328" height="286" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1596288180187" />
+    <state width="1328" height="286" key="GridCell.Tab.1.left" timestamp="1596288180187">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1328" height="286" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1596128184594" />
-    <state width="1328" height="286" key="GridCell.Tab.1.right" timestamp="1596128184594">
+    <state width="1328" height="286" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1596288180187" />
+    <state width="1328" height="286" key="GridCell.Tab.1.right" timestamp="1596288180187">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1328" height="286" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1596128184594" />
+    <state width="1328" height="286" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1596288180187" />
     <state width="1328" height="286" key="GridCell.Tab.2.bottom" timestamp="1596118949455">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -699,10 +713,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="652" y="278" key="Vcs.Multiple.Commit.Info.Dialog.Key/0.0.1920.1040@0.0.1920.1040" timestamp="1595504035044" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1596124434041">
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1596183091863">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1596124434041" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1596183091863" />
     <state width="968" height="528" key="XDebugger.FullValuePopup" timestamp="1595580723169">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

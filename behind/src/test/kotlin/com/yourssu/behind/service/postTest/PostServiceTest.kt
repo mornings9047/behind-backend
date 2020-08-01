@@ -10,6 +10,7 @@ import com.yourssu.behind.model.entity.professor.Professor
 import com.yourssu.behind.repository.lecture.LectureRepository
 import com.yourssu.behind.repository.post.PostRepository
 import com.yourssu.behind.repository.post.ScrapRepository
+import com.yourssu.behind.repository.professor.ProfessorRepository
 import com.yourssu.behind.service.post.PostService
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
@@ -25,7 +26,7 @@ import javax.transaction.Transactional
  */
 
 @SpringBootTest
-class PostServiceTest @Autowired constructor(val postService: PostService, val postRepository: PostRepository, val scrapRepository: ScrapRepository) {
+class PostServiceTest @Autowired constructor(val postService: PostService, val postRepository: PostRepository, val scrapRepository: ScrapRepository, val professorRepository: ProfessorRepository, val lectureRepository: LectureRepository) {
 
     val testCreateOrUpdateRequestPostDto =
             CreateOrUpdateRequestPostDto(schoolId = "20202020",
@@ -97,5 +98,11 @@ class PostServiceTest @Autowired constructor(val postService: PostService, val p
     @Test
     fun getPostDetailsTest() {
         println(postService.getPostDetails(160).content)
+    }
+
+    @Test
+    fun deletePostTest()
+    {
+        
     }
 }

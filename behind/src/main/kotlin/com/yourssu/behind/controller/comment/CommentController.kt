@@ -25,8 +25,8 @@ class CommentController @Autowired constructor(val commentService: CommentServic
 
     @ApiOperation("게시물의 댓글 가져오기")
     @GetMapping("/post/{postId}")
-    fun getComment(@PathVariable postId: Long, @RequestParam page: Int): List<ResponseCommentDto> {
-        return commentService.getComment(postId, page)
+    fun getComment(@PathVariable postId: Long): List<ResponseCommentDto> {
+        return commentService.getComment(postId)
     }
 
     @ApiOperation("댓글 신고하기")

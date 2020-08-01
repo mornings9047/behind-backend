@@ -8,6 +8,9 @@ import java.time.LocalDateTime
 @ApiModel
 class ResponseCommentDto(comment: Comment) {
 
+    @ApiModelProperty(value = "댓글 Id")
+    val commentId: Long? = comment.id
+
     @ApiModelProperty(value = "글 작성자 여부")
     var postOwner: Boolean = comment.postOwner
 
@@ -21,6 +24,11 @@ class ResponseCommentDto(comment: Comment) {
     var isDeleted: Boolean = comment.deleteComment
 
     @ApiModelProperty("대 댓글")
-    val reComment: List<ResponseCommentDto>? = comment.children.map { ResponseCommentDto(it) }
+    var reComment: List<ResponseCommentDto>? = null
+
+    constructor(comment: Comment, reCommentList: List<Comment>) : this(comment) {
+        reComment = reCommentList.map { ResponseCommentDto(it) }
+    }
+
 
 }

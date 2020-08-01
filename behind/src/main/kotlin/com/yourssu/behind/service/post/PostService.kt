@@ -29,6 +29,7 @@ class PostService @Autowired constructor(private val postRepository: PostReposit
     private val reportFunction = ReportPostFunction(postRepository, scrapRepository)
     private val deleteFunction = DeletePostFunction(postRepository, scrapRepository)
 
+    @Transactional
     fun createPost(createOrUpdateRequestPostDto: CreateOrUpdateRequestPostDto, imgFile: MultipartFile?) {
         var imgUrl: String? = null
         val user = userRepository.findBySchoolId(createOrUpdateRequestPostDto.schoolId).orElseThrow { UserNotExistException() }
