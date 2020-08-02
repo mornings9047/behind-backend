@@ -26,13 +26,10 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3a7fd033-6b74-4fc7-8f4e-f81fe24564a9" name="Default Changelist" comment="대댓글 리턴 변경,&#10;대댓글이 없을시 빈배열이아닌 null로">
+    <list default="true" id="3a7fd033-6b74-4fc7-8f4e-f81fe24564a9" name="Default Changelist" comment="대댓글 완료">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/behind/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/behind/src/test/kotlin/com/yourssu/behind/service/authTest/AuthServiceTests.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/test/kotlin/com/yourssu/behind/service/authTest/AuthServiceTests.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/behind/src/test/kotlin/com/yourssu/behind/service/commentTest/CommentServiceTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/test/kotlin/com/yourssu/behind/service/commentTest/CommentServiceTest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/behind/src/test/kotlin/com/yourssu/behind/service/postTest/PostServiceTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/test/kotlin/com/yourssu/behind/service/postTest/PostServiceTest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/behind/src/test/kotlin/com/yourssu/behind/service/userTest/UserServiceTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/test/kotlin/com/yourssu/behind/service/userTest/UserServiceTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/controller/post/PostController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/controller/post/PostController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/model/entity/comment/Comment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/model/entity/comment/Comment.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -283,7 +280,7 @@
       <workItem from="1596182531670" duration="977000" />
       <workItem from="1596183661116" duration="91000" />
       <workItem from="1596284203518" duration="4251000" />
-      <workItem from="1596359232827" duration="1405000" />
+      <workItem from="1596359232827" duration="2818000" />
     </task>
     <task id="LOCAL-00001" summary="initialize">
       <created>1595056923738</created>
@@ -523,7 +520,14 @@
       <option name="project" value="LOCAL" />
       <updated>1596288410632</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="대댓글 완료">
+      <created>1596360758912</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1596360758912</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -557,7 +561,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/behind" />
     </ignored-roots>
-    <MESSAGE value="gitignore" />
     <MESSAGE value="gitkeep" />
     <MESSAGE value="userName 삭제" />
     <MESSAGE value="게시물 생성, img필드 추가" />
@@ -582,7 +585,8 @@
     <MESSAGE value="댓글삭제, 게시물 삭제, 회원탈티,신고에 따른 삭제" />
     <MESSAGE value="DeleteDpostException" />
     <MESSAGE value="대댓글 리턴 변경,&#10;대댓글이 없을시 빈배열이아닌 null로" />
-    <option name="LAST_COMMIT_MESSAGE" value="대댓글 리턴 변경,&#10;대댓글이 없을시 빈배열이아닌 null로" />
+    <MESSAGE value="대댓글 완료" />
+    <option name="LAST_COMMIT_MESSAGE" value="대댓글 완료" />
   </component>
   <component name="WindowStateProjectService">
     <state x="857" y="409" key="#Assign_Data_Sources" timestamp="1595840765702">
@@ -717,10 +721,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="652" y="278" key="Vcs.Multiple.Commit.Info.Dialog.Key/0.0.1920.1040@0.0.1920.1040" timestamp="1595504035044" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1596288415784">
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1596360763433">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1596288415784" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1596360763433" />
     <state width="968" height="528" key="XDebugger.FullValuePopup" timestamp="1595580723169">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

@@ -15,8 +15,8 @@ import org.springframework.web.multipart.MultipartFile
 @RestController
 @RequestMapping("/posts")
 class PostController @Autowired constructor(val postService: PostService) {
-    @PostMapping("/", consumes = [MediaType.MULTIPART_FORM_DATA_VALUE])
     @ApiOperation("게시글 작성", consumes = (MediaType.MULTIPART_FORM_DATA_VALUE))
+    @PostMapping("/", consumes = [MediaType.MULTIPART_FORM_DATA_VALUE])
     @ResponseStatus(HttpStatus.CREATED)
     fun createPost(@RequestPart(required = false) imgFile: MultipartFile?,
                    @RequestPart createOrUpdateRequestPostDto: CreateOrUpdateRequestPostDto
@@ -25,16 +25,16 @@ class PostController @Autowired constructor(val postService: PostService) {
     }
 
 
-    @GetMapping("/{lectureId}")
     @ApiOperation("강좌 별 게시글 가져오기")
+    @GetMapping("/lecture/{lectureId}")
     @ResponseStatus(HttpStatus.OK)
     fun getPost(@PathVariable lectureId: Long, @RequestParam(required = false) type: PostType?, @RequestParam page: Int): List<ResponsePostsDto> {
         return postService.getPosts(lectureId, type, page)
     }
 
+    @ApiOperation("게시물 검색하기")
     @GetMapping("/search/{keyword}")
     @ResponseStatus(HttpStatus.OK)
-    @ApiOperation("게시물 검색하기")
     fun searchPosts(@PathVariable keyword: String, @RequestParam(required = false) type: PostType?, @RequestParam page: Int): List<ResponsePostsDto> {
         return postService.searchPosts(keyword, type, page)
     }
@@ -47,7 +47,8 @@ class PostController @Autowired constructor(val postService: PostService) {
         return postService.scrapPost(schoolId, postId)
     }
 
-    @GetMapping("/post/{postId}")
+    @ApiOperation("게시글 가져오기")
+    @GetMapping("/{postId}")
     @ResponseStatus(HttpStatus.OK)
     fun getPostDetails(@PathVariable postId: Long): ResponsePostDto {
         return postService.getPostDetails(postId)

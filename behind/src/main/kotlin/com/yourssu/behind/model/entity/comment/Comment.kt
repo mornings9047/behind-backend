@@ -45,9 +45,4 @@ data class Comment(
         return ToStringBuilder
                 .reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE)
     }
-
-    fun saveRecomment(reComment: Comment) {
-        this.children.add(reComment)
-
-    }
 }
