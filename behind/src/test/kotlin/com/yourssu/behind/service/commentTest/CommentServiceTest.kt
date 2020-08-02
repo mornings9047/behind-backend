@@ -30,7 +30,7 @@ class CommentServiceTest @Autowired constructor(val commentService: CommentServi
 
     @Test
     fun createCommentTest() {
-        val createOrUpdateRequestCommentDto = CreateOrUpdateRequestCommentDto("20202020", "TestComment")
+        val createOrUpdateRequestCommentDto = CreateOrUpdateRequestCommentDto("TestComment")
         commentService.createComment(existId, createOrUpdateRequestCommentDto)
 
         val user: User = userRepository.findBySchoolId("20202020").orElseThrow { UserNotExistsException() }

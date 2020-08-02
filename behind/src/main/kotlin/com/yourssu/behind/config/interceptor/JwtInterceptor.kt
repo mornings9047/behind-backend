@@ -14,9 +14,9 @@ class JwtInterceptor @Autowired constructor(val jwtService: JwtService) : Handle
 
     override fun preHandle(request: HttpServletRequest, response: HttpServletResponse, handler: Any): Boolean {
         val token = request.getHeader(HEADER_AUTH)
-        if (token != null && jwtService.isValid(token))
-            return true
-        else
-            throw UnAuthorizedException()
+        return if (token != null && jwtService.isValid(token)) {
+            jwtService.getUser()
+            true
+        } else false
     }
 }

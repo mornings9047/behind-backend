@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile
 @RestController
 @RequestMapping("/posts")
 class PostController @Autowired constructor(val postService: PostService) {
+
     @PostMapping("/", consumes = [MediaType.MULTIPART_FORM_DATA_VALUE])
     @ApiOperation("게시글 작성", consumes = (MediaType.MULTIPART_FORM_DATA_VALUE))
     @ResponseStatus(HttpStatus.CREATED)
@@ -23,7 +24,6 @@ class PostController @Autowired constructor(val postService: PostService) {
     ) {
         postService.createPost(createOrUpdateRequestPostDto, imgFile)
     }
-
 
     @GetMapping("/{lectureId}")
     @ApiOperation("강좌 별 게시글 가져오기")

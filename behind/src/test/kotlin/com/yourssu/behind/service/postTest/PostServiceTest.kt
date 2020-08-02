@@ -25,10 +25,12 @@ import javax.transaction.Transactional
  */
 
 @SpringBootTest
-class PostServiceTest @Autowired constructor(val postService: PostService, val postRepository: PostRepository, val scrapRepository: ScrapRepository) {
+class PostServiceTest @Autowired constructor(val postService: PostService,
+                                             val postRepository: PostRepository,
+                                             val scrapRepository: ScrapRepository) {
 
     val testCreateOrUpdateRequestPostDto =
-            CreateOrUpdateRequestPostDto(schoolId = "20202020",
+            CreateOrUpdateRequestPostDto(
                     title = "testPost3",
                     type = PostType.FREE,
                     content = "This is PostCreation Test",
@@ -69,22 +71,22 @@ class PostServiceTest @Autowired constructor(val postService: PostService, val p
     @Transactional
     fun createPostsTest() {
         val professor = Professor(name = "JOC")
-        professorRepository.save(professor)
-        lectureRepository.save(Lecture(major = "computer", year = "20", semester = LectureSemester.SPRING, courseName = "OOP", professor = professor))
+//        professorRepository.save(professor)
+//        lectureRepository.save(Lecture(major = "computer", year = "20", semester = LectureSemester.SPRING, courseName = "OOP", professor = professor))
 
         for (i in 1..100)
-            postService.createPost(CreateOrUpdateRequestPostDto(schoolId = "20202020", title = "title$i", type = PostType.FREE, content = "www.figma.com/file/gEIPNEmE2KpymmVGFbHdNP/%EB%B9%84%ED%95%98%EC%9D%B8%EB%93%9C---Android?node-id=59%3A1239https://www.figma.com/file/gEIPNEmE2KpymmVGFbHdNP/%EB%B9%84%ED%95%98%EC%9D%B8%EB%93%9C---Android?node-id=59%3A1239$i", lectureId = 422), imgFile = null)
+            postService.createPost(CreateOrUpdateRequestPostDto(title = "title$i", type = PostType.FREE, content = "www.figma.com/file/gEIPNEmE2KpymmVGFbHdNP/%EB%B9%84%ED%95%98%EC%9D%B8%EB%93%9C---Android?node-id=59%3A1239https://www.figma.com/file/gEIPNEmE2KpymmVGFbHdNP/%EB%B9%84%ED%95%98%EC%9D%B8%EB%93%9C---Android?node-id=59%3A1239$i", lectureId = 422), imgFile = null)
     }
 
     @Test
     @Transactional
     fun searchPostsTest() {
         for (i in 1..20)
-            postService.createPost(CreateOrUpdateRequestPostDto(schoolId = "20202020", title = "FREE$i", type = PostType.FREE, content = "www.figma.com/file/gEIPNEmE2KpymmVGFbHdNP/%EB%B9%84%ED%95%98%EC%9D%B8%EB%93%9C---Android?node-id=59%3A1239https://www.figma.com/file/gEIPNEmE2KpymmVGFbHdNP/%EB%B9%84%ED%95%98%EC%9D%B8%EB%93%9C---Android?node-id=59%3A1239$i", lectureId = 9), imgFile = null)
+            postService.createPost(CreateOrUpdateRequestPostDto(title = "FREE$i", type = PostType.FREE, content = "www.figma.com/file/gEIPNEmE2KpymmVGFbHdNP/%EB%B9%84%ED%95%98%EC%9D%B8%EB%93%9C---Android?node-id=59%3A1239https://www.figma.com/file/gEIPNEmE2KpymmVGFbHdNP/%EB%B9%84%ED%95%98%EC%9D%B8%EB%93%9C---Android?node-id=59%3A1239$i", lectureId = 9), imgFile = null)
         for (i in 1..20)
-            postService.createPost(CreateOrUpdateRequestPostDto(schoolId = "20202020", title = "QUES$i", type = PostType.QUESTION, content = "www.figma.com/file/gEIPNEmE2KpymmVGFbHdNP/%EB%B9%84%ED%95%98%EC%9D%B8%EB%93%9C---Android?node-id=59%3A1239https://www.figma.com/file/gEIPNEmE2KpymmVGFbHdNP/%EB%B9%84%ED%95%98%EC%9D%B8%EB%93%9C---Android?node-id=59%3A1239$i", lectureId = 9), imgFile = null)
+            postService.createPost(CreateOrUpdateRequestPostDto(title = "QUES$i", type = PostType.QUESTION, content = "www.figma.com/file/gEIPNEmE2KpymmVGFbHdNP/%EB%B9%84%ED%95%98%EC%9D%B8%EB%93%9C---Android?node-id=59%3A1239https://www.figma.com/file/gEIPNEmE2KpymmVGFbHdNP/%EB%B9%84%ED%95%98%EC%9D%B8%EB%93%9C---Android?node-id=59%3A1239$i", lectureId = 9), imgFile = null)
         for (i in 1..20)
-            postService.createPost(CreateOrUpdateRequestPostDto(schoolId = "20202020", title = "INFO$i", type = PostType.INFORMATION, content = "www.figma.com/file/gEIPNEmE2KpymmVGFbHdNP/%EB%B9%84%ED%95%98%EC%9D%B8%EB%93%9C---Android?node-id=59%3A1239https://www.figma.com/file/gEIPNEmE2KpymmVGFbHdNP/%EB%B9%84%ED%95%98%EC%9D%B8%EB%93%9C---Android?node-id=59%3A1239$i", lectureId = 9), imgFile = null)
+            postService.createPost(CreateOrUpdateRequestPostDto(title = "INFO$i", type = PostType.INFORMATION, content = "www.figma.com/file/gEIPNEmE2KpymmVGFbHdNP/%EB%B9%84%ED%95%98%EC%9D%B8%EB%93%9C---Android?node-id=59%3A1239https://www.figma.com/file/gEIPNEmE2KpymmVGFbHdNP/%EB%B9%84%ED%95%98%EC%9D%B8%EB%93%9C---Android?node-id=59%3A1239$i", lectureId = 9), imgFile = null)
 
         for (responsePostDto in postService.searchPosts(keyword = "FREE", type = null, page = 0))
             println("${responsePostDto.type}   ${responsePostDto.title}")

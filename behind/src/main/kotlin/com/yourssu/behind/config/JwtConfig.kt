@@ -10,9 +10,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 
 @Configuration
 @EnableWebMvc
-class WebSecurityConfig @Autowired constructor(val jwtInterceptor: JwtInterceptor) : WebMvcConfigurer {
+class JwtConfig @Autowired constructor(val jwtInterceptor: JwtInterceptor) : WebMvcConfigurer {
 
     override fun addInterceptors(registry: InterceptorRegistry) {
+        super.addInterceptors(registry)
+        println("addInter success")
         registry.addInterceptor(jwtInterceptor)
                 .addPathPatterns("/**")   // 기본 적용 경로
                 .excludePathPatterns("/auth/**")    // 예외 적용 경로

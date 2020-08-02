@@ -1,5 +1,6 @@
 package com.yourssu.behind.service.auth
 
+import com.yourssu.behind.exception.auth.TokenExpiredException
 import com.yourssu.behind.exception.user.UnAuthorizedException
 import com.yourssu.behind.exception.user.UserNotExistsException
 import com.yourssu.behind.model.entity.user.User
@@ -10,15 +11,38 @@ import org.springframework.stereotype.Service
 import org.springframework.web.context.request.RequestContextHolder
 import org.springframework.web.context.request.ServletRequestAttributes
 import java.util.*
-import javax.servlet.http.HttpServletRequest
 
 @Service
 class JwtService @Autowired constructor(val userRepository: UserRepository) {
     private final val key = "A"
+    private final val HEADER_AUTH = "Authorization"
+    private final val ACCESS_TOKEN_EXPIRATION = 1000 * 60L * 5  // 5분
+    private final val REFRESH_TOKEN_EXPIRATION = 1000 * 60L * 60 * 24 // 24시간
+    private final val ACCESS_TOKEN = "ACCESS_TOKEN"
+    private final val REFRESH_TOKEN = "REFRESH_TOKEN"
 
-    fun createToken(user: User): String {
-        val expiredTime = 100 * 60L * 2 // 만료기간 2분
-        val expiration = Date(System.currentTimeMillis() + expiredTime)
+    fun createAccessToken(user: User): String {
+        val expiration = Date(System.currentTimeMillis() + ACCESS_TOKEN_EXPIRATION)
+
+        val headers: MutableMap<String, Any> = HashMap()    // 헤더
+        val payloads: MutableMap<String, Any> = HashMap()   // 내용
+
+        headers["typ"] = "JWT"
+        headers["alg"] = "HS256"
+
+        payloads["schoolId"] = user.schoolId
+
+        return Jwts.builder()
+                .setSubject(ACCESS_TOKEN)
+                .setHeader(headers)
+                .setClaims(payloads)
+                .setExpiration(expiration)
+                .signWith(SignatureAlgorithm.HS256, key.toByteArray())
+                .compact()
+    }
+
+    fun createRefreshToken(user: User): String {
+        val expiration = Date(System.currentTimeMillis() + REFRESH_TOKEN_EXPIRATION)
 
         val headers: MutableMap<String, Any> = HashMap()    // 헤더
         val payloads: MutableMap<String, Any> = HashMap()   // 내용
@@ -26,10 +50,10 @@ class JwtService @Autowired constructor(val userRepository: UserRepository) {
         headers["typ"] = "JWT"  // 토큰 타입
         headers["alg"] = "HS256" // 알고리즘
 
-        payloads["exp"] = expiration   // 만료시간
         payloads["schoolId"] = user.schoolId   // 데이터
 
         return Jwts.builder()
+                .setSubject(REFRESH_TOKEN)
                 .setHeader(headers)
                 .setClaims(payloads)
                 .setExpiration(expiration)
@@ -38,42 +62,32 @@ class JwtService @Autowired constructor(val userRepository: UserRepository) {
                 .compact()  // 토큰 생성
     }
 
+    fun decodeToken(): Claims {
+        val request = ((RequestContextHolder.currentRequestAttributes()) as ServletRequestAttributes).request
+        val token = request.getHeader(HEADER_AUTH)
+        return Jwts.parser().setSigningKey("A".toByteArray()).parseClaimsJws(token).body
+    }
+
     @Throws(InterruptedException::class)
     fun isValid(token: String): Boolean {
         try {
-            val schoolId = Jwts.parser().setSigningKey("A".toByteArray()).parseClaimsJws(token).body["schoolId"] as String
-            return userRepository.findBySchoolId(schoolId).isPresent
+            return !isTokenExpired(token)
         } catch (e: ExpiredJwtException) {
-            e.printStackTrace()
-            println("ExpiredJwtException")
-            throw UnAuthorizedException()
-        } catch (e: UnsupportedJwtException) {
-            e.printStackTrace()
-            println("UnsupportedJwtException")
-            throw UnAuthorizedException()
+            throw TokenExpiredException()
         } catch (e: MalformedJwtException) {
-            e.printStackTrace()
-            println("MalformedJwtException")
-            throw UnAuthorizedException()
-        } catch (e: SignatureException) {
-            e.printStackTrace()
-            println("SignatureException")
             throw UnAuthorizedException()
         } catch (e: IllegalArgumentException) {
-            e.printStackTrace()
-            println("IllegalArgumentException")
             throw UnAuthorizedException()
         }
     }
 
     fun getUser(): User {
-        val request = ((RequestContextHolder.currentRequestAttributes()) as ServletRequestAttributes).request
-        val token = request.getHeader("Authorization")
-        try {
-            val schoolId = Jwts.parser().setSigningKey("A".toByteArray()).parseClaimsJws(token).body["schoolId"] as String
-            return userRepository.findBySchoolId(schoolId).orElseThrow { UserNotExistsException() }
-        } catch (e: Exception) {
-            throw UnAuthorizedException()
-        }
+        val schoolId = decodeToken()["schoolId"] as String
+        return userRepository.findBySchoolId(schoolId).orElseThrow { UserNotExistsException() }
+    }
+
+    fun isTokenExpired(token: String): Boolean {
+        val expiration = decodeToken().expiration
+        return expiration.before(Date())
     }
 }
