@@ -43,11 +43,11 @@ class PostController @Autowired constructor(val postService: PostService) {
     @ApiOperation("스크랩 하기")
     @GetMapping("/{postId}/scrap")
     @ResponseStatus(HttpStatus.OK)
-    fun scrapPost(@PathVariable postId: Long, @RequestParam schoolId: String) {
-        return postService.scrapPost(schoolId, postId)
+    fun scrapPost(@PathVariable postId: Long) {
+        return postService.scrapPost(postId)
     }
 
-    @ApiOperation("게시글 가져오기")
+    @ApiOperation("특정 게시글 가져오기")
     @GetMapping("/{postId}")
     @ResponseStatus(HttpStatus.OK)
     fun getPostDetails(@PathVariable postId: Long): ResponsePostDto {
