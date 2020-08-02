@@ -16,10 +16,8 @@ import java.util.*
 class JwtService @Autowired constructor(val userRepository: UserRepository) {
     private final val key = "A"
     private final val HEADER_AUTH = "Authorization"
-    private final val ACCESS_TOKEN_EXPIRATION = 1000 * 60L * 5
-    private final val REFRESH_TOKEN_EXPIRATION = 1000 * 60L * 60 * 24
+    private final val ACCESS_TOKEN_EXPIRATION = 1000 * 60L * 2
     private final val ACCESS_TOKEN = "ACCESS_TOKEN"
-    private final val REFRESH_TOKEN = "REFRESH_TOKEN"
 
     fun createAccessToken(user: User): String {
         val expiration = Date(System.currentTimeMillis() + ACCESS_TOKEN_EXPIRATION)
@@ -37,29 +35,13 @@ class JwtService @Autowired constructor(val userRepository: UserRepository) {
                 .compact()
     }
 
-    fun createRefreshToken(user: User): String {
-        val expiration = Date(System.currentTimeMillis() + REFRESH_TOKEN_EXPIRATION)
-
-        println("expiration: $expiration")
-
-        val headers: MutableMap<String, Any> = HashMap()
-        val payloads: MutableMap<String, Any> = HashMap()
-        headers["typ"] = "JWT"
-        headers["alg"] = "HS256"
-        payloads["schoolId"] = user.schoolId
-        return Jwts.builder()
-                .setSubject(REFRESH_TOKEN)
-                .setHeader(headers)
-                .setClaims(payloads)
-                .setExpiration(expiration)
-                .signWith(SignatureAlgorithm.HS256, key.toByteArray())
-                .compact()
+    fun getToken(): String {
+        val request = ((RequestContextHolder.currentRequestAttributes()) as ServletRequestAttributes).request
+        return request.getHeader(HEADER_AUTH)
     }
 
     fun decodeToken(): Claims {
-        val request = ((RequestContextHolder.currentRequestAttributes()) as ServletRequestAttributes).request
-        val token = request.getHeader(HEADER_AUTH)
-        return Jwts.parser().setSigningKey("A".toByteArray()).parseClaimsJws(token).body
+        return Jwts.parser().setSigningKey("A".toByteArray()).parseClaimsJws(getToken()).body
     }
 
     @Throws(InterruptedException::class)

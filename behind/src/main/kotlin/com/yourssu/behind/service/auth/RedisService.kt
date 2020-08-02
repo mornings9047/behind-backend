@@ -1,32 +1,32 @@
 package com.yourssu.behind.service.auth
 
 
-import io.jsonwebtoken.Jwts
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.stereotype.Service
 import java.util.*
 
 @Service
-class RedisService @Autowired constructor(val jwtService: JwtService,
-                                          val redisTemplate: RedisTemplate<String, Any>) {
+class RedisService @Autowired constructor(val redisTemplate: RedisTemplate<String, Any>,
+                                          val jwtService: JwtService) {
 
     fun save(schoolId: String, refreshToken: String) {
         redisTemplate.opsForValue().set(schoolId, refreshToken)
-        val expiration = Jwts.parser().setSigningKey("A".toByteArray()).parseClaimsJws(refreshToken).body.expiration
+        val expiration = jwtService.decodeToken().expiration
         setExpiration(schoolId, expiration)
+    }
+
+    fun setExpiration(schoolId: String, expiration: Date): Boolean {
+//        redisTemplate.expire(schoolId, Duration(1000))
+        return redisTemplate.expireAt(schoolId, expiration)
     }
 
     fun get(key: String): String? {
         return redisTemplate.opsForValue().get(key) as String?
     }
 
-    fun delete(schoolId: String): Boolean {
-        return redisTemplate.delete(schoolId)
-    }
-
-    fun setExpiration(schoolId: String, expiration: Date): Boolean {
-        return redisTemplate.expireAt(schoolId, expiration)
+    fun delete(schoolId: String) {
+        redisTemplate.delete(schoolId)
     }
 
 }

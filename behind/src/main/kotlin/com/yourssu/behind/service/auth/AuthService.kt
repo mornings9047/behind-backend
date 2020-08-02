@@ -10,9 +10,13 @@ import com.yourssu.behind.service.auth.function.AuthValidFunction
 import org.mindrot.jbcrypt.BCrypt
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import org.springframework.web.context.request.RequestContextHolder
+import org.springframework.web.context.request.ServletRequestAttributes
 
 @Service
-class AuthService @Autowired constructor(private val userRepository: UserRepository) {
+class AuthService @Autowired constructor(private val userRepository: UserRepository,
+                                         val jwtService: JwtService,
+                                         val redisService: RedisService) {
     val authValidFunction = AuthValidFunction(userRepository)
 
     fun signUp(userSignUpRequestDto: UserSignUpRequestDto) {
@@ -34,5 +38,11 @@ class AuthService @Autowired constructor(private val userRepository: UserReposit
 
     fun checkPassword(password: String, encryptedPassword: String): Boolean {
         return BCrypt.checkpw(password, encryptedPassword)
+    }
+
+    fun signOut() {
+        val user = jwtService.getUser()
+        val token = jwtService.getToken()
+        redisService.save(user.schoolId, token)
     }
 }

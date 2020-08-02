@@ -1,6 +1,5 @@
 package com.yourssu.behind.controller.auth
 
-import com.yourssu.behind.model.dto.auth.response.SignInResponseDto
 import com.yourssu.behind.model.dto.user.request.UserSignInRequestDto
 import com.yourssu.behind.model.dto.user.request.UserSignUpRequestDto
 import com.yourssu.behind.service.auth.AuthService
@@ -27,11 +26,15 @@ class AuthController @Autowired constructor(val authService: AuthService,
     @PostMapping("/signin")
     @ApiOperation(value = "로그인")
     @ResponseStatus(HttpStatus.OK)
-    fun signIn(@Valid @RequestBody signInRequestDto: UserSignInRequestDto): SignInResponseDto {
+    fun signIn(@Valid @RequestBody signInRequestDto: UserSignInRequestDto): String {
         val user = authService.signIn(signInRequestDto)
-        val accessToken = jwtService.createAccessToken(user)
-        val refreshToken = jwtService.createRefreshToken(user)
-        redisService.save(user.schoolId, refreshToken)
-        return SignInResponseDto(accessToken, refreshToken)
+        return jwtService.createAccessToken(user)
+    }
+
+    @PostMapping("/signout")
+    @ApiOperation(value = "로그아웃")
+    @ResponseStatus(HttpStatus.OK)
+    fun signOut() {
+        return authService.signOut()
     }
 }
