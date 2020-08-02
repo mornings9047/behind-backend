@@ -1,5 +1,6 @@
 package com.yourssu.behind.service.commentTest
 
+import com.yourssu.behind.exception.comment.CommentNotExistException
 import com.yourssu.behind.exception.post.PostNotExistException
 import com.yourssu.behind.exception.user.UserNotExistsException
 import com.yourssu.behind.model.dto.comment.request.CreateOrUpdateRequestCommentDto
@@ -44,11 +45,20 @@ class CommentServiceTest @Autowired constructor(val commentService: CommentServi
     @Transactional
     fun getCommentTest() {
         val nowPage: Int = 0
-        val comments = commentService.getComment(existId, 0)
+        val comments = commentService.getComment(existId)
 
         for (comment in comments) {
             println(comment)
         }
+    }
+
+    @Test
+    @Transactional
+    fun deleteComment()
+    {
+        var comment = commentRepository.findById(existId).orElseThrow { CommentNotExistException() }
+        commentService.deleteComment(existId)
+        Assertions.assertTrue(comment.deleteComment)
     }
 
 

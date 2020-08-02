@@ -18,9 +18,9 @@ class UserServiceTest @Autowired constructor(val userService: UserService) {
     @Test
     @Transactional
     fun findUserRelatedPost() {
-        Assertions.assertNotNull(userService.findUserRelatedPost(1, PostSearch.POST))
-        Assertions.assertNotNull(userService.findUserRelatedPost(1, PostSearch.COMMENT))
-        Assertions.assertNotNull(userService.findUserRelatedPost(1, PostSearch.SCRAP))
+        Assertions.assertNotNull(userService.findUserRelatedPost(1, PostSearch.POST,0))
+        Assertions.assertNotNull(userService.findUserRelatedPost(1, PostSearch.COMMENT,0))
+        Assertions.assertNotNull(userService.findUserRelatedPost(1, PostSearch.SCRAP,0))
     }
 
 }

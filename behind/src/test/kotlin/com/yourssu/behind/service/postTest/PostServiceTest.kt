@@ -13,12 +13,11 @@ import com.yourssu.behind.repository.post.ScrapRepository
 import com.yourssu.behind.repository.professor.ProfessorRepository
 import com.yourssu.behind.service.post.PostService
 import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.TestInstance
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.mock.web.MockMultipartFile
-import org.springframework.test.context.event.annotation.BeforeTestExecution
-import org.springframework.web.multipart.MultipartFile
 import javax.transaction.Transactional
 
 /*
@@ -35,17 +34,14 @@ class PostServiceTest @Autowired constructor(val postService: PostService, val p
                     content = "This is PostCreation Test",
                     lectureId = 1)
 
-    val imgFile: MultipartFile? = MockMultipartFile("testImgFile.jpeg",
-            "testImgFile", null, java.io.File("C:\\Users\\82102\\Desktop\\2020_behind_backend\\uploads\\0fee34e5-38da-46be-9bb8-92711ee9a2bf.jpeg").inputStream())
 
     val existId: Long = 1
     val fakeId: Long = -1
 
     @Test
     @Transactional
-    @BeforeTestExecution
     fun createPostTest() {
-        postService.createPost(testCreateOrUpdateRequestPostDto, imgFile)
+        postService.createPost(testCreateOrUpdateRequestPostDto, null)
         Assertions.assertNotNull(postRepository.findByTitle(testCreateOrUpdateRequestPostDto.title))
     }
 
@@ -101,8 +97,11 @@ class PostServiceTest @Autowired constructor(val postService: PostService, val p
     }
 
     @Test
-    fun deletePostTest()
-    {
-        
+    @Transactional
+    fun deletePostTest() {
+        var post = postRepository.findByTitle("testPost3").orElseThrow { PostNotExistException() }
+        post[0].id?.let { postService.deletePost(it) }
+        Assertions.assertEquals(true, post[0].deletePost)
+
     }
 }
