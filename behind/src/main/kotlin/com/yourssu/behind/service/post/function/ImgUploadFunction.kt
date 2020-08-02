@@ -14,8 +14,6 @@ class ImgUploadFunction {
         originalFileName = originalFileName.substring(0, extPos)
         val fileName: String = originalFileName + UUID.randomUUID().toString()
 
-        println(ext)
-
         if (!directory.exists())
             directory.mkdir()
 

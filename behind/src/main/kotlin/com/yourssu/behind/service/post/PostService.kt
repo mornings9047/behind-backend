@@ -30,7 +30,10 @@ class PostService @Autowired constructor(private val postRepository: PostReposit
     private val imgUploadFunction = ImgUploadFunction()
     private val findPostFunction = FindPostFunction(postRepository)
     private val scrapFunction = ScrapFunction(userRepository, postRepository, scrapRepository)
+    private val reportFunction = ReportPostFunction(postRepository, scrapRepository)
+    private val deleteFunction = DeletePostFunction(postRepository, scrapRepository)
 
+    @Transactional
     fun createPost(createOrUpdateRequestPostDto: CreateOrUpdateRequestPostDto, imgFile: MultipartFile?) {
         var imgUrl: String? = null
         val user = userRepository.findBySchoolId(jwtService.getSchoolId()).orElseThrow { UserNotExistException() }
@@ -69,7 +72,18 @@ class PostService @Autowired constructor(private val postRepository: PostReposit
         return scrapFunction.createScrapPost(jwtService.getSchoolId(), postId)
     }
 
+    @Transactional
     fun getPostDetails(postId: Long): ResponsePostDto {
         return findPostFunction.getPostDetails(postId)
+    }
+
+    @Transactional
+    fun deletePost(postId: Long) {
+        deleteFunction.deletePost(postId)
+    }
+
+    @Transactional
+    fun reportPost(postId: Long) {
+        reportFunction.reportPost(postId)
     }
 }

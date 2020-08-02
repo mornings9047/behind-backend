@@ -3,14 +3,14 @@ package com.yourssu.behind.repository.comment
 import com.yourssu.behind.model.entity.comment.Comment
 import com.yourssu.behind.model.entity.post.Post
 import com.yourssu.behind.model.entity.user.User
+import org.springframework.data.domain.Pageable
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
-import java.util.*
 
 @Repository
 interface CommentRepository : JpaRepository<Comment, Long> {
-    fun findByUserAndPost(user: User, post: Post): Optional<List<Comment>>
-    fun findAllByPostIdAndDeleteCommentIsFalse(postId: Long): List<Comment>
-    fun findByUser(user: User): List<Comment>
-    fun findByPostAndParentIsNull(post: Post, pageable: org.springframework.data.domain.Pageable): List<Comment>
+    fun findByUserAndPost(user: User, post: Post, page: Pageable): List<Comment>
+    fun findByPostAndParentIsNull(post: Post): List<Comment>
+    fun findAllByUserAndDeleteCommentIsFalse(user: User): List<Comment>
+    fun findAllByDeleteCommentIsFalseAndParent(parent: Comment) : List<Comment> //대댓글 가져오는 쿼리
 }
