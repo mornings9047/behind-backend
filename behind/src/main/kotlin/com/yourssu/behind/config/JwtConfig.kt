@@ -14,7 +14,6 @@ class JwtConfig @Autowired constructor(val jwtInterceptor: JwtInterceptor) : Web
 
     override fun addInterceptors(registry: InterceptorRegistry) {
         super.addInterceptors(registry)
-        println("addInter success")
         registry.addInterceptor(jwtInterceptor)
                 .addPathPatterns("/**")   // 기본 적용 경로
                 .excludePathPatterns("/auth/**")    // 예외 적용 경로

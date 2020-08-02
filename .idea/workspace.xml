@@ -26,24 +26,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="74755603-762b-4638-81ac-b1f71e7d9e7c" name="Default Changelist" comment="Refactoring-Interceptor 수정, Signin 성공 시, Token 2개 발급">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/exception/auth/TokenExpiredException.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/model/dto/auth/response/SignInResponseDto.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/config/RedisConfig.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/auth/RedisService.kt" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/behind/src/test/kotlin/com/yourssu/behind/service/redisTest/RedisServiceTest.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/config/WebSecurityConfig.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/config/JwtConfig.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/config/interceptor/GlobalRestExceptionHandler.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/config/interceptor/GlobalRestExceptionHandler.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/config/interceptor/JwtInterceptor.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/config/interceptor/JwtInterceptor.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/behind/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/behind/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/config/JwtConfig.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/config/JwtConfig.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/controller/auth/AuthController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/controller/auth/AuthController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/controller/post/PostController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/controller/post/PostController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/exception/comment/CommentNotExistException.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/exception/comment/CommentNotExistException.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/auth/AuthService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/auth/AuthService.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/auth/JwtService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/auth/JwtService.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/behind/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/behind/src/test/kotlin/com/yourssu/behind/service/authTest/AuthServiceTests.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/test/kotlin/com/yourssu/behind/service/authTest/AuthServiceTests.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/behind/src/test/kotlin/com/yourssu/behind/service/commentTest/CommentServiceTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/test/kotlin/com/yourssu/behind/service/commentTest/CommentServiceTest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/behind/src/test/kotlin/com/yourssu/behind/service/postTest/PostServiceTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/test/kotlin/com/yourssu/behind/service/postTest/PostServiceTest.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,6 +85,7 @@
       <list>
         <option value="Kotlin Enum" />
         <option value="Kotlin Interface" />
+        <option value="Kotlin File" />
         <option value="Kotlin Class" />
       </list>
     </option>
@@ -313,7 +305,7 @@
       <workItem from="1596208372526" duration="1551000" />
       <workItem from="1596211873122" duration="3784000" />
       <workItem from="1596333873411" duration="9432000" />
-      <workItem from="1596350209391" duration="11019000" />
+      <workItem from="1596350209391" duration="12494000" />
     </task>
     <task id="LOCAL-00001" summary="initialize">
       <created>1595056923738</created>
@@ -539,7 +531,14 @@
       <option name="project" value="LOCAL" />
       <updated>1596192391054</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="Refactoring-Interceptor 수정, Signin 성공 시, Token 2개 발급">
+      <created>1596361292595</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1596361292595</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -662,10 +661,10 @@
     </state>
     <state x="700" y="295" key="#org.jetbrains.kotlin.idea.refactoring.move.moveDeclarations.ui.MoveKotlinTopLevelDeclarationsDialog/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1596342566255" />
     <state x="700" y="295" width="499" height="450" key="#org.jetbrains.kotlin.idea.refactoring.move.moveDeclarations.ui.MoveKotlinTopLevelDeclarationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1596120860787" />
-    <state x="84" y="106" key="CommitChangelistDialog2" timestamp="1596361035368">
+    <state x="84" y="106" key="CommitChangelistDialog2" timestamp="1596362024691">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="84" y="106" key="CommitChangelistDialog2/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1596361035367" />
+    <state x="84" y="106" key="CommitChangelistDialog2/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1596362024691" />
     <state x="84" y="106" key="CommitChangelistDialog2/0.0.1920.1040/-1920.3.1920.1040@0.0.1920.1040" timestamp="1596192389892" />
     <state x="494" y="106" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1596099707806" />
     <state x="162" y="81" key="DiffContextDialog" timestamp="1596113752029">
@@ -677,52 +676,52 @@
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1596359040773" />
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1596113054386" />
-    <state width="1699" height="282" key="GridCell.Tab.0.bottom" timestamp="1596361035472">
+    <state width="1699" height="282" key="GridCell.Tab.0.bottom" timestamp="1596362735042">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1699" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1596361035472" />
+    <state width="1699" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1596362735042" />
     <state width="1699" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.3.1920.1040@0.0.1920.1040" timestamp="1596189344554" />
     <state width="1699" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1596215664763" />
-    <state width="1699" height="282" key="GridCell.Tab.0.center" timestamp="1596361035471">
+    <state width="1699" height="282" key="GridCell.Tab.0.center" timestamp="1596362735042">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1699" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1596361035471" />
+    <state width="1699" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1596362735042" />
     <state width="1699" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.3.1920.1040@0.0.1920.1040" timestamp="1596189344554" />
     <state width="1699" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1596215664763" />
-    <state width="1699" height="282" key="GridCell.Tab.0.left" timestamp="1596361035471">
+    <state width="1699" height="282" key="GridCell.Tab.0.left" timestamp="1596362735042">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1699" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1596361035471" />
+    <state width="1699" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1596362735042" />
     <state width="1699" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.3.1920.1040@0.0.1920.1040" timestamp="1596189344554" />
     <state width="1699" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1596215664763" />
-    <state width="1699" height="282" key="GridCell.Tab.0.right" timestamp="1596361035472">
+    <state width="1699" height="282" key="GridCell.Tab.0.right" timestamp="1596362735042">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1699" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1596361035472" />
+    <state width="1699" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1596362735042" />
     <state width="1699" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.3.1920.1040@0.0.1920.1040" timestamp="1596189344554" />
     <state width="1699" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1596215664763" />
-    <state width="1699" height="282" key="GridCell.Tab.1.bottom" timestamp="1596361035472">
+    <state width="1699" height="282" key="GridCell.Tab.1.bottom" timestamp="1596362735043">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1699" height="282" key="GridCell.Tab.1.bottom/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1596361035472" />
+    <state width="1699" height="282" key="GridCell.Tab.1.bottom/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1596362735043" />
     <state width="1699" height="282" key="GridCell.Tab.1.bottom/0.0.1920.1040/-1920.3.1920.1040@0.0.1920.1040" timestamp="1596189344554" />
     <state width="1699" height="282" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1596215664763" />
-    <state width="1699" height="282" key="GridCell.Tab.1.center" timestamp="1596361035472">
+    <state width="1699" height="282" key="GridCell.Tab.1.center" timestamp="1596362735042">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1699" height="282" key="GridCell.Tab.1.center/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1596361035472" />
+    <state width="1699" height="282" key="GridCell.Tab.1.center/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1596362735042" />
     <state width="1699" height="282" key="GridCell.Tab.1.center/0.0.1920.1040/-1920.3.1920.1040@0.0.1920.1040" timestamp="1596189344554" />
     <state width="1699" height="282" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1596215664763" />
-    <state width="1699" height="282" key="GridCell.Tab.1.left" timestamp="1596361035472">
+    <state width="1699" height="282" key="GridCell.Tab.1.left" timestamp="1596362735042">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1699" height="282" key="GridCell.Tab.1.left/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1596361035472" />
+    <state width="1699" height="282" key="GridCell.Tab.1.left/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1596362735042" />
     <state width="1699" height="282" key="GridCell.Tab.1.left/0.0.1920.1040/-1920.3.1920.1040@0.0.1920.1040" timestamp="1596189344554" />
     <state width="1699" height="282" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1596215664763" />
-    <state width="1699" height="282" key="GridCell.Tab.1.right" timestamp="1596361035472">
+    <state width="1699" height="282" key="GridCell.Tab.1.right" timestamp="1596362735043">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1699" height="282" key="GridCell.Tab.1.right/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1596361035472" />
+    <state width="1699" height="282" key="GridCell.Tab.1.right/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1596362735043" />
     <state width="1699" height="282" key="GridCell.Tab.1.right/0.0.1920.1040/-1920.3.1920.1040@0.0.1920.1040" timestamp="1596189344554" />
     <state width="1699" height="282" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1596215664763" />
     <state width="1328" height="286" key="GridCell.Tab.2.bottom" timestamp="1596118949455">
