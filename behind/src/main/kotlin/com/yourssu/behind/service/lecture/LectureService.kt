@@ -14,15 +14,13 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.io.File
 import java.io.FileInputStream
-import java.util.*
-import kotlin.collections.ArrayList
 
 @Service
-class LectureService @Autowired constructor(val LectureRepository : LectureRepository, val ProfessorRepository : ProfessorRepository) {
+class LectureService @Autowired constructor(val lectureRepository : LectureRepository, val professorRepository : ProfessorRepository) {
 
     @Transactional
     fun saveLecture(lectureDto: LectureDto){
-        LectureRepository.save(Lecture(
+        lectureRepository.save(Lecture(
                 courseName = lectureDto.courseName,
                 major = lectureDto.major,
                 professor = lectureDto.professor,
@@ -71,7 +69,7 @@ class LectureService @Autowired constructor(val LectureRepository : LectureRepos
         }
 
         while(k < rows-1) {
-            var professor = ProfessorRepository.save(Professor(name = professors.get(k)))
+            var professor = professorRepository.save(Professor(name = professors.get(k)))
             var lectureDto: LectureDto = LectureDto(
                     courseNames.get(k),
                     majors.get(k),
