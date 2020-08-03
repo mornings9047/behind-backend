@@ -18,8 +18,6 @@ import org.springframework.transaction.annotation.Transactional
 class CommentService @Autowired constructor(val postRepository: PostRepository,
                                             private val commentRepository: CommentRepository,
                                             val jwtService: JwtService) {
-    private val commentFunction = CommentFunction(commentRepository)
-
     private val commentFunction = CommentFunction(commentRepository, postRepository)
     private val reportFunction = ReportCommentFunction(commentRepository)
 
