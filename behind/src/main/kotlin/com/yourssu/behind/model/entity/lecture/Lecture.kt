@@ -10,7 +10,7 @@ import javax.persistence.*
 @Entity
 data class Lecture(
         @Id
-        @GeneratedValue
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         val id: Long? = null,
 
         val major: String,

@@ -19,17 +19,45 @@
     <select>
       <path>
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:origin/DeleteComment" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:excelRead" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </select>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3a7fd033-6b74-4fc7-8f4e-f81fe24564a9" name="Default Changelist" comment="대댓글 완료">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/commons_logging_1_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/commons_logging_1_2_javadoc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/commons_math3_3_6_1_javadoc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/poi_4_1_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/behind/Lecture_Excel/2020_Fall_국어국문.xls" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/behind/Lecture_Excel/2020_Fall_기독교.xls" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/behind/Lecture_Excel/2020_Fall_독어독문.xls" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/behind/Lecture_Excel/2020_Fall_문예창작.xls" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/behind/Lecture_Excel/2020_Fall_불어불문.xls" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/behind/Lecture_Excel/2020_Fall_사학.xls" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/behind/Lecture_Excel/2020_Fall_수학.xls" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/behind/Lecture_Excel/2020_Fall_스포츠.xls" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/behind/Lecture_Excel/2020_Fall_영어영문.xls" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/behind/Lecture_Excel/2020_Fall_영화예술.xls" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/behind/Lecture_Excel/2020_Fall_중어중문.xls" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/behind/Lecture_Excel/2020_Fall_철학.xls" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/controller/lecture/LectureController.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/model/dto/lecture/LectureDto.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/lecture/LectureService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-07-26__10_54__Default_Changelist_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-07-26__10_54__Default_Changelist_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-07-26__10_55__Default_Changelist_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-07-26_오후_10_54_[Default_Changelist]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-07-26_오후_10_54_[Default_Changelist]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-07-26_오후_10_55_[Default_Changelist]/shelved.patch" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/controller/post/PostController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/controller/post/PostController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/model/entity/comment/Comment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/model/entity/comment/Comment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/behind/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/behind/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/controller/comment/CommentController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/controller/comment/CommentController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/model/entity/lecture/Lecture.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/model/entity/lecture/Lecture.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/model/entity/professor/Professor.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/model/entity/professor/Professor.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/post/PostService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/post/PostService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/behind/src/test/kotlin/com/yourssu/behind/service/postTest/PostServiceTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/test/kotlin/com/yourssu/behind/service/postTest/PostServiceTest.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,6 +93,7 @@
         <option value="Kotlin Enum" />
         <option value="Kotlin Interface" />
         <option value="Kotlin Class" />
+        <option value="Kotlin File" />
       </list>
     </option>
   </component>
@@ -94,7 +123,7 @@
     <property name="TODO_SCOPE" value="All Places" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../commons-math3-3.6.1/commons-math3-3.6.1.jar!/" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -102,9 +131,9 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
@@ -139,7 +168,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.PostServiceTest.deletePostTest">
+  <component name="RunManager" selected="Kotlin.BehindApplicationKt">
     <configuration name="CommentServiceTest.getCommentTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -216,24 +245,23 @@
       <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="BehindApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true">
+    <configuration name="BehindApplicationKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
       <module name="behind.main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.yourssu.behind.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.yourssu.behind.BehindApplication" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" value="com.yourssu.behind.BehindApplicationKt" />
+      <option name="WORKING_DIRECTORY" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Kotlin.BehindApplicationKt" />
         <item itemvalue="Gradle.PostServiceTest.deletePostTest" />
-        <item itemvalue="Spring Boot.BehindApplication" />
         <item itemvalue="Gradle.PostServiceTest.thumbsUpTest" />
         <item itemvalue="Gradle.CommentServiceTest.getCommentTest" />
         <item itemvalue="Gradle.behind [build]" />
@@ -544,7 +572,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/DeleteComment" />
+                        <option value="excelRead" />
                       </list>
                     </value>
                   </entry>
@@ -645,26 +673,26 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="162" y="81" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1596113752029" />
-    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1596113054386">
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1596451177572">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1596113054386" />
-    <state width="1877" height="251" key="GridCell.Tab.0.bottom" timestamp="1596360373654">
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1596451177572" />
+    <state width="1149" height="312" key="GridCell.Tab.0.bottom" timestamp="1596452956513">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="251" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1596360373654" />
-    <state width="1877" height="251" key="GridCell.Tab.0.center" timestamp="1596360373654">
+    <state width="1149" height="312" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1596452956513" />
+    <state width="1149" height="312" key="GridCell.Tab.0.center" timestamp="1596452956513">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="251" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1596360373654" />
-    <state width="1877" height="251" key="GridCell.Tab.0.left" timestamp="1596360373654">
+    <state width="1149" height="312" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1596452956513" />
+    <state width="1149" height="312" key="GridCell.Tab.0.left" timestamp="1596452956513">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="251" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1596360373654" />
-    <state width="1877" height="251" key="GridCell.Tab.0.right" timestamp="1596360373654">
+    <state width="1149" height="312" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1596452956513" />
+    <state width="1149" height="312" key="GridCell.Tab.0.right" timestamp="1596452956513">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="251" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1596360373654" />
+    <state width="1149" height="312" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1596452956513" />
     <state width="1328" height="286" key="GridCell.Tab.1.bottom" timestamp="1596288460130">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -705,10 +733,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="503" y="282" width="1087" height="479" key="MultipleFileMergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1595504182120" />
-    <state x="461" y="164" key="SettingsEditor" timestamp="1596113057916">
+    <state x="461" y="164" key="SettingsEditor" timestamp="1596451183254">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="461" y="164" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1596113057916" />
+    <state x="461" y="164" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1596451183254" />
     <state x="92" y="92" width="1736" height="856" key="ShowDiffWithBranchDialog" timestamp="1596109737474">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -753,6 +781,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="339" y="130" key="new project wizard/0.0.1920.1040@0.0.1920.1040" timestamp="1595147594617" />
+    <state x="792" y="290" key="refactoring.ChangeSignatureDialog" timestamp="1596449456533">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="792" y="290" key="refactoring.ChangeSignatureDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1596449456533" />
     <state x="616" y="240" width="672" height="677" key="run.anything.popup" timestamp="1596023210959">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

@@ -3,14 +3,13 @@ package com.yourssu.behind.model.entity.professor
 import com.yourssu.behind.model.entity.lecture.Lecture
 import org.apache.commons.lang3.builder.ToStringBuilder
 import org.apache.commons.lang3.builder.ToStringStyle
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.Id
-import javax.persistence.OneToMany
+import javax.persistence.*
 
 @Entity
 data class Professor(
-        @Id @GeneratedValue val id: Long? = null,
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        val id: Long? = null,
 
         val name: String,
 

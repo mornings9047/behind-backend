@@ -33,6 +33,7 @@ dependencies {
     implementation("org.mindrot:jbcrypt:0.3m")
     implementation("javax.validation:validation-api:2.0.0.Final")
     implementation("io.jsonwebtoken:jjwt:0.7.0")
+    implementation("org.apache.poi:poi-ooxml:4.1.2")
 }
 
 tasks.withType<Test> {
