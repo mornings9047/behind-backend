@@ -15,9 +15,8 @@ import org.springframework.web.multipart.MultipartFile
 @RestController
 @RequestMapping("/posts")
 class PostController @Autowired constructor(val postService: PostService) {
-
-    @PostMapping("/", consumes = [MediaType.MULTIPART_FORM_DATA_VALUE])
     @ApiOperation("게시글 작성", consumes = (MediaType.MULTIPART_FORM_DATA_VALUE))
+    @PostMapping("/", consumes = [MediaType.MULTIPART_FORM_DATA_VALUE])
     @ResponseStatus(HttpStatus.CREATED)
     fun createPost(@RequestPart(required = false) imgFile: MultipartFile?,
                    @RequestPart createOrUpdateRequestPostDto: CreateOrUpdateRequestPostDto
@@ -25,17 +24,17 @@ class PostController @Autowired constructor(val postService: PostService) {
         postService.createPost(createOrUpdateRequestPostDto, imgFile)
     }
 
-    @GetMapping("/{lectureId}")
+    @GetMapping("/lecture/{lectureId}")
     @ApiOperation("강좌 별 게시글 가져오기")
     @ResponseStatus(HttpStatus.OK)
     fun getPost(@PathVariable lectureId: Long, @RequestParam(required = false) type: PostType?, @RequestParam page: Int): List<ResponsePostsDto> {
         return postService.getPosts(lectureId, type, page)
     }
 
-    @GetMapping("/search/{keyword}")
     @ApiOperation("게시물 검색하기")
+    @GetMapping("/search/{keyword}")
     @ResponseStatus(HttpStatus.OK)
-    fun searchPosts(@PathVariable keyword: String, @RequestParam type: PostType?, @RequestParam page: Int): List<ResponsePostsDto> {
+    fun searchPosts(@PathVariable keyword: String, @RequestParam(required = false) type: PostType?, @RequestParam page: Int): List<ResponsePostsDto> {
         return postService.searchPosts(keyword, type, page)
     }
 
@@ -52,5 +51,17 @@ class PostController @Autowired constructor(val postService: PostService) {
     @ResponseStatus(HttpStatus.OK)
     fun getPostDetails(@PathVariable postId: Long): ResponsePostDto {
         return postService.getPostDetails(postId)
+    }
+
+    @ApiOperation("게시글 삭제하기")
+    @DeleteMapping("/{postId}")
+    fun deletePost(@PathVariable postId: Long) {
+        return postService.deletePost(postId)
+    }
+
+    @ApiOperation("게시글 신고하기")
+    @GetMapping("/report/{postId}")
+    fun reportPost(@PathVariable postId: Long) {
+        return postService.reportPost(postId)
     }
 }

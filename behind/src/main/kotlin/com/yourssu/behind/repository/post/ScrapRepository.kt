@@ -16,4 +16,8 @@ interface ScrapRepository : JpaRepository<Scrap, Long> {
     fun deleteByScrapUserAndScrapPost(user: User, post: Post)
 
     fun countAllByScrapPost(post: Post): Int
+
+    fun deleteAllByScrapPost(post: Post)
+
+    fun findAllByScrapUser(user: User): List<Scrap>
 }

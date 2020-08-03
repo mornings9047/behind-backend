@@ -13,7 +13,7 @@ class ResponsePostDto(post: Post) {
     val postId: Long? = post.id
 
     @ApiModelProperty("강의 id")
-    val lectureId = ReturnLectureDto(post.lecture)
+    val lectureId = post.lecture.id
 
     @ApiModelProperty(value = "게시물 제목")
     val title: String = post.title

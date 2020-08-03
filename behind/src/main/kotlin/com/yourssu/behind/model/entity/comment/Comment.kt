@@ -20,9 +20,13 @@ data class Comment(
         @Temporal
         val createdAt: LocalDateTime = LocalDateTime.now(),
 
-        val deleteComment: Boolean = false,
+        var deleteComment: Boolean = false,
 
         var postOwner: Boolean = false,
+
+        var reportNum: Int = 0,
+
+        var reCommentNum: Int = 0,
 
         @ManyToOne
         val parent: Comment?,
@@ -40,10 +44,5 @@ data class Comment(
     override fun toString(): String {
         return ToStringBuilder
                 .reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE)
-    }
-
-    fun saveRecomment(reComment: Comment) {
-        this.children.add(reComment)
-
     }
 }

@@ -1,5 +1,6 @@
 package com.yourssu.behind.service.post.function
 
+import com.yourssu.behind.exception.post.DeletedPostException
 import com.yourssu.behind.exception.post.PostNotExistException
 import com.yourssu.behind.model.dto.post.response.ResponsePostDto
 import com.yourssu.behind.model.dto.post.response.ResponsePostsDto
@@ -7,9 +8,6 @@ import com.yourssu.behind.model.entity.lecture.Lecture
 import com.yourssu.behind.model.entity.post.PostPage
 import com.yourssu.behind.model.entity.post.PostType
 import com.yourssu.behind.repository.post.PostRepository
-import org.springframework.data.domain.PageRequest
-import org.springframework.data.domain.Sort
-import javax.transaction.Transactional
 
 class FindPostFunction(private val postRepository: PostRepository) {
 
@@ -33,6 +31,10 @@ class FindPostFunction(private val postRepository: PostRepository) {
 
     fun getPostDetails(postId: Long): ResponsePostDto {
         val post = postRepository.findByIdAndDeletePostIsFalse(postId).orElseThrow { throw PostNotExistException() }
+
+        if (post.deletePost)
+            throw DeletedPostException()
+
         return ResponsePostDto(post)
     }
 }

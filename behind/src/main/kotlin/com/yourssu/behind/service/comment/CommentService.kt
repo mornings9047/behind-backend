@@ -5,12 +5,11 @@ import com.yourssu.behind.exception.post.PostNotExistException
 import com.yourssu.behind.model.dto.comment.request.CreateOrUpdateRequestCommentDto
 import com.yourssu.behind.model.dto.comment.response.ResponseCommentDto
 import com.yourssu.behind.model.entity.comment.Comment
-import com.yourssu.behind.model.entity.comment.CommentPage
-import com.yourssu.behind.model.entity.post.Post
 import com.yourssu.behind.repository.comment.CommentRepository
 import com.yourssu.behind.repository.post.PostRepository
 import com.yourssu.behind.service.auth.JwtService
 import com.yourssu.behind.service.comment.function.CommentFunction
+import com.yourssu.behind.service.comment.function.ReportCommentFunction
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -21,6 +20,10 @@ class CommentService @Autowired constructor(val postRepository: PostRepository,
                                             val jwtService: JwtService) {
     private val commentFunction = CommentFunction(commentRepository)
 
+    private val commentFunction = CommentFunction(commentRepository, postRepository)
+    private val reportFunction = ReportCommentFunction(commentRepository)
+
+    @Transactional
     fun createComment(postId: Long, createOrUpdateRequestCommentDto: CreateOrUpdateRequestCommentDto) {
         val commentUser = jwtService.getUser()
         val targetPost = postRepository.findById(postId).orElseThrow { PostNotExistException() }
@@ -37,15 +40,28 @@ class CommentService @Autowired constructor(val postRepository: PostRepository,
 
         val commentUser = jwtService.getUser()
         val targetPost = postRepository.findById(postId).orElseThrow { PostNotExistException() }
-        val comment = commentRepository.findById(parentCommentId).orElseThrow { CommentNotExistException() }
-        val reComment = Comment(content = createOrUpdateRequestCommentDto.content, user = commentUser, post = targetPost, parent = comment)
+        var comment = commentRepository.findById(parentCommentId).orElseThrow { CommentNotExistException() }
+        var reComment = Comment(content = createOrUpdateRequestCommentDto.content, user = commentUser, post = targetPost, parent = comment)
 
+
+        if (commentUser == targetPost.user)
+            reComment.postOwner = true
+        comment.reCommentNum++
         commentRepository.save(reComment)
     }
 
     @Transactional
-    fun getComment(postId: Long, page: Int): List<ResponseCommentDto> {
-        val post: Post = postRepository.findById(postId).orElseThrow { PostNotExistException() }
-        return commentRepository.findByPostAndParentIsNull(post, CommentPage(page)).map { ResponseCommentDto(it) }
+    fun getComment(postId: Long): List<ResponseCommentDto> {
+        return commentFunction.getComment(postId)
+    }
+
+    @Transactional
+    fun reportComment(commentId: Long) {
+        return reportFunction.reportComment(commentId)
+    }
+
+    @Transactional
+    fun deleteComment(commentId: Long) {
+        return commentFunction.deleteComment(commentId)
     }
 }

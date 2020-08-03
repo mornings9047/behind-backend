@@ -7,14 +7,11 @@ import com.yourssu.behind.model.dto.user.request.UserSignUpRequestDto
 import com.yourssu.behind.repository.user.UserRepository
 import com.yourssu.behind.service.auth.AuthService
 import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.test.annotation.Rollback
 import org.springframework.test.context.event.annotation.AfterTestExecution
-import org.springframework.transaction.annotation.Transactional
 
 @SpringBootTest
 class AuthServiceTests {

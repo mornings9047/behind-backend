@@ -1,7 +1,7 @@
 package com.yourssu.behind.service.userTest
 
 import com.yourssu.behind.model.entity.post.PostSearch
-import com.yourssu.behind.service.UserService
+import com.yourssu.behind.service.user.UserService
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -18,9 +18,9 @@ class UserServiceTest @Autowired constructor(val userService: UserService) {
     @Test
     @Transactional
     fun findUserRelatedPost() {
-        Assertions.assertNotNull(userService.findUserRelatedPost(1, PostSearch.POST))
-        Assertions.assertNotNull(userService.findUserRelatedPost(1, PostSearch.COMMENT))
-        Assertions.assertNotNull(userService.findUserRelatedPost(1, PostSearch.SCRAP))
+        Assertions.assertNotNull(userService.findUserRelatedPost(1, PostSearch.POST,0))
+        Assertions.assertNotNull(userService.findUserRelatedPost(1, PostSearch.COMMENT,0))
+        Assertions.assertNotNull(userService.findUserRelatedPost(1, PostSearch.SCRAP,0))
     }
 
 }
