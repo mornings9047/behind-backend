@@ -17,6 +17,7 @@ class JwtConfig @Autowired constructor(val jwtInterceptor: JwtInterceptor) : Web
         registry.addInterceptor(jwtInterceptor)
                 .addPathPatterns("/**")   // 기본 적용 경로
                 .excludePathPatterns("/auth/**")    // 예외 적용 경로
+                .excludePathPatterns("/swagger-ui.html")
     }
 
     override fun addCorsMappings(registry: CorsRegistry) {

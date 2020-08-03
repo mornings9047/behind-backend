@@ -16,7 +16,7 @@ import java.util.*
 class JwtService @Autowired constructor(val userRepository: UserRepository) {
     private final val key = "A"
     private final val HEADER_AUTH = "Authorization"
-    private final val ACCESS_TOKEN_EXPIRATION = 1000 * 60L * 2
+    val ACCESS_TOKEN_EXPIRATION = 1000 * 60L * 60   // 1시간
     private final val ACCESS_TOKEN = "ACCESS_TOKEN"
 
     fun createAccessToken(user: User): String {
