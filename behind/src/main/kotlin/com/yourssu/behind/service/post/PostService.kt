@@ -64,8 +64,8 @@ class PostService @Autowired constructor(private val postRepository: PostReposit
 
 
     @Transactional
-    fun scrapPost(schoolId: String, postId: Long) {
-        return scrapFunction.createScrapPost(schoolId, postId)
+    fun scrapPost(postId: Long) {
+        return scrapFunction.createScrapPost(jwtService.getUser().schoolId, postId)
     }
 
     fun getPostDetails(postId: Long): ResponsePostDto {
