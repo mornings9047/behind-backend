@@ -42,7 +42,6 @@ class AuthService @Autowired constructor(private val userRepository: UserReposit
 
     fun signOut() {
         val user = jwtService.getUser()
-        val token = jwtService.getToken()
-        redisService.save(user.schoolId, token)
+        redisService.delete(user.schoolId)
     }
 }

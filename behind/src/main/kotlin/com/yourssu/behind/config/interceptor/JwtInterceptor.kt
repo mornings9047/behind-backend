@@ -17,7 +17,7 @@ class JwtInterceptor @Autowired constructor(val jwtService: JwtService,
         val token = request.getHeader(HEADER_AUTH)
         return if (token != null && jwtService.isValid(token)) {
             val user = jwtService.getUser()
-            return redisService.get(user.schoolId).isNullOrBlank()
+            return !redisService.get(user.schoolId).isNullOrBlank()
         } else false
     }
 }

@@ -17,7 +17,6 @@ class RedisService @Autowired constructor(val redisTemplate: RedisTemplate<Strin
     }
 
     fun setExpiration(schoolId: String, expiration: Date): Boolean {
-//        redisTemplate.expire(schoolId, Duration(1000))
         return redisTemplate.expireAt(schoolId, expiration)
     }
 
