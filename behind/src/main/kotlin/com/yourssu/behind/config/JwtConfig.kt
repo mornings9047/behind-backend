@@ -9,7 +9,6 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 
 @Configuration
-@EnableWebMvc
 class JwtConfig @Autowired constructor(val jwtInterceptor: JwtInterceptor) : WebMvcConfigurer {
 
     override fun addInterceptors(registry: InterceptorRegistry) {
@@ -18,6 +17,10 @@ class JwtConfig @Autowired constructor(val jwtInterceptor: JwtInterceptor) : Web
                 .addPathPatterns("/**")   // 기본 적용 경로
                 .excludePathPatterns("/auth/**")    // 예외 적용 경로
                 .excludePathPatterns("/swagger-ui.html")
+                .excludePathPatterns("**/swagger-resources/**")
+                .excludePathPatterns("/webjars/**")
+                .excludePathPatterns("/v2/api-docs")
+                .excludePathPatterns("/api/**")
     }
 
     override fun addCorsMappings(registry: CorsRegistry) {

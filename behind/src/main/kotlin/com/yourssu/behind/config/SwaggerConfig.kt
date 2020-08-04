@@ -1,7 +1,5 @@
 package com.yourssu.behind.config
 
-import com.yourssu.behind.service.auth.JwtService
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
@@ -20,8 +18,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2
 @Configuration
 @EnableSwagger2
 class SwaggerConfig : WebMvcConfigurationSupport() {
-    @Autowired
-    lateinit var jwtService: JwtService
     private final val HEADER_AUTH = "Authorization"
 
     private fun apiInfo(): ApiInfo {
@@ -61,8 +57,8 @@ class SwaggerConfig : WebMvcConfigurationSupport() {
                 .name(HEADER_AUTH)
                 .modelRef(ModelRef("string"))
                 .parameterType("header")
-                .defaultValue(jwtService.createAccessToken("20170501"))
-                .required(true)
+                .defaultValue(null)
+                .required(false)
                 .build()
         return listOf(parameter)
     }
