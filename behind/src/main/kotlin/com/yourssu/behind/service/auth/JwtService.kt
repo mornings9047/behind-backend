@@ -19,13 +19,13 @@ class JwtService @Autowired constructor(val userRepository: UserRepository) {
     val ACCESS_TOKEN_EXPIRATION = 1000 * 60L * 60   // 1시간
     private final val ACCESS_TOKEN = "ACCESS_TOKEN"
 
-    fun createAccessToken(user: User): String {
+    fun createAccessToken(schoolId: String): String {
         val expiration = Date(System.currentTimeMillis() + ACCESS_TOKEN_EXPIRATION)
         val headers: MutableMap<String, Any> = HashMap()    // 헤더
         val payloads: MutableMap<String, Any> = HashMap()   // 내용
         headers["typ"] = "JWT"
         headers["alg"] = "HS256"
-        payloads["schoolId"] = user.schoolId
+        payloads["schoolId"] = schoolId
         return Jwts.builder()
                 .setSubject(ACCESS_TOKEN)
                 .setHeader(headers)
