@@ -1,7 +1,6 @@
 package com.yourssu.behind.service.post
 
 import com.yourssu.behind.exception.lecture.LectureNotExistException
-import com.yourssu.behind.exception.user.UserNotExistException
 import com.yourssu.behind.model.dto.post.request.CreateOrUpdateRequestPostDto
 import com.yourssu.behind.model.dto.post.response.ResponsePostDto
 import com.yourssu.behind.model.dto.post.response.ResponsePostsDto

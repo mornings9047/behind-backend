@@ -1,7 +1,7 @@
 package com.yourssu.behind.service.auth
 
 import com.yourssu.behind.exception.auth.TokenExpiredException
-import com.yourssu.behind.exception.user.UnAuthorizedException
+import com.yourssu.behind.exception.auth.UnAuthorizedException
 import com.yourssu.behind.exception.user.UserNotExistsException
 import com.yourssu.behind.model.entity.user.User
 import com.yourssu.behind.repository.user.UserRepository
