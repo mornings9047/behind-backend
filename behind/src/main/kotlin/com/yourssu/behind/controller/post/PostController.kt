@@ -24,9 +24,8 @@ class PostController @Autowired constructor(val postService: PostService) {
         postService.createPost(createOrUpdateRequestPostDto, imgFile)
     }
 
-
-    @ApiOperation("강좌 별 게시글 가져오기")
     @GetMapping("/lecture/{lectureId}")
+    @ApiOperation("강좌 별 게시글 가져오기")
     @ResponseStatus(HttpStatus.OK)
     fun getPost(@PathVariable lectureId: Long, @RequestParam(required = false) type: PostType?, @RequestParam page: Int): List<ResponsePostsDto> {
         return postService.getPosts(lectureId, type, page)

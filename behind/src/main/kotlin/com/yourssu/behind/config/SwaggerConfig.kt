@@ -5,9 +5,12 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport
 import springfox.documentation.builders.ApiInfoBuilder
+import springfox.documentation.builders.ParameterBuilder
 import springfox.documentation.builders.PathSelectors
 import springfox.documentation.builders.RequestHandlerSelectors
+import springfox.documentation.schema.ModelRef
 import springfox.documentation.service.ApiInfo
+import springfox.documentation.service.Parameter
 import springfox.documentation.spi.DocumentationType
 import springfox.documentation.spring.web.plugins.Docket
 import springfox.documentation.swagger2.annotations.EnableSwagger2
@@ -15,6 +18,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2
 @Configuration
 @EnableSwagger2
 class SwaggerConfig : WebMvcConfigurationSupport() {
+    private final val HEADER_AUTH = "Authorization"
 
     private fun apiInfo(): ApiInfo {
         return ApiInfoBuilder()
@@ -28,6 +32,7 @@ class SwaggerConfig : WebMvcConfigurationSupport() {
         return Docket(DocumentationType.SWAGGER_2)
                 .groupName("Behind")
                 .apiInfo(this.apiInfo())
+                .globalOperationParameters(getHeader())
                 .select()
                 .paths(PathSelectors.ant("/**"))
                 .apis(RequestHandlerSelectors.basePackage("com.yourssu.behind.controller"))
@@ -47,5 +52,14 @@ class SwaggerConfig : WebMvcConfigurationSupport() {
         registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/")
     }
 
-
+    fun getHeader(): List<Parameter> {
+        val parameter = ParameterBuilder()
+                .name(HEADER_AUTH)
+                .modelRef(ModelRef("string"))
+                .parameterType("header")
+                .defaultValue(null)
+                .required(false)
+                .build()
+        return listOf(parameter)
+    }
 }

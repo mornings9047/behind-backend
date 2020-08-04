@@ -1,59 +1,69 @@
 package com.yourssu.behind.service.auth
 
+import com.yourssu.behind.exception.auth.TokenExpiredException
 import com.yourssu.behind.exception.user.UnAuthorizedException
+import com.yourssu.behind.exception.user.UserNotExistsException
 import com.yourssu.behind.model.entity.user.User
+import com.yourssu.behind.repository.user.UserRepository
 import io.jsonwebtoken.*
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.web.context.request.RequestContextHolder
 import org.springframework.web.context.request.ServletRequestAttributes
 import java.util.*
-import javax.servlet.http.HttpServletRequest
 
 @Service
-class JwtService {
+class JwtService @Autowired constructor(val userRepository: UserRepository) {
     private final val key = "A"
+    private final val HEADER_AUTH = "Authorization"
+    val ACCESS_TOKEN_EXPIRATION = 1000 * 60L * 60   // 1시간
+    private final val ACCESS_TOKEN = "ACCESS_TOKEN"
 
-    fun createToken(schoolId: String): String {
-        val expiredTime = 100 * 60L * 2 // 만료기간 2분
-        val now = Date().time + expiredTime
-
+    fun createAccessToken(schoolId: String): String {
+        val expiration = Date(System.currentTimeMillis() + ACCESS_TOKEN_EXPIRATION)
         val headers: MutableMap<String, Any> = HashMap()    // 헤더
         val payloads: MutableMap<String, Any> = HashMap()   // 내용
-
-        headers["typ"] = "JWT"  // 토큰 타입
-        headers["alg"] = "HS256" // 알고리즘
-
-        payloads["exp"] = now   // 만료시간
-        payloads["schoolId"] = schoolId   // 데이터
-
+        headers["typ"] = "JWT"
+        headers["alg"] = "HS256"
+        payloads["schoolId"] = schoolId
         return Jwts.builder()
+                .setSubject(ACCESS_TOKEN)
                 .setHeader(headers)
                 .setClaims(payloads)
+                .setExpiration(expiration)
                 .signWith(SignatureAlgorithm.HS256, key.toByteArray())
-                // 서명(해시 알고리즘: SignatureAlgorithm.HS256, key의 byte: key.toByteArray())
-                .compact()  // 토큰 생성
+                .compact()
+    }
+
+    fun getToken(): String {
+        val request = ((RequestContextHolder.currentRequestAttributes()) as ServletRequestAttributes).request
+        return request.getHeader(HEADER_AUTH)
+    }
+
+    fun decodeToken(): Claims {
+        return Jwts.parser().setSigningKey("A".toByteArray()).parseClaimsJws(getToken()).body
     }
 
     @Throws(InterruptedException::class)
     fun isValid(token: String): Boolean {
         try {
-            return Jwts.parser()
-                    .setSigningKey("A".toByteArray())
-                    .parseClaimsJws(token)
-                    .body != null
-        } catch (e: Exception) {
+            return !isTokenExpired(token)
+        } catch (e: ExpiredJwtException) {
+            throw TokenExpiredException()
+        } catch (e: MalformedJwtException) {
+            throw UnAuthorizedException()
+        } catch (e: IllegalArgumentException) {
             throw UnAuthorizedException()
         }
     }
 
-    fun getSchoolId(): String {
-        val request = ((RequestContextHolder.currentRequestAttributes()) as ServletRequestAttributes).request
-        val token = request.getHeader("Authorization")
-        try {
-            return Jwts.parser().setSigningKey("A".toByteArray()).parseClaimsJws(token).body["schoolId"] as String
-        } catch (e: Exception) {
-            throw UnAuthorizedException()
-        }
+    fun getUser(): User {
+        val schoolId = decodeToken()["schoolId"] as String
+        return userRepository.findBySchoolId(schoolId).orElseThrow { UserNotExistsException() }
     }
 
+    fun isTokenExpired(token: String): Boolean {
+        val expiration = decodeToken().expiration
+        return expiration.before(Date())
+    }
 }

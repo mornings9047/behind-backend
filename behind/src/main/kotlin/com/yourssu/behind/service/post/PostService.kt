@@ -20,11 +20,10 @@ import org.springframework.web.multipart.MultipartFile
 
 @Service
 class PostService @Autowired constructor(private val postRepository: PostRepository,
-                                         private val userRepository: UserRepository,
+                                         userRepository: UserRepository,
                                          val lectureRepository: LectureRepository,
-                                         scrapRepository: ScrapRepository,
-                                         val jwtService: JwtService) {
-
+                                         val jwtService: JwtService,
+                                         scrapRepository: ScrapRepository) {
     private val imgUploadFunction = ImgUploadFunction()
     private val findPostFunction = FindPostFunction(postRepository)
     private val scrapFunction = ScrapFunction(userRepository, postRepository, scrapRepository)
@@ -34,7 +33,7 @@ class PostService @Autowired constructor(private val postRepository: PostReposit
     @Transactional
     fun createPost(createOrUpdateRequestPostDto: CreateOrUpdateRequestPostDto, imgFile: MultipartFile?) {
         var imgUrl: String? = null
-        val user = userRepository.findBySchoolId(jwtService.getSchoolId()).orElseThrow { UserNotExistException() }
+        val user = jwtService.getUser()
         val lecture = lectureRepository.findById(createOrUpdateRequestPostDto.lectureId).orElseThrow { LectureNotExistException() }
 
         if (imgFile != null)
@@ -67,7 +66,7 @@ class PostService @Autowired constructor(private val postRepository: PostReposit
 
     @Transactional
     fun scrapPost(postId: Long) {
-        return scrapFunction.createScrapPost(jwtService.getSchoolId(), postId)
+        return scrapFunction.createScrapPost(jwtService.getUser().schoolId, postId)
     }
 
     @Transactional

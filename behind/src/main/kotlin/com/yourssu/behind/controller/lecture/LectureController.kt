@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/lecture")
-class LectureController @Autowired constructor(val LectureService : LectureService){
+class LectureController @Autowired constructor(val lectureService: LectureService) {
 
     @ApiOperation(value = "강의목록 파일을 읽어서 DB에 저장")
     @GetMapping("/read")
-    fun LectureRead(){
-        return LectureService.readExcel()
+    fun lectureRead() {
+        return lectureService.readExcel()
     }
 }
