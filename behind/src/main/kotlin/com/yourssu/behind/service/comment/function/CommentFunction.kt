@@ -1,7 +1,7 @@
 package com.yourssu.behind.service.comment.function
 
 import com.yourssu.behind.exception.comment.CommentNotExistException
-import com.yourssu.behind.exception.post.PostNotExistException
+import com.yourssu.behind.exception.post.PostNotExistsException
 import com.yourssu.behind.model.dto.comment.response.ResponseCommentDto
 import com.yourssu.behind.model.entity.comment.Comment
 import com.yourssu.behind.model.entity.post.Post
@@ -15,20 +15,16 @@ class CommentFunction(private val commentRepository: CommentRepository, private 
     }
 
     fun deleteComment(commentId: Long) {
-        var comment: Comment = commentRepository.findById(commentId).orElseThrow { CommentNotExistException() }
+        val comment = commentRepository.findById(commentId).orElseThrow { CommentNotExistException() }
+
         comment.deleteComment = true
-
         if (comment.parent != null)
-        {
             comment.parent!!.reCommentNum--
-        }
-
-
         commentRepository.save(comment)
     }
 
     fun getComment(postId: Long): List<ResponseCommentDto> {
-        val post: Post = postRepository.findById(postId).orElseThrow { PostNotExistException() }
+        val post: Post = postRepository.findById(postId).orElseThrow { PostNotExistsException() }
 
         return commentRepository.findByPostAndParentIsNull(post)
                 .filter { it.reCommentNum > 0 || !it.deleteComment }

@@ -1,7 +1,7 @@
 package com.yourssu.behind.service.commentTest
 
 import com.yourssu.behind.exception.comment.CommentNotExistException
-import com.yourssu.behind.exception.post.PostNotExistException
+import com.yourssu.behind.exception.post.PostNotExistsException
 import com.yourssu.behind.exception.user.UserNotExistsException
 import com.yourssu.behind.model.dto.comment.request.CreateOrUpdateRequestCommentDto
 import com.yourssu.behind.model.entity.post.Post
@@ -35,7 +35,7 @@ class CommentServiceTest @Autowired constructor(val commentService: CommentServi
         commentService.createComment(existId, createOrUpdateRequestCommentDto)
 
         val user: User = userRepository.findBySchoolId("20202020").orElseThrow { UserNotExistsException() }
-        val post: Post = postRepository.findById(existId).orElseThrow { PostNotExistException() }
+        val post: Post = postRepository.findById(existId).orElseThrow { PostNotExistsException() }
 
         Assertions.assertNotNull(commentRepository.findByUserAndPost(user, post, PostPage(0)))
 

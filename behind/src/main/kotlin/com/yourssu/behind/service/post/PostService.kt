@@ -9,7 +9,6 @@ import com.yourssu.behind.model.entity.post.PostType
 import com.yourssu.behind.repository.lecture.LectureRepository
 import com.yourssu.behind.repository.post.PostRepository
 import com.yourssu.behind.repository.post.ScrapRepository
-import com.yourssu.behind.repository.user.UserRepository
 import com.yourssu.behind.service.auth.JwtService
 import com.yourssu.behind.service.post.function.*
 import org.springframework.beans.factory.annotation.Autowired
@@ -19,13 +18,12 @@ import org.springframework.web.multipart.MultipartFile
 
 @Service
 class PostService @Autowired constructor(private val postRepository: PostRepository,
-                                         userRepository: UserRepository,
                                          val lectureRepository: LectureRepository,
-                                         val jwtService: JwtService,
+                                         private val jwtService: JwtService,
                                          scrapRepository: ScrapRepository) {
     private val imgUploadFunction = ImgUploadFunction()
     private val findPostFunction = FindPostFunction(postRepository)
-    private val scrapFunction = ScrapFunction(userRepository, postRepository, scrapRepository)
+    private val scrapFunction = ScrapFunction(jwtService, postRepository, scrapRepository)
     private val reportFunction = ReportPostFunction(postRepository, scrapRepository)
     private val deleteFunction = DeletePostFunction(postRepository, scrapRepository)
 
@@ -62,10 +60,9 @@ class PostService @Autowired constructor(private val postRepository: PostReposit
         return findPostFunction.searchPostsByKeyword(keyword, type, page)
     }
 
-
     @Transactional
     fun scrapPost(postId: Long) {
-        return scrapFunction.createScrapPost(jwtService.getUser().schoolId, postId)
+        return scrapFunction.createScrapPost(postId)
     }
 
     @Transactional
