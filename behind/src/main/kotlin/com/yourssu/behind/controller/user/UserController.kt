@@ -5,22 +5,24 @@ import com.yourssu.behind.model.entity.post.PostSearch
 import com.yourssu.behind.service.user.UserService
 import io.swagger.annotations.ApiOperation
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/user")
 class UserController @Autowired constructor(val userService: UserService) {
 
-    @GetMapping("{userId}/post")
+    @GetMapping("/post")
     @ApiOperation("유저와 연관된 게시물 가져오기(댓글 작성한 글, 작성한 글, 스크랩 한 글")
-    fun getUserRelatedPost(@PathVariable userId: Long, @RequestParam type: PostSearch, page: Int): Collection<ResponsePostsDto> {
-        return userService.findUserRelatedPost(userId, type, page)
+    @ResponseStatus(HttpStatus.OK)
+    fun getUserRelatedPost(@RequestParam type: PostSearch, page: Int): Collection<ResponsePostsDto> {
+        return userService.findUserRelatedPost(type, page)
     }
 
-    @DeleteMapping("{userId}")
+    @DeleteMapping
     @ApiOperation("회원 탈퇴")
-    fun deleteUser(@PathVariable userId: Long) {
-        return userService.deleteUser(userId)
+    @ResponseStatus(HttpStatus.OK)
+    fun deleteUser() {
+        return userService.deleteUser()
     }
-
 }

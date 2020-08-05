@@ -20,7 +20,7 @@ class AuthController @Autowired constructor(val authService: AuthService,
     @ApiOperation(value = "회원가입")
     @ResponseStatus(HttpStatus.CREATED)
     fun signUpNewUser(@Valid @RequestBody signUpRequestDto: UserSignUpRequestDto) {
-        authService.signUp(signUpRequestDto)
+        return authService.signUp(signUpRequestDto)
     }
 
     @PostMapping("/signin")

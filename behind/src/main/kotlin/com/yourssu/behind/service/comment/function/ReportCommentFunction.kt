@@ -1,13 +1,13 @@
 package com.yourssu.behind.service.comment.function
 
-import com.yourssu.behind.exception.comment.CommentNotExistException
+import com.yourssu.behind.exception.comment.CommentNotExistsException
 import com.yourssu.behind.model.entity.comment.Comment
 import com.yourssu.behind.repository.comment.CommentRepository
 
-class ReportCommentFunction(val commentRepository: CommentRepository) {
+class ReportCommentFunction(private val commentRepository: CommentRepository) {
 
     fun reportComment(commentId: Long) {
-        var comment: Comment = commentRepository.findById(commentId).orElseThrow { CommentNotExistException() }
+        val comment: Comment = commentRepository.findById(commentId).orElseThrow { CommentNotExistsException() }
 
         if (comment.reportNum >= 2)
             comment.deleteComment = true

@@ -1,25 +1,5 @@
 package com.yourssu.behind.service.postTest
 
-import com.yourssu.behind.exception.lecture.LectureNotExistException
-import com.yourssu.behind.exception.post.PostNotExistException
-import com.yourssu.behind.model.dto.post.request.CreateOrUpdateRequestPostDto
-import com.yourssu.behind.model.entity.lecture.Lecture
-import com.yourssu.behind.model.entity.lecture.LectureSemester
-import com.yourssu.behind.model.entity.post.PostType
-import com.yourssu.behind.model.entity.professor.Professor
-import com.yourssu.behind.repository.lecture.LectureRepository
-import com.yourssu.behind.repository.post.PostRepository
-import com.yourssu.behind.repository.post.ScrapRepository
-import com.yourssu.behind.repository.professor.ProfessorRepository
-import com.yourssu.behind.service.post.PostService
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.BeforeAll
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.TestInstance
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
-import javax.transaction.Transactional
-
 /*
   schoolId가 2020인 유저가 DB에있다고 가정했습니다.
  */

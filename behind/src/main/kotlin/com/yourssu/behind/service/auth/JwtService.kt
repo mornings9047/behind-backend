@@ -1,7 +1,9 @@
 package com.yourssu.behind.service.auth
 
+import com.yourssu.behind.exception.auth.InvalidTokenException
 import com.yourssu.behind.exception.auth.TokenExpiredException
-import com.yourssu.behind.exception.user.UnAuthorizedException
+import com.yourssu.behind.exception.auth.TokenNotFoundException
+import com.yourssu.behind.exception.auth.UnAuthorizedException
 import com.yourssu.behind.exception.user.UserNotExistsException
 import com.yourssu.behind.model.entity.user.User
 import com.yourssu.behind.repository.user.UserRepository
@@ -37,7 +39,11 @@ class JwtService @Autowired constructor(val userRepository: UserRepository) {
 
     fun getToken(): String {
         val request = ((RequestContextHolder.currentRequestAttributes()) as ServletRequestAttributes).request
-        return request.getHeader(HEADER_AUTH)
+        try {
+            return request.getHeader(HEADER_AUTH)
+        } catch (e: IllegalStateException) {
+            throw TokenNotFoundException()
+        }
     }
 
     fun decodeToken(): Claims {
@@ -51,9 +57,9 @@ class JwtService @Autowired constructor(val userRepository: UserRepository) {
         } catch (e: ExpiredJwtException) {
             throw TokenExpiredException()
         } catch (e: MalformedJwtException) {
-            throw UnAuthorizedException()
+            throw InvalidTokenException()
         } catch (e: IllegalArgumentException) {
-            throw UnAuthorizedException()
+            throw TokenNotFoundException()
         }
     }
 

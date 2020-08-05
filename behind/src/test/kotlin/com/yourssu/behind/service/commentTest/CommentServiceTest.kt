@@ -1,7 +1,7 @@
 package com.yourssu.behind.service.commentTest
 
-import com.yourssu.behind.exception.comment.CommentNotExistException
-import com.yourssu.behind.exception.post.PostNotExistException
+import com.yourssu.behind.exception.comment.CommentNotExistsException
+import com.yourssu.behind.exception.post.PostNotExistsException
 import com.yourssu.behind.exception.user.UserNotExistsException
 import com.yourssu.behind.model.dto.comment.request.CreateOrUpdateRequestCommentDto
 import com.yourssu.behind.model.entity.post.Post
@@ -35,7 +35,7 @@ class CommentServiceTest @Autowired constructor(val commentService: CommentServi
         commentService.createComment(existId, createOrUpdateRequestCommentDto)
 
         val user: User = userRepository.findBySchoolId("20202020").orElseThrow { UserNotExistsException() }
-        val post: Post = postRepository.findById(existId).orElseThrow { PostNotExistException() }
+        val post: Post = postRepository.findById(existId).orElseThrow { PostNotExistsException() }
 
         Assertions.assertNotNull(commentRepository.findByUserAndPost(user, post, PostPage(0)))
 
@@ -44,22 +44,16 @@ class CommentServiceTest @Autowired constructor(val commentService: CommentServi
     @Test
     @Transactional
     fun getCommentTest() {
-        val nowPage: Int = 0
         val comments = commentService.getComment(existId)
-
-        for (comment in comments) {
+        for (comment in comments)
             println(comment)
-        }
     }
 
     @Test
     @Transactional
-    fun deleteComment()
-    {
-        var comment = commentRepository.findById(existId).orElseThrow { CommentNotExistException() }
+    fun deleteComment() {
+        val comment = commentRepository.findById(existId).orElseThrow { CommentNotExistsException() }
         commentService.deleteComment(existId)
         Assertions.assertTrue(comment.deleteComment)
     }
-
-
 }

@@ -1,6 +1,5 @@
 package com.yourssu.behind.service.user
 
-import com.yourssu.behind.exception.user.UserNotExistsException
 import com.yourssu.behind.model.dto.post.response.ResponsePostsDto
 import com.yourssu.behind.model.entity.post.Post
 import com.yourssu.behind.model.entity.post.PostPage
@@ -9,19 +8,24 @@ import com.yourssu.behind.repository.comment.CommentRepository
 import com.yourssu.behind.repository.post.PostRepository
 import com.yourssu.behind.repository.post.ScrapRepository
 import com.yourssu.behind.repository.user.UserRepository
+import com.yourssu.behind.service.auth.JwtService
 import com.yourssu.behind.service.user.function.UserDeleteFunction
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
-class UserService @Autowired constructor(val userRepository: UserRepository, val commentRepository: CommentRepository, val postRepository: PostRepository, val scrapRepository: ScrapRepository) {
+class UserService @Autowired constructor(userRepository: UserRepository,
+                                         val commentRepository: CommentRepository,
+                                         val postRepository: PostRepository,
+                                         val scrapRepository: ScrapRepository,
+                                         private val jwtService: JwtService) {
 
-    private val deleteFunction = UserDeleteFunction(userRepository)
+    private val deleteFunction = UserDeleteFunction(userRepository, jwtService)
 
     @Transactional
-    fun findUserRelatedPost(userId: Long, type: PostSearch, page: Int): Collection<ResponsePostsDto> {
-        val user = userRepository.findById(userId).orElseThrow { UserNotExistsException() }
+    fun findUserRelatedPost(type: PostSearch, page: Int): Collection<ResponsePostsDto> {
+        val user = jwtService.getUser()
         val postPage = PostPage(page)
         return when (type) {
             PostSearch.SCRAP -> {
@@ -41,7 +45,7 @@ class UserService @Autowired constructor(val userRepository: UserRepository, val
     }
 
     @Transactional
-    fun deleteUser(userId: Long) {
-        deleteFunction.deleteUser(userId)
+    fun deleteUser() {
+        deleteFunction.deleteUser()
     }
 }

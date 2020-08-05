@@ -1,7 +1,7 @@
 package com.yourssu.behind.service.comment
 
-import com.yourssu.behind.exception.comment.CommentNotExistException
-import com.yourssu.behind.exception.post.PostNotExistException
+import com.yourssu.behind.exception.comment.CommentNotExistsException
+import com.yourssu.behind.exception.post.PostNotExistsException
 import com.yourssu.behind.model.dto.comment.request.CreateOrUpdateRequestCommentDto
 import com.yourssu.behind.model.dto.comment.response.ResponseCommentDto
 import com.yourssu.behind.model.entity.comment.Comment
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
-class CommentService @Autowired constructor(val postRepository: PostRepository,
+class CommentService @Autowired constructor(private val postRepository: PostRepository,
                                             private val commentRepository: CommentRepository,
                                             val jwtService: JwtService) {
     private val commentFunction = CommentFunction(commentRepository, postRepository)
@@ -24,7 +24,7 @@ class CommentService @Autowired constructor(val postRepository: PostRepository,
     @Transactional
     fun createComment(postId: Long, createOrUpdateRequestCommentDto: CreateOrUpdateRequestCommentDto) {
         val commentUser = jwtService.getUser()
-        val targetPost = postRepository.findById(postId).orElseThrow { PostNotExistException() }
+        val targetPost = postRepository.findById(postId).orElseThrow { PostNotExistsException() }
         val newComment = Comment(user = commentUser, post = targetPost, content = createOrUpdateRequestCommentDto.content, parent = null)
 
         if (commentUser == targetPost.user)
@@ -35,12 +35,10 @@ class CommentService @Autowired constructor(val postRepository: PostRepository,
 
     @Transactional
     fun createRecomment(postId: Long, createOrUpdateRequestCommentDto: CreateOrUpdateRequestCommentDto, parentCommentId: Long) {
-
         val commentUser = jwtService.getUser()
-        val targetPost = postRepository.findById(postId).orElseThrow { PostNotExistException() }
-        var comment = commentRepository.findById(parentCommentId).orElseThrow { CommentNotExistException() }
-        var reComment = Comment(content = createOrUpdateRequestCommentDto.content, user = commentUser, post = targetPost, parent = comment)
-
+        val targetPost = postRepository.findById(postId).orElseThrow { PostNotExistsException() }
+        val comment = commentRepository.findById(parentCommentId).orElseThrow { CommentNotExistsException() }
+        val reComment = Comment(content = createOrUpdateRequestCommentDto.content, user = commentUser, post = targetPost, parent = comment)
 
         if (commentUser == targetPost.user)
             reComment.postOwner = true
