@@ -1,6 +1,6 @@
 package com.yourssu.behind.service.comment.function
 
-import com.yourssu.behind.exception.comment.CommentNotExistException
+import com.yourssu.behind.exception.comment.CommentNotExistsException
 import com.yourssu.behind.exception.post.PostNotExistsException
 import com.yourssu.behind.model.dto.comment.response.ResponseCommentDto
 import com.yourssu.behind.model.entity.comment.Comment
@@ -15,11 +15,11 @@ class CommentFunction(private val commentRepository: CommentRepository, private 
     }
 
     fun deleteComment(commentId: Long) {
-        val comment = commentRepository.findById(commentId).orElseThrow { CommentNotExistException() }
+        val comment = commentRepository.findById(commentId).orElseThrow { CommentNotExistsException() }
 
         comment.deleteComment = true
         if (comment.parent != null)
-            comment.parent!!.reCommentNum--
+            comment.parent.reCommentNum--
         commentRepository.save(comment)
     }
 

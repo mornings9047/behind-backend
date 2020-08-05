@@ -1,6 +1,6 @@
 package com.yourssu.behind.service.post
 
-import com.yourssu.behind.exception.lecture.LectureNotExistException
+import com.yourssu.behind.exception.lecture.LectureNotExistsException
 import com.yourssu.behind.model.dto.post.request.CreateOrUpdateRequestPostDto
 import com.yourssu.behind.model.dto.post.response.ResponsePostDto
 import com.yourssu.behind.model.dto.post.response.ResponsePostsDto
@@ -31,7 +31,7 @@ class PostService @Autowired constructor(private val postRepository: PostReposit
     fun createPost(createOrUpdateRequestPostDto: CreateOrUpdateRequestPostDto, imgFile: MultipartFile?) {
         var imgUrl: String? = null
         val user = jwtService.getUser()
-        val lecture = lectureRepository.findById(createOrUpdateRequestPostDto.lectureId).orElseThrow { LectureNotExistException() }
+        val lecture = lectureRepository.findById(createOrUpdateRequestPostDto.lectureId).orElseThrow { LectureNotExistsException() }
 
         if (imgFile != null)
             imgUrl = imgUploadFunction.storeImg(imgFile)
@@ -48,7 +48,7 @@ class PostService @Autowired constructor(private val postRepository: PostReposit
 
     @Transactional
     fun getPosts(lectureId: Long, type: PostType?, page: Int): List<ResponsePostsDto> {
-        val lecture = lectureRepository.findById(lectureId).orElseThrow { LectureNotExistException() }
+        val lecture = lectureRepository.findById(lectureId).orElseThrow { LectureNotExistsException() }
         return if (type == null)
             findPostFunction.getAllPosts(lecture, page)
         else

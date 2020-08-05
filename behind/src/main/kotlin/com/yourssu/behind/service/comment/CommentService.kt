@@ -1,6 +1,6 @@
 package com.yourssu.behind.service.comment
 
-import com.yourssu.behind.exception.comment.CommentNotExistException
+import com.yourssu.behind.exception.comment.CommentNotExistsException
 import com.yourssu.behind.exception.post.PostNotExistsException
 import com.yourssu.behind.model.dto.comment.request.CreateOrUpdateRequestCommentDto
 import com.yourssu.behind.model.dto.comment.response.ResponseCommentDto
@@ -37,7 +37,7 @@ class CommentService @Autowired constructor(private val postRepository: PostRepo
     fun createRecomment(postId: Long, createOrUpdateRequestCommentDto: CreateOrUpdateRequestCommentDto, parentCommentId: Long) {
         val commentUser = jwtService.getUser()
         val targetPost = postRepository.findById(postId).orElseThrow { PostNotExistsException() }
-        val comment = commentRepository.findById(parentCommentId).orElseThrow { CommentNotExistException() }
+        val comment = commentRepository.findById(parentCommentId).orElseThrow { CommentNotExistsException() }
         val reComment = Comment(content = createOrUpdateRequestCommentDto.content, user = commentUser, post = targetPost, parent = comment)
 
         if (commentUser == targetPost.user)

@@ -4,4 +4,4 @@ import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.ResponseStatus
 
 @ResponseStatus(code = HttpStatus.FORBIDDEN, reason = "토큰 기한이 만료되었습니다")
-class TokenExpiredException : RuntimeException()
+class TokenExpiredException(msg: String = "Token expired") : RuntimeException(msg)
