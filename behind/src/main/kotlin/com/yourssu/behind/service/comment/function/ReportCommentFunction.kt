@@ -1,19 +1,26 @@
 package com.yourssu.behind.service.comment.function
 
 import com.yourssu.behind.exception.comment.CommentNotExistsException
+import com.yourssu.behind.exception.report.AlreadyReportCommentException
 import com.yourssu.behind.model.entity.comment.Comment
+import com.yourssu.behind.model.entity.report.Report
+import com.yourssu.behind.model.entity.user.User
 import com.yourssu.behind.repository.comment.CommentRepository
+import com.yourssu.behind.repository.report.ReportRepository
+import com.yourssu.behind.repository.user.UserRepository
 
-class ReportCommentFunction(private val commentRepository: CommentRepository) {
+class ReportCommentFunction(private val commentRepository: CommentRepository, private val reportRepository: ReportRepository) {
 
-    fun reportComment(commentId: Long) {
-        val comment: Comment = commentRepository.findById(commentId).orElseThrow { CommentNotExistsException() }
+    fun reportComment(user: User, commentId: Long) {
+        var comment: Comment = commentRepository.findById(commentId).orElseThrow { CommentNotExistsException() }
 
+        if (reportRepository.existsByCommentAndUser(comment, user))
+            throw AlreadyReportCommentException()
         if (comment.reportNum >= 2)
             comment.deleteComment = true
-        else
-            comment.reportNum++
 
+        reportRepository.save(Report(user = user, comment = comment, post = null))
+        comment.reportNum++
         commentRepository.save(comment)
     }
 }

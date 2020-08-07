@@ -35,6 +35,9 @@ dependencies {
     implementation("io.jsonwebtoken:jjwt:0.7.0")
     implementation("org.apache.poi:poi-ooxml:4.1.2")
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
+    implementation("org.apache.commons:commons-lang3:3.11")
+    implementation("com.amazonaws:aws-java-sdk:1.11.106")
+    implementation("commons-io:commons-io:2.5")
 }
 
 tasks.withType<Test> {

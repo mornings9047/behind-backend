@@ -9,6 +9,8 @@ import com.yourssu.behind.model.entity.post.PostType
 import com.yourssu.behind.repository.lecture.LectureRepository
 import com.yourssu.behind.repository.post.PostRepository
 import com.yourssu.behind.repository.post.ScrapRepository
+import com.yourssu.behind.repository.report.ReportRepository
+import com.yourssu.behind.repository.user.UserRepository
 import com.yourssu.behind.service.auth.JwtService
 import com.yourssu.behind.service.post.function.*
 import org.springframework.beans.factory.annotation.Autowired
@@ -20,11 +22,13 @@ import org.springframework.web.multipart.MultipartFile
 class PostService @Autowired constructor(private val postRepository: PostRepository,
                                          val lectureRepository: LectureRepository,
                                          private val jwtService: JwtService,
-                                         scrapRepository: ScrapRepository) {
-    private val imgUploadFunction = ImgUploadFunction()
+                                         scrapRepository: ScrapRepository,
+                                         val userRepository: UserRepository,
+                                         val reportRepository: ReportRepository,
+                                         val imgUploadFunction: ImgUploadFunction) {
     private val findPostFunction = FindPostFunction(postRepository)
     private val scrapFunction = ScrapFunction(jwtService, postRepository, scrapRepository)
-    private val reportFunction = ReportPostFunction(postRepository, scrapRepository)
+    private val reportFunction = ReportPostFunction(postRepository, scrapRepository, reportRepository)
     private val deleteFunction = DeletePostFunction(postRepository, scrapRepository)
 
     @Transactional
@@ -34,7 +38,7 @@ class PostService @Autowired constructor(private val postRepository: PostReposit
         val lecture = lectureRepository.findById(createOrUpdateRequestPostDto.lectureId).orElseThrow { LectureNotExistsException() }
 
         if (imgFile != null)
-            imgUrl = imgUploadFunction.storeImg(imgFile)
+            imgUrl = imgUploadFunction.s3StoreImg(imgFile)
 
         postRepository.save(Post(user = user,
                 type = createOrUpdateRequestPostDto.type,
@@ -77,6 +81,6 @@ class PostService @Autowired constructor(private val postRepository: PostReposit
 
     @Transactional
     fun reportPost(postId: Long) {
-        reportFunction.reportPost(postId)
+        reportFunction.reportPost(jwtService.getUser(), postId)
     }
 }

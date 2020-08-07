@@ -7,6 +7,8 @@ import com.yourssu.behind.model.dto.comment.response.ResponseCommentDto
 import com.yourssu.behind.model.entity.comment.Comment
 import com.yourssu.behind.repository.comment.CommentRepository
 import com.yourssu.behind.repository.post.PostRepository
+import com.yourssu.behind.repository.report.ReportRepository
+import com.yourssu.behind.repository.user.UserRepository
 import com.yourssu.behind.service.auth.JwtService
 import com.yourssu.behind.service.comment.function.CommentFunction
 import com.yourssu.behind.service.comment.function.ReportCommentFunction
@@ -17,9 +19,11 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 class CommentService @Autowired constructor(private val postRepository: PostRepository,
                                             private val commentRepository: CommentRepository,
-                                            val jwtService: JwtService) {
+                                            val jwtService: JwtService,
+                                            reportRepository: ReportRepository,
+                                            val userRepository: UserRepository) {
     private val commentFunction = CommentFunction(commentRepository, postRepository)
-    private val reportFunction = ReportCommentFunction(commentRepository)
+    private val reportFunction = ReportCommentFunction(commentRepository, reportRepository)
 
     @Transactional
     fun createComment(postId: Long, createOrUpdateRequestCommentDto: CreateOrUpdateRequestCommentDto) {
@@ -53,7 +57,7 @@ class CommentService @Autowired constructor(private val postRepository: PostRepo
 
     @Transactional
     fun reportComment(commentId: Long) {
-        return reportFunction.reportComment(commentId)
+        return reportFunction.reportComment(jwtService.getUser(),commentId)
     }
 
     @Transactional

@@ -42,7 +42,6 @@ class LectureService @Autowired constructor(val lectureRepository : LectureRepos
         val wb = HSSFWorkbook(filePath)
         var rowIndex: Int = 0
         var columnIndex: Int = 0
-        var maxColumnIndex = 0
         val sheet = wb.getSheetAt(0)
         val rows = sheet.physicalNumberOfRows
         var row: HSSFRow = sheet.getRow(rowIndex)
@@ -54,7 +53,6 @@ class LectureService @Autowired constructor(val lectureRepository : LectureRepos
 
         while (true) {
             cell = row.getCell(columnIndex)
-            var startIndex:Long = 0
             if (cell.stringCellValue.equals("과목명"))
                 courseNames = readRow("courseNames",path)
 
