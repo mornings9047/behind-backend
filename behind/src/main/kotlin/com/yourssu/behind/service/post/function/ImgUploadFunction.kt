@@ -18,7 +18,7 @@ import java.util.*
 
 @Component
 class ImgUploadFunction(@Value("\${cloud.aws.credentials.accessKey}") private val accessKey: String,
-                        @Value("\${cloud.aws.credentials.secretKey}") private val secretKey: String,
+                        @Value("\${cloud.aws.credentials.secretKey") private val secretKey: String,
                         @Value("\${cloud.aws.s3.bucket}") private val bucket: String,
                         @Value("\${cloud.aws.region.static}") private val region: String) {
 

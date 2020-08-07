@@ -7,7 +7,7 @@ import io.swagger.annotations.ApiModelProperty
 import java.time.LocalDateTime
 
 @ApiModel
-class ResponsePostsDto(post: Post) {
+class ResponsePostsDto(post: Post, commentNum: Int) {
     @ApiModelProperty(value = "게시글 Id")
     val postId: Long? = post.id
 
@@ -30,11 +30,6 @@ class ResponsePostsDto(post: Post) {
     val createdAt: LocalDateTime = post.createdAt
 
     @ApiModelProperty(value = "댓글 갯수")
-    val commentsNum = post.comments.filter { !it.deleteComment }.size
+    val commentsNum = commentNum
 
-    private fun resizeText(text: String, size: Int): String {
-        if (text.length > size)
-            return "${text.dropLast(size)}..."
-        return text
-    }
 }

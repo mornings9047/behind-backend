@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -26,22 +29,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3a7fd033-6b74-4fc7-8f4e-f81fe24564a9" name="Default Changelist" comment="예외처리 수정 완료, searchPost jpa 쿼리문 수정">
-      <change afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/exception/report/AlreadyReportCommentException.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/exception/report/AlreadyReportPostException.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/model/entity/report/Report.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/repository/report/ReportRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/behind/Lecture_Excel/2020_Fall_Christ.xls" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/behind/Lecture_Excel/2020_Fall_German.xls" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/behind/Lecture_Excel/2020_Fall_Korean.xls" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/behind/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/behind/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/controller/auth/AuthController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/controller/auth/AuthController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/comment/CommentService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/comment/CommentService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/comment/function/ReportCommentFunction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/comment/function/ReportCommentFunction.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/controller/post/PostController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/controller/post/PostController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/model/dto/post/response/ResponsePostDto.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/model/dto/post/response/ResponsePostsDto.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/model/dto/post/response/ResponsePostsDto.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/repository/comment/CommentRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/repository/comment/CommentRepository.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/lecture/LectureService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/lecture/LectureService.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/post/PostService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/post/PostService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/post/function/FindPostFunction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/post/function/FindPostFunction.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/post/function/ImgUploadFunction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/post/function/ImgUploadFunction.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/post/function/ReportPostFunction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/post/function/ReportPostFunction.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/user/UserService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/user/UserService.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/behind/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/behind/src/main/resources/import.sql" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,9 +127,6 @@
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\82102\Desktop\2020_behind_backend" />
-    </key>
     <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
       <recent name="com.yourssu.behind.exception.auth" />
       <recent name="com.yourssu.behind.service.user" />
@@ -142,6 +140,10 @@
       <recent name="C:\Users\82102\Desktop\2020_behind_backend\behind\src\main\kotlin\com\yourssu\behind\repository" />
       <recent name="C:\Users\82102\Desktop\2020_behind_backend\behind\src\main\kotlin\com\yourssu\behind\config" />
       <recent name="C:\Users\82102\Desktop\2020_behind_backend\behind\src\main\kotlin\com\yourssu\behind\controller" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\82102\IdeaProjects\2020_behind_backend\behind\Lecture_Excel" />
+      <recent name="C:\Users\82102\Desktop\2020_behind_backend" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -158,6 +160,17 @@
     </option>
   </component>
   <component name="RunManager" selected="Kotlin.BehindApplicationKt">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="CommentServiceTest.getCommentTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -264,6 +277,7 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -313,6 +327,7 @@
       <workItem from="1596540049281" duration="9622000" />
       <workItem from="1596604390473" duration="10158000" />
       <workItem from="1596617454711" duration="2269000" />
+      <workItem from="1596777682519" duration="2272000" />
     </task>
     <task id="LOCAL-00001" summary="initialize">
       <created>1595056923738</created>
@@ -633,7 +648,7 @@
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="2" />
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -735,9 +750,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="569" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1595326277224" />
-    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1596550089184">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="552" y="211" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1596779164929">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="552" y="211" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1596779164929" />
     <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1596550089184" />
     <state x="700" y="295" width="499" height="450" key="#org.jetbrains.kotlin.idea.refactoring.move.moveDeclarations.ui.MoveKotlinTopLevelDeclarationsDialog" timestamp="1596552533616">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -756,24 +772,28 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1596451177572" />
-    <state width="1877" height="251" key="GridCell.Tab.0.bottom" timestamp="1596619488352">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1596779920668">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1596779920668" />
     <state width="1699" height="428" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1596614504458" />
     <state width="1877" height="251" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1596619488352" />
-    <state width="1877" height="251" key="GridCell.Tab.0.center" timestamp="1596619488351">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1596779920667">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1596779920667" />
     <state width="1699" height="428" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1596614504458" />
     <state width="1877" height="251" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1596619488351" />
-    <state width="1877" height="251" key="GridCell.Tab.0.left" timestamp="1596619488351">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1596779920667">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1596779920667" />
     <state width="1699" height="428" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1596614504458" />
     <state width="1877" height="251" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1596619488351" />
-    <state width="1877" height="251" key="GridCell.Tab.0.right" timestamp="1596619488351">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1596779920668">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1596779920667" />
     <state width="1699" height="428" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1596614504458" />
     <state width="1877" height="251" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1596619488351" />
     <state width="1699" height="428" key="GridCell.Tab.1.bottom" timestamp="1596614504458">

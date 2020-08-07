@@ -1,7 +1,6 @@
 package com.yourssu.behind.controller.post
 
 import com.yourssu.behind.model.dto.post.request.CreateOrUpdateRequestPostDto
-import com.yourssu.behind.model.dto.post.response.ResponsePostDto
 import com.yourssu.behind.model.dto.post.response.ResponsePostsDto
 import com.yourssu.behind.model.entity.post.PostType
 import com.yourssu.behind.service.post.PostService
@@ -49,7 +48,7 @@ class PostController @Autowired constructor(val postService: PostService) {
     @ApiOperation("특정 게시글 가져오기")
     @GetMapping("/{postId}")
     @ResponseStatus(HttpStatus.OK)
-    fun getPostDetails(@PathVariable postId: Long): ResponsePostDto {
+    fun getPostDetails(@PathVariable postId: Long): ResponsePostsDto {
         return postService.getPostDetails(postId)
     }
 
