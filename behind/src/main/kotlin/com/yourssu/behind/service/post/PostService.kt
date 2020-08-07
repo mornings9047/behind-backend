@@ -2,10 +2,10 @@ package com.yourssu.behind.service.post
 
 import com.yourssu.behind.exception.lecture.LectureNotExistsException
 import com.yourssu.behind.model.dto.post.request.CreateOrUpdateRequestPostDto
-import com.yourssu.behind.model.dto.post.response.ResponsePostDto
 import com.yourssu.behind.model.dto.post.response.ResponsePostsDto
 import com.yourssu.behind.model.entity.post.Post
 import com.yourssu.behind.model.entity.post.PostType
+import com.yourssu.behind.repository.comment.CommentRepository
 import com.yourssu.behind.repository.lecture.LectureRepository
 import com.yourssu.behind.repository.post.PostRepository
 import com.yourssu.behind.repository.post.ScrapRepository
@@ -25,8 +25,9 @@ class PostService @Autowired constructor(private val postRepository: PostReposit
                                          scrapRepository: ScrapRepository,
                                          val userRepository: UserRepository,
                                          val reportRepository: ReportRepository,
-                                         val imgUploadFunction: ImgUploadFunction) {
-    private val findPostFunction = FindPostFunction(postRepository)
+                                         val imgUploadFunction: ImgUploadFunction,
+                                         val commentRepository: CommentRepository) {
+    private val findPostFunction = FindPostFunction(postRepository, commentRepository)
     private val scrapFunction = ScrapFunction(jwtService, postRepository, scrapRepository)
     private val reportFunction = ReportPostFunction(postRepository, scrapRepository, reportRepository)
     private val deleteFunction = DeletePostFunction(postRepository, scrapRepository)
@@ -70,7 +71,7 @@ class PostService @Autowired constructor(private val postRepository: PostReposit
     }
 
     @Transactional
-    fun getPostDetails(postId: Long): ResponsePostDto {
+    fun getPostDetails(postId: Long): ResponsePostsDto {
         return findPostFunction.getPostDetails(postId)
     }
 

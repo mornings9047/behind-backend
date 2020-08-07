@@ -141,7 +141,7 @@ class LectureService @Autowired constructor(val lectureRepository : LectureRepos
 
     @Transactional
     fun getFileList() : ArrayList<String>{
-        val path:String = "behind\\Lecture_Excel\\"
+        val path:String = "./behind/Lecture_Excel"
         val dir: File = File(path)
         var fileList = dir.listFiles()
         var fileNames = arrayListOf<String>()
