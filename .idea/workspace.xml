@@ -29,17 +29,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3a7fd033-6b74-4fc7-8f4e-f81fe24564a9" name="Default Changelist" comment="예외처리 수정 완료, searchPost jpa 쿼리문 수정">
-      <change afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/exception/lecture/AlreadyLectureException.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/model/entity/lecture/SearchType.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/lecture/function/FindLectureFunction.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/controller/user/UserController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/controller/user/UserController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/model/entity/lecture/Lecture.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/model/entity/lecture/Lecture.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/repository/lecture/LectureRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/repository/lecture/LectureRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/repository/professor/ProfessorRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/repository/professor/ProfessorRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/lecture/LectureService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/lecture/LectureService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/user/UserService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/user/UserService.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/behind/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/behind/src/test/kotlin/com/yourssu/behind/service/postTest/PostServiceTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/test/kotlin/com/yourssu/behind/service/postTest/PostServiceTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/behind/src/test/kotlin/com/yourssu/behind/service/userTest/UserServiceTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/test/kotlin/com/yourssu/behind/service/userTest/UserServiceTest.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
