@@ -40,44 +40,38 @@ class LectureService @Autowired constructor(val lectureRepository : LectureRepos
     fun readColumn(path:String){
         val filePath = FileInputStream(path)
         val wb = HSSFWorkbook(filePath)
-        var rowIndex: Int = 0
-        var columnIndex: Int = 0
+        var rowIndex = 0
+        var columnIndex = 0
         val sheet = wb.getSheetAt(0)
         val rows = sheet.physicalNumberOfRows
         var row: HSSFRow = sheet.getRow(rowIndex)
-        var cell: HSSFCell = row.getCell(columnIndex)
+        var cell: HSSFCell
         var courseNames = arrayListOf<String>()
-        var majors = arrayListOf<String>()
-        var professors:ArrayList<String> = arrayListOf<String>()
-        var k = 0
-
+        var majors: ArrayList<String>
+        var professors:ArrayList<String> = arrayListOf()
+        var i = 0
         while (true) {
             cell = row.getCell(columnIndex)
-            if (cell.stringCellValue.equals("과목명"))
+            if (cell.stringCellValue == "과목명")
                 courseNames = readRow("courseNames",path)
 
-            else if (cell.stringCellValue.equals("교수명"))
+            else if (cell.stringCellValue == "교수명")
                 professors = readRow("professors",path)
 
-            else if (cell.stringCellValue.equals("개설학과")) {
+            else if (cell.stringCellValue == "개설학과") {
                 majors = readRow("majors",path)
                 break
             }
             columnIndex++
         }
 
-        while(k < rows-1) {
-            var professor = professorRepository.save(Professor(name = professors.get(k)))
-            var lectureDto: LectureDto = LectureDto(
-                    courseNames.get(k),
-                    majors.get(k),
-                    professor,
-                    year = "2020",
-                    semester = LectureSemester.FALL
-            )
+        while(i in 0 until rows - 1) {
+            var professor = professorRepository.save(Professor(name = professors[i]))
+            var lectureDto = LectureDto(courseNames[i], majors[i],  professor,
+                                        year = "2020",  semester = LectureSemester.FALL)
             saveLecture(lectureDto)
-            k++
-        }
+            i++
+            }
     }
 
     @Transactional
@@ -85,8 +79,8 @@ class LectureService @Autowired constructor(val lectureRepository : LectureRepos
         var result = arrayListOf<String>()
         val filePath = FileInputStream(path)
         val wb = HSSFWorkbook(filePath)
-        var rowIndex: Int = 1
-        var columnIndex: Int = 1
+        var rowIndex = 1
+        var columnIndex = 1
         val sheet = wb.getSheetAt(0)
         val rows = sheet.physicalNumberOfRows
         var row: HSSFRow
@@ -94,60 +88,60 @@ class LectureService @Autowired constructor(val lectureRepository : LectureRepos
 
         var courseNames = arrayListOf<String>()
         var majors = arrayListOf<String>()
-        var professors:ArrayList<String> = arrayListOf<String>()
+        var professors:ArrayList<String> = arrayListOf()
 
-        if (fieldName.equals("courseNames")) {
-            rowIndex = 1
-            columnIndex = 6
-            while (rowIndex < rows) {
-                row = sheet.getRow(rowIndex)
-                cell = row.getCell(columnIndex)
-                courseNames.add(cell.stringCellValue + "")
-                rowIndex++
+        when (fieldName) {
+            "courseNames" -> {
+                rowIndex = 1
+                columnIndex = 6
+                while (rowIndex < rows) {
+                    row = sheet.getRow(rowIndex)
+                    cell = row.getCell(columnIndex)
+                    courseNames.add(cell.stringCellValue + "")
+                    rowIndex++
+                }
+                result = courseNames
+                return result
             }
-            result = courseNames
-            return result
-        }
-
-        else if (fieldName.equals("professors")) {
-            rowIndex = 1
-            columnIndex = 8
-            while (rowIndex < rows) {
-                row = sheet.getRow(rowIndex)
-                cell = row.getCell(columnIndex)
-                var value : String = cell.stringCellValue + ""
-                value = value.replace("\n",",")
-                professors.add(value)
-                rowIndex++
+            "professors" -> {
+                rowIndex = 1
+                columnIndex = 8
+                while (rowIndex < rows) {
+                    row = sheet.getRow(rowIndex)
+                    cell = row.getCell(columnIndex)
+                    var value : String = cell.stringCellValue + ""
+                    value = value.replace("\n",",")
+                    professors.add(value)
+                    rowIndex++
+                }
+                result = professors
+                return result
             }
-            result = professors
-            return result
-        }
-
-        else if (fieldName.equals("majors")) {
-            rowIndex = 1
-            columnIndex = 9
-            while (rowIndex < rows) {
-                row = sheet.getRow(rowIndex)
-                cell = row.getCell(columnIndex)
-                majors.add(cell.stringCellValue + "")
-                rowIndex++
+            "majors" -> {
+                rowIndex = 1
+                columnIndex = 9
+                while (rowIndex < rows) {
+                    row = sheet.getRow(rowIndex)
+                    cell = row.getCell(columnIndex)
+                    majors.add(cell.stringCellValue + "")
+                    rowIndex++
+                }
+                result = majors
+                return result
             }
-            result = majors
-            return result
+            else -> return result
         }
-        return result
     }
 
     @Transactional
     fun getFileList() : ArrayList<String>{
-        val path:String = "./behind/Lecture_Excel"
-        val dir: File = File(path)
+        val path = "behind/Lecture_Excel/"
+        val dir = File(path)
         var fileList = dir.listFiles()
         var fileNames = arrayListOf<String>()
         for(file in fileList){
-            if(file.isFile())
-                fileNames.add(path.plus(file.getName()))
+            if(file.isFile)
+                fileNames.add(path.plus(file.name))
         }
         return fileNames
     }
