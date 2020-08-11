@@ -54,8 +54,8 @@ class UserController @Autowired constructor(val userService: UserService) {
 
     @GetMapping("/feed")
     @ApiOperation("새 글 피드")
-    fun newPostFeed() : Collection<ResponsePostsDto>{
-        return userService.newPostFeed()
+    fun newPostFeed(@RequestParam page: Int) : Collection<ResponsePostsDto>{
+        return userService.newPostFeed(page)
     }
 
 }

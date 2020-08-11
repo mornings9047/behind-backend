@@ -1,8 +1,5 @@
 package com.yourssu.behind.service.user
 
-import com.yourssu.behind.exception.lecture.AlreadyLectureException
-import com.yourssu.behind.exception.lecture.LectureNotExistsException
-import com.yourssu.behind.exception.user.UserNotExistsException
 import com.yourssu.behind.model.dto.lecture.ReturnLectureDto
 import com.yourssu.behind.model.dto.post.response.ResponsePostsDto
 import com.yourssu.behind.model.entity.lecture.SearchType
@@ -16,6 +13,7 @@ import com.yourssu.behind.repository.post.ScrapRepository
 import com.yourssu.behind.repository.professor.ProfessorRepository
 import com.yourssu.behind.repository.user.UserRepository
 import com.yourssu.behind.service.auth.JwtService
+import com.yourssu.behind.service.lecture.function.UserLectureFunction
 import com.yourssu.behind.service.lecture.function.FindLectureFunction
 import com.yourssu.behind.service.post.function.FindPostFunction
 import com.yourssu.behind.service.user.function.UserDeleteFunction
@@ -35,6 +33,7 @@ class UserService @Autowired constructor(val userRepository: UserRepository,
     private val deleteFunction = UserDeleteFunction(userRepository, jwtService)
     private val findPostFunction = FindPostFunction(postRepository, commentRepository)
     private val findLectureFunction = FindLectureFunction(lectureRepository, professorRepository)
+    private val userLectureFunction = UserLectureFunction(jwtService, lectureRepository)
 
     @Transactional
     fun findUserRelatedPost(type: PostSearch, page: Int): Collection<ResponsePostsDto> {
@@ -69,21 +68,12 @@ class UserService @Autowired constructor(val userRepository: UserRepository,
 
     @Transactional
     fun addUserLecture(lectureId: Long){
-        val user = jwtService.getUser()
-        var lecture = lectureRepository.findById(lectureId).orElseThrow { LectureNotExistsException() }
-
-        for(i in user.lectures){
-            if(i == lecture)
-                throw AlreadyLectureException()
-        }
-        user.lectures.add(lecture)
+        userLectureFunction.addUserLecture(lectureId)
     }
 
     @Transactional
     fun deleteUserLecture(lectureId: Long){
-        val user = jwtService.getUser()
-        var lecture = lectureRepository.findById(lectureId).orElseThrow { LectureNotExistsException() }
-        user.lectures.removeIf { i -> i == lecture }
+        userLectureFunction.removeUserLecture(lectureId)
     }
 
     @Transactional
@@ -98,20 +88,18 @@ class UserService @Autowired constructor(val userRepository: UserRepository,
     }
 
     @Transactional
-    fun newPostFeed() : MutableList<ResponsePostsDto>{
+    fun newPostFeed(page: Int) : Collection<ResponsePostsDto>{
         val user = jwtService.getUser()
         val userLectureList = user.lectures
-        val result : MutableList<ResponsePostsDto> = arrayListOf()
-
+        val postList : MutableList<ResponsePostsDto> = arrayListOf()
+        var result : List<ResponsePostsDto> = listOf()
 
         for(i in 0 until userLectureList.size){
             var temp = findPostFunction.getAllPosts(userLectureList[i],0)
             for(element in temp)
-                result.add(element)
+                postList.add(element)
         }
-
-        result.sortByDescending { it.postId }
-        return result
+        postList.sortByDescending { it.postId }
+        return postList
     }
-
 }

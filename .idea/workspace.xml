@@ -4,35 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="BranchesTreeState">
-    <expand>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-    </expand>
-    <select>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:addUserLectures" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-    </select>
+    <expand />
+    <select />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3a7fd033-6b74-4fc7-8f4e-f81fe24564a9" name="Default Changelist" comment="예외처리 수정 완료, searchPost jpa 쿼리문 수정">
+      <change afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/lecture/function/UserLectureFunction.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/behind/src/main/resources/import.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/behind/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/behind/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/controller/user/UserController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/controller/user/UserController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/repository/user/UserRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/repository/user/UserRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/post/function/FindPostFunction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/post/function/FindPostFunction.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/user/UserService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/user/UserService.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/behind/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/behind/src/test/kotlin/com/yourssu/behind/service/postTest/PostServiceTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/test/kotlin/com/yourssu/behind/service/postTest/PostServiceTest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/behind/src/test/kotlin/com/yourssu/behind/service/userTest/UserServiceTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/test/kotlin/com/yourssu/behind/service/userTest/UserServiceTest.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -640,6 +625,9 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.sql" />
+  </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
@@ -767,31 +755,31 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1596451177572" />
-    <state width="1237" height="102" key="GridCell.Tab.0.bottom" timestamp="1597113889276">
+    <state width="1237" height="182" key="GridCell.Tab.0.bottom" timestamp="1597150976594">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="102" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1597113889276" />
+    <state width="1237" height="182" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1597150976594" />
     <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1596779920668" />
     <state width="1699" height="428" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1596614504458" />
     <state width="1877" height="251" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1596619488352" />
-    <state width="1237" height="102" key="GridCell.Tab.0.center" timestamp="1597113889275">
+    <state width="1237" height="182" key="GridCell.Tab.0.center" timestamp="1597150976593">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="102" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1597113889275" />
+    <state width="1237" height="182" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1597150976593" />
     <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1596779920667" />
     <state width="1699" height="428" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1596614504458" />
     <state width="1877" height="251" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1596619488351" />
-    <state width="1237" height="102" key="GridCell.Tab.0.left" timestamp="1597113889275">
+    <state width="1237" height="182" key="GridCell.Tab.0.left" timestamp="1597150976593">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="102" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1597113889275" />
+    <state width="1237" height="182" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1597150976593" />
     <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1596779920667" />
     <state width="1699" height="428" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1596614504458" />
     <state width="1877" height="251" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1596619488351" />
-    <state width="1237" height="102" key="GridCell.Tab.0.right" timestamp="1597113889276">
+    <state width="1237" height="182" key="GridCell.Tab.0.right" timestamp="1597150976593">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="102" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1597113889276" />
+    <state width="1237" height="182" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1597150976593" />
     <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1596779920667" />
     <state width="1699" height="428" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1596614504458" />
     <state width="1877" height="251" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1596619488351" />
