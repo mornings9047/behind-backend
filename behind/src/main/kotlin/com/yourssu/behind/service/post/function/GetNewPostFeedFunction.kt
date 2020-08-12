@@ -12,9 +12,8 @@ class GetNewPostFeedFunction(private val jwtService: JwtService,
 
     fun getNewPostFeed(page: Int) : Collection<ResponsePostsDto> {
         val user = jwtService.getUser()
-        val result = postRepository.findAllByLecture_UsersAndDeletePostIsFalse(user, PostPage(page)).map{
+        return postRepository.findAllByLecture_UsersAndDeletePostIsFalse(user, PostPage(page)).map {
             ResponsePostsDto(it, commentRepository.countByPostAndDeleteCommentIsFalse(it))
         }
-        return result
     }
 }

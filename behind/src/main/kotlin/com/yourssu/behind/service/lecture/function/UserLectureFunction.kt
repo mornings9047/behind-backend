@@ -1,10 +1,8 @@
 package com.yourssu.behind.service.lecture.function
 
-import com.yourssu.behind.exception.lecture.AlreadyLectureException
+import com.yourssu.behind.exception.lecture.LectureAlreadyExistsException
 import com.yourssu.behind.exception.lecture.LectureNotExistsException
 import com.yourssu.behind.model.dto.lecture.ReturnLectureDto
-import com.yourssu.behind.model.entity.lecture.Lecture
-import com.yourssu.behind.model.entity.user.User
 import com.yourssu.behind.repository.lecture.LectureRepository
 import com.yourssu.behind.service.auth.JwtService
 
@@ -15,7 +13,7 @@ class UserLectureFunction(private val jwtService : JwtService, private val lectu
         val lecture = lectureRepository.findById(lectureId).orElseThrow { LectureNotExistsException() }
         for(i in user.lectures){
             if(i == lecture)
-                throw AlreadyLectureException()
+                throw LectureAlreadyExistsException()
         }
         user.lectures.add(lecture)
     }

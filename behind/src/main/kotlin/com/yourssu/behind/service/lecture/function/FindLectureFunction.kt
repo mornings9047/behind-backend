@@ -10,23 +10,20 @@ class FindLectureFunction(private val lectureRepository: LectureRepository, priv
     fun searchLectureByKeyword(keyword: String, type: SearchType) : Collection<ReturnLectureDto> {
         when (type) {
             SearchType.Lecture -> {
-                val lectureList = lectureRepository.findByCourseNameContains(keyword)
-                var result: ArrayList<ReturnLectureDto> = arrayListOf()
-
-                for (i in lectureList.indices) {
-                    val returnLectureDto = ReturnLectureDto(lectureList.get(index = i))
-                    result.add(returnLectureDto)
-                }
+                val lectures = lectureRepository.findByCourseNameContains(keyword)
+                val result: ArrayList<ReturnLectureDto> = arrayListOf()
+                for (lecture in lectures)
+                    result.add(ReturnLectureDto(lecture))
                 return result
             }
 
             SearchType.Professor -> {
-                val professorList = professorRepository.findByNameContains(keyword)
+                val professors = professorRepository.findByNameContains(keyword)
                 var result: ArrayList<ReturnLectureDto> = arrayListOf()
                 val lectures = lectureRepository.findAll()
-                for (i in professorList.indices) {
+                for (i in professors.indices) {
                     for (j in 0 until lectures.size) {
-                        if (lectures[j].professor.name == professorList[i].name) {
+                        if (lectures[j].professor.name == professors[i].name) {
                             val returnLectureDto = ReturnLectureDto(lectures[j])
                             result.add(returnLectureDto)
                         }

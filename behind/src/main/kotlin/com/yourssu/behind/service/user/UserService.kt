@@ -32,7 +32,6 @@ class UserService @Autowired constructor(val userRepository: UserRepository,
                                          private val jwtService: JwtService) {
 
     private val deleteFunction = UserDeleteFunction(userRepository, jwtService)
-    //private val findPostFunction = FindPostFunction(postRepository, commentRepository)
     private val findLectureFunction = FindLectureFunction(lectureRepository, professorRepository)
     private val userLectureFunction = UserLectureFunction(jwtService, lectureRepository)
     private val getNewPostFeedFunction = GetNewPostFeedFunction(jwtService, postRepository, commentRepository)

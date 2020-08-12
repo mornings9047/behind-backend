@@ -17,8 +17,6 @@ import java.io.FileInputStream
 
 @Service
 class LectureService @Autowired constructor(val lectureRepository : LectureRepository, val professorRepository : ProfessorRepository) {
-
-    @Transactional
     fun saveLecture(lectureDto: LectureDto){
         lectureRepository.save(Lecture(
                 courseName = lectureDto.courseName,
@@ -29,14 +27,12 @@ class LectureService @Autowired constructor(val lectureRepository : LectureRepos
         ))
     }
 
-    @Transactional
     fun readExcel() {
         var fileList: ArrayList<String> = getFileList()
         for (path in fileList)
             readColumn(path)
     }
 
-    @Transactional
     fun readColumn(path:String){
         val filePath = FileInputStream(path)
         val wb = HSSFWorkbook(filePath)
@@ -50,6 +46,7 @@ class LectureService @Autowired constructor(val lectureRepository : LectureRepos
         var majors: ArrayList<String>
         var professors:ArrayList<String> = arrayListOf()
         var i = 0
+        
         while (true) {
             cell = row.getCell(columnIndex)
             if (cell.stringCellValue == "과목명")
@@ -74,7 +71,6 @@ class LectureService @Autowired constructor(val lectureRepository : LectureRepos
             }
     }
 
-    @Transactional
     fun readRow(fieldName : String, path:String) : ArrayList<String> {
         var result = arrayListOf<String>()
         val filePath = FileInputStream(path)
@@ -129,11 +125,11 @@ class LectureService @Autowired constructor(val lectureRepository : LectureRepos
                 result = majors
                 return result
             }
+
             else -> return result
         }
     }
 
-    @Transactional
     fun getFileList() : ArrayList<String>{
         val path = "behind/Lecture_Excel/"
         val dir = File(path)
