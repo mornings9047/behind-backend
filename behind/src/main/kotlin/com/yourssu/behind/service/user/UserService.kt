@@ -16,6 +16,7 @@ import com.yourssu.behind.service.auth.JwtService
 import com.yourssu.behind.service.lecture.function.UserLectureFunction
 import com.yourssu.behind.service.lecture.function.FindLectureFunction
 import com.yourssu.behind.service.post.function.FindPostFunction
+import com.yourssu.behind.service.post.function.GetNewPostFeedFunction
 import com.yourssu.behind.service.user.function.UserDeleteFunction
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -31,9 +32,10 @@ class UserService @Autowired constructor(val userRepository: UserRepository,
                                          private val jwtService: JwtService) {
 
     private val deleteFunction = UserDeleteFunction(userRepository, jwtService)
-    private val findPostFunction = FindPostFunction(postRepository, commentRepository)
+    //private val findPostFunction = FindPostFunction(postRepository, commentRepository)
     private val findLectureFunction = FindLectureFunction(lectureRepository, professorRepository)
     private val userLectureFunction = UserLectureFunction(jwtService, lectureRepository)
+    private val getNewPostFeedFunction = GetNewPostFeedFunction(jwtService, postRepository, commentRepository)
 
     @Transactional
     fun findUserRelatedPost(type: PostSearch, page: Int): Collection<ResponsePostsDto> {
@@ -78,28 +80,13 @@ class UserService @Autowired constructor(val userRepository: UserRepository,
 
     @Transactional
     fun getAllUserLecture() : Collection<ReturnLectureDto>{
-        val user = jwtService.getUser()
-        val result : MutableList<ReturnLectureDto> = mutableListOf()
-
-        for(i in 0 until user.lectures.size)
-            result.add(ReturnLectureDto(user.lectures[i]))
-
-        return result
+        return userLectureFunction.getUserLectures()
     }
 
     @Transactional
     fun newPostFeed(page: Int) : Collection<ResponsePostsDto>{
-        val user = jwtService.getUser()
-        val userLectureList = user.lectures
-        val postList : MutableList<ResponsePostsDto> = arrayListOf()
-        var result : List<ResponsePostsDto> = listOf()
-
-        for(i in 0 until userLectureList.size){
-            var temp = findPostFunction.getAllPosts(userLectureList[i],0)
-            for(element in temp)
-                postList.add(element)
-        }
-        postList.sortByDescending { it.postId }
-        return postList
+        return getNewPostFeedFunction.getNewPostFeed(page)
     }
+
+
 }
