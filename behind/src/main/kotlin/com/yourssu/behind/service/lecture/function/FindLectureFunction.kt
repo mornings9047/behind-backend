@@ -4,33 +4,28 @@ import com.yourssu.behind.model.dto.lecture.ReturnLectureDto
 import com.yourssu.behind.model.entity.lecture.SearchType
 import com.yourssu.behind.repository.lecture.LectureRepository
 import com.yourssu.behind.repository.professor.ProfessorRepository
-import java.util.ArrayList
 
-class FindLectureFunction(private val lectureRepository: LectureRepository, private val professorRepository: ProfessorRepository){
-    fun searchLectureByKeyword(keyword: String, type: SearchType) : Collection<ReturnLectureDto> {
+class FindLectureFunction(private val lectureRepository: LectureRepository, private val professorRepository: ProfessorRepository) {
+    fun searchLectureByKeyword(keyword: String, type: SearchType): Collection<ReturnLectureDto> {
+        val result: MutableList<ReturnLectureDto> = mutableListOf()
         when (type) {
             SearchType.Lecture -> {
                 val lectures = lectureRepository.findByCourseNameContains(keyword)
-                val result: ArrayList<ReturnLectureDto> = arrayListOf()
                 for (lecture in lectures)
                     result.add(ReturnLectureDto(lecture))
-                return result
             }
-
             SearchType.Professor -> {
                 val professors = professorRepository.findByNameContains(keyword)
-                var result: ArrayList<ReturnLectureDto> = arrayListOf()
                 val lectures = lectureRepository.findAll()
-                for (i in professors.indices) {
-                    for (j in 0 until lectures.size) {
-                        if (lectures[j].professor.name == professors[i].name) {
-                            val returnLectureDto = ReturnLectureDto(lectures[j])
-                            result.add(returnLectureDto)
-                        }
+                for (professor in professors) {
+                    for (lecture in lectures) {
+                        if (lecture.professor.name == professor.name)
+                            result.add(ReturnLectureDto(lecture))
                     }
                 }
-                return result
             }
         }
+        return result
+
     }
 }
