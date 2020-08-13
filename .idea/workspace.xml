@@ -25,11 +25,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3a7fd033-6b74-4fc7-8f4e-f81fe24564a9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/lecture/function/FindLectureFunction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/lecture/function/FindLectureFunction.kt" afterDir="false" />
-    </list>
+    <list default="true" id="3a7fd033-6b74-4fc7-8f4e-f81fe24564a9" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -85,6 +81,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="dynamic.classpath" value="true" />
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelOrder1" value="1" />
@@ -141,7 +138,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Kotlin.BehindApplicationKt">
+  <component name="RunManager" selected="Spring Boot.BehindApplication">
     <configuration name="CommentServiceTest.getCommentTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -721,6 +718,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="503" y="282" width="1087" height="479" key="MultipleFileMergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1595504182120" />
+    <state x="684" y="221" key="RollbackChangesDialog" timestamp="1597296888636">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="684" y="221" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1597296888636" />
     <state x="242" y="0" key="SettingsEditor" timestamp="1597023204915">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
