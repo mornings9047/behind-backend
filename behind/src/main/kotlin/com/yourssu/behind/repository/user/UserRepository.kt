@@ -1,5 +1,6 @@
 package com.yourssu.behind.repository.user
 
+import com.yourssu.behind.model.entity.lecture.Lecture
 import com.yourssu.behind.model.entity.user.User
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository

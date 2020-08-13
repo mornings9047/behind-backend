@@ -23,7 +23,7 @@ uploads/
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
-import.sql
+
 
 ### NetBeans ###
 /nbproject/private/

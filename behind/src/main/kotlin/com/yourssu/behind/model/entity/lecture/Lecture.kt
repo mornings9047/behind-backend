@@ -10,7 +10,7 @@ import javax.persistence.*
 @Entity
 data class Lecture(
         @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @GeneratedValue
         val id: Long? = null,
 
         val major: String,
@@ -29,7 +29,7 @@ data class Lecture(
         var posts: MutableList<Post> = mutableListOf(),
 
         @ManyToMany(mappedBy = "lectures")
-        var users: MutableList<User> = mutableListOf<User>()
+        var users: MutableList<User> = mutableListOf()
 ) {
     @Override
     override fun toString(): String {

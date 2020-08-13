@@ -12,6 +12,7 @@ import javax.transaction.Transactional
     DB에 PK 1번 유저가 있다고 가정했습니다.
  */
 
+/*
 @SpringBootTest
 class UserServiceTest @Autowired constructor(val userService: UserService) {
 
@@ -24,3 +25,5 @@ class UserServiceTest @Autowired constructor(val userService: UserService) {
     }
 
 }
+
+ */

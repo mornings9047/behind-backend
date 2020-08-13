@@ -3,6 +3,7 @@ package com.yourssu.behind.service.postTest
 /*
   schoolId가 2020인 유저가 DB에있다고 가정했습니다.
  */
+
 /*
 @SpringBootTest
 class PostServiceTest @Autowired constructor(val postService: PostService, val postRepository: PostRepository, val scrapRepository: ScrapRepository, val professorRepository: ProfessorRepository, val lectureRepository: LectureRepository) {
@@ -87,3 +88,5 @@ class PostServiceTest @Autowired constructor(val postService: PostService, val p
 }
 
  */
+
+

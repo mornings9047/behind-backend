@@ -10,7 +10,6 @@ import com.yourssu.behind.repository.comment.CommentRepository
 import com.yourssu.behind.repository.post.PostRepository
 
 class FindPostFunction(private val postRepository: PostRepository, private val commentRepository: CommentRepository) {
-
     fun getAllPosts(lecture: Lecture, page: Int): List<ResponsePostsDto> {
         return postRepository.findAllByLectureAndDeletePostIsFalse(lecture, PostPage(page)).map { ResponsePostsDto(it, commentRepository.countByPostAndDeleteCommentIsFalse(it)) }
     }
