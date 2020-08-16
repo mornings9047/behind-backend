@@ -38,6 +38,7 @@ dependencies {
     implementation("org.apache.commons:commons-lang3:3.11")
     implementation("com.amazonaws:aws-java-sdk:1.11.106")
     implementation("commons-io:commons-io:2.5")
+    implementation("org.springframework.boot:spring-boot-starter-mail")
 }
 
 tasks.withType<Test> {

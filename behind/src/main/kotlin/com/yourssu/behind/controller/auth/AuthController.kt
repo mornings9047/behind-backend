@@ -4,6 +4,7 @@ import com.yourssu.behind.model.dto.user.request.UserSignInRequestDto
 import com.yourssu.behind.model.dto.user.request.UserSignUpRequestDto
 import com.yourssu.behind.service.auth.AuthService
 import com.yourssu.behind.service.auth.JwtService
+import com.yourssu.behind.service.auth.MailService
 import com.yourssu.behind.service.auth.RedisService
 import io.swagger.annotations.ApiOperation
 import org.springframework.beans.factory.annotation.Autowired
@@ -15,7 +16,8 @@ import javax.validation.Valid
 @RequestMapping("/auth")
 class AuthController @Autowired constructor(val authService: AuthService,
                                             val jwtService: JwtService,
-                                            val redisService: RedisService) {
+                                            val redisService: RedisService,
+                                            val mailService: MailService) {
     @PostMapping("/signUp")
     @ApiOperation(value = "회원가입")
     @ResponseStatus(HttpStatus.CREATED)
@@ -38,5 +40,12 @@ class AuthController @Autowired constructor(val authService: AuthService,
     @ResponseStatus(HttpStatus.OK)
     fun signOut() {
         return authService.signOut()
+    }
+
+    @GetMapping("/mail")
+    @ApiOperation("인증메일 전송")
+    @ResponseStatus(HttpStatus.OK)
+    fun sendMail(@RequestParam userEmail: String) {
+        mailService.sendMail()
     }
 }
