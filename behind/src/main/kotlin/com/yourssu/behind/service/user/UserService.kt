@@ -44,15 +44,15 @@ class UserService @Autowired constructor(val userRepository: UserRepository,
             PostSearch.SCRAP -> {
                 val returnPost: MutableSet<Post> = mutableSetOf()
                 scrapRepository.findAllByScrapUser(user).map { returnPost.add(it.scrapPost) }
-                returnPost.map { ResponsePostsDto(it, commentRepository.countByPostAndDeleteCommentIsFalse(it)) }
+                returnPost.map { ResponsePostsDto(it) }
             }
             PostSearch.COMMENT -> {
                 val returnPost: MutableSet<Post> = mutableSetOf()
                 commentRepository.findAllByUserAndDeleteCommentIsFalse(user).map { returnPost.add(it.post) }
-                returnPost.map { ResponsePostsDto(it, commentRepository.countByPostAndDeleteCommentIsFalse(it)) }
+                returnPost.map { ResponsePostsDto(it) }
             }
             PostSearch.POST -> {
-                postRepository.findAllByUserAndDeletePostIsFalse(user, postPage).map { ResponsePostsDto(it, commentRepository.countByPostAndDeleteCommentIsFalse(it)) }
+                postRepository.findAllByUserAndDeletePostIsFalse(user, postPage).map { ResponsePostsDto(it) }
             }
         }
     }

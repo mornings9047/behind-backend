@@ -18,7 +18,7 @@ import java.util.*
 
 @Component
 class ImgUploadFunction(@Value("\${cloud.aws.credentials.accessKey}") private val accessKey: String,
-                        @Value("\${cloud.aws.credentials.secretKey") private val secretKey: String,
+                        @Value("\${cloud.aws.credentials.secretKey}") private val secretKey: String,
                         @Value("\${cloud.aws.s3.bucket}") private val bucket: String,
                         @Value("\${cloud.aws.region.static}") private val region: String) {
 
@@ -28,20 +28,25 @@ class ImgUploadFunction(@Value("\${cloud.aws.credentials.accessKey}") private va
             .withRegion(this.region)
             .build()
 
-    fun s3StoreImg(file: MultipartFile): String {
-        var fileName: String? = file.originalFilename
-        val ext = FilenameUtils.getExtension(fileName)
-        val bytes: ByteArray = com.amazonaws.util.IOUtils.toByteArray(file.inputStream)
-        var metaData = ObjectMetadata()
-        var byteArrayInputStream = ByteArrayInputStream(bytes)
-        metaData.contentLength = bytes.size.toLong()
-        metaData.contentType = "image/jpeg"
-        fileName = UUID.randomUUID().toString()+fileName
+    fun s3StoreImg(file: Array<MultipartFile>): List<String> {
 
-        if (ext != "jpeg" && ext != "jpg" && ext != "png")
-            throw InvalidFileTypeException()
+        val UrlList:MutableList<String> = mutableListOf();
+        file.forEach {
+            var fileName: String? = it.originalFilename
+            val ext = FilenameUtils.getExtension(fileName)
+            val bytes: ByteArray = com.amazonaws.util.IOUtils.toByteArray(it.inputStream)
+            var metaData = ObjectMetadata()
+            var byteArrayInputStream = ByteArrayInputStream(bytes)
+            metaData.contentLength = bytes.size.toLong()
+            metaData.contentType = "image/jpeg"
+            fileName = UUID.randomUUID().toString()+fileName
 
-        s3Client.putObject(PutObjectRequest(bucket, fileName, byteArrayInputStream, metaData))
-        return s3Client.getUrl(bucket, fileName).toString()
+            if (ext != "jpeg" && ext != "jpg" && ext != "png")
+                throw InvalidFileTypeException()
+
+            s3Client.putObject(PutObjectRequest(bucket, fileName, byteArrayInputStream, metaData))
+            UrlList.add(s3Client.getUrl(bucket, fileName).toString())
+        }
+        return UrlList;
     }
 }

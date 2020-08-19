@@ -3,10 +3,12 @@ package com.yourssu.behind.service.post
 import com.yourssu.behind.exception.lecture.LectureNotExistsException
 import com.yourssu.behind.model.dto.post.request.CreateOrUpdateRequestPostDto
 import com.yourssu.behind.model.dto.post.response.ResponsePostsDto
+import com.yourssu.behind.model.entity.post.Image
 import com.yourssu.behind.model.entity.post.Post
 import com.yourssu.behind.model.entity.post.PostType
 import com.yourssu.behind.repository.comment.CommentRepository
 import com.yourssu.behind.repository.lecture.LectureRepository
+import com.yourssu.behind.repository.post.ImageRepository
 import com.yourssu.behind.repository.post.PostRepository
 import com.yourssu.behind.repository.post.ScrapRepository
 import com.yourssu.behind.repository.report.ReportRepository
@@ -23,6 +25,7 @@ class PostService @Autowired constructor(private val postRepository: PostReposit
                                          val lectureRepository: LectureRepository,
                                          private val jwtService: JwtService,
                                          scrapRepository: ScrapRepository,
+                                         val imageRepository: ImageRepository,
                                          val userRepository: UserRepository,
                                          val reportRepository: ReportRepository,
                                          val imgUploadFunction: ImgUploadFunction,
@@ -33,22 +36,24 @@ class PostService @Autowired constructor(private val postRepository: PostReposit
     private val deleteFunction = DeletePostFunction(postRepository, scrapRepository)
 
     @Transactional
-    fun createPost(createOrUpdateRequestPostDto: CreateOrUpdateRequestPostDto, imgFile: MultipartFile?) {
-        var imgUrl: String? = null
+    fun createPost(createOrUpdateRequestPostDto: CreateOrUpdateRequestPostDto, imgFile: Array<MultipartFile>?) {
+        var imgUrl: List<Image>? = null
         val user = jwtService.getUser()
         val lecture = lectureRepository.findById(createOrUpdateRequestPostDto.lectureId).orElseThrow { LectureNotExistsException() }
-
-        if (imgFile != null)
-            imgUrl = imgUploadFunction.s3StoreImg(imgFile)
-
-        postRepository.save(Post(user = user,
+        var post: Post = Post(user = user,
                 type = createOrUpdateRequestPostDto.type,
                 title = createOrUpdateRequestPostDto.title,
                 content = createOrUpdateRequestPostDto.content,
-                imgUrl = imgUrl,
                 lecture = lecture,
                 deletePost = false
-        ))
+        )
+        postRepository.save(post)
+
+        if (imgFile != null) {
+            imgUrl = imgUploadFunction.s3StoreImg(imgFile).map { Image(URL = it, post = post) }
+            imgUrl.forEach { imageRepository.save(it) }
+            post.imageURL = imgUrl
+        }
     }
 
     @Transactional
