@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
 
 @RestController
-@RequestMapping("/posts")
+@RequestMapping("/articles")
 class PostController @Autowired constructor(val postService: PostService) {
     @ApiOperation("게시글 작성", consumes = (MediaType.MULTIPART_FORM_DATA_VALUE))
     @PostMapping("/", consumes = [MediaType.MULTIPART_FORM_DATA_VALUE])
