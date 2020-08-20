@@ -7,7 +7,7 @@ import io.swagger.annotations.ApiModelProperty
 import java.time.LocalDateTime
 
 @ApiModel
-class ResponsePostsDto(post: Post, commentNum: Int) {
+class ResponsePostsDto(post: Post) {
     @ApiModelProperty(value = "게시글 Id")
     val postId: Long? = post.id
 
@@ -24,12 +24,12 @@ class ResponsePostsDto(post: Post, commentNum: Int) {
     val content: String = post.content
 
     @ApiModelProperty(value = "게시글 이미지 경로")
-    val imgUrl: String? = post.imgUrl
+    val imgUrl: List<String> = post.imageURL.map { it.URL }
 
     @ApiModelProperty(value = "작성 시간")
     val createdAt: LocalDateTime = post.createdAt
 
     @ApiModelProperty(value = "댓글 갯수")
-    val commentsNum = commentNum
+    val commentsNum = post.commentNum
 
 }

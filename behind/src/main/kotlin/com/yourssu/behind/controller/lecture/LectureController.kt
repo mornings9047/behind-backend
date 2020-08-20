@@ -1,5 +1,7 @@
 package com.yourssu.behind.controller.lecture
 
+import com.yourssu.behind.model.dto.lecture.ReturnLectureDto
+import com.yourssu.behind.model.entity.lecture.SearchType
 import com.yourssu.behind.service.lecture.LectureService
 import com.yourssu.behind.service.user.UserService
 import io.swagger.annotations.ApiOperation
@@ -16,6 +18,13 @@ class LectureController @Autowired constructor(val lectureService: LectureServic
     @GetMapping("/read")
     fun lectureRead() {
         return lectureService.readExcel()
+    }
+
+    @PostMapping("/search/{keyword}")
+    @ApiOperation("키워드에 따른 강의 검색. (교수명 or 과목명으로 선택하여 검색)")
+    @ResponseStatus(HttpStatus.OK)
+    fun searchLectures(@PathVariable keyword:String, @RequestParam(required = false) type: SearchType): Collection<ReturnLectureDto>{
+        return userService.searchLecture(keyword,type)
     }
 
     @GetMapping("/{lectureId}")

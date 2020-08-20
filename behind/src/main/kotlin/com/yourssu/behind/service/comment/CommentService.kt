@@ -23,7 +23,7 @@ class CommentService @Autowired constructor(private val postRepository: PostRepo
                                             reportRepository: ReportRepository,
                                             val userRepository: UserRepository) {
     private val commentFunction = CommentFunction(commentRepository, postRepository)
-    private val reportFunction = ReportCommentFunction(commentRepository, reportRepository)
+    private val reportFunction = ReportCommentFunction(postRepository, commentRepository, reportRepository)
 
     @Transactional
     fun createComment(postId: Long, createOrUpdateRequestCommentDto: CreateOrUpdateRequestCommentDto) {
@@ -34,6 +34,7 @@ class CommentService @Autowired constructor(private val postRepository: PostRepo
         if (commentUser == targetPost.user)
             newComment.postOwner = true
 
+        targetPost.commentNum++
         commentFunction.createComment(newComment)
     }
 
@@ -47,6 +48,7 @@ class CommentService @Autowired constructor(private val postRepository: PostRepo
         if (commentUser == targetPost.user)
             reComment.postOwner = true
         comment.reCommentNum++
+        targetPost.commentNum++
         commentRepository.save(reComment)
     }
 

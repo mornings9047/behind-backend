@@ -17,7 +17,7 @@ class PostController @Autowired constructor(val postService: PostService) {
     @ApiOperation("게시글 작성", consumes = (MediaType.MULTIPART_FORM_DATA_VALUE))
     @PostMapping("/", consumes = [MediaType.MULTIPART_FORM_DATA_VALUE])
     @ResponseStatus(HttpStatus.CREATED)
-    fun createPost(@RequestPart(required = false) imgFile: MultipartFile?,
+    fun createPost(@RequestPart(required = false) imgFile: Array<MultipartFile>?,
                    @RequestPart createOrUpdateRequestPostDto: CreateOrUpdateRequestPostDto
     ) {
         postService.createPost(createOrUpdateRequestPostDto, imgFile)

@@ -11,11 +11,11 @@ import com.yourssu.behind.repository.post.PostRepository
 
 class FindPostFunction(private val postRepository: PostRepository, private val commentRepository: CommentRepository) {
     fun getAllPosts(lecture: Lecture, page: Int): List<ResponsePostsDto> {
-        return postRepository.findAllByLectureAndDeletePostIsFalse(lecture, PostPage(page)).map { ResponsePostsDto(it, commentRepository.countByPostAndDeleteCommentIsFalse(it)) }
+        return postRepository.findAllByLectureAndDeletePostIsFalse(lecture, PostPage(page)).map { ResponsePostsDto(it) }
     }
 
     fun getPostsByType(lecture: Lecture, type: PostType, page: Int): List<ResponsePostsDto> {
-        return postRepository.findAllByLectureAndTypeEqualsAndDeletePostIsFalse(lecture, type, PostPage(page)).map { ResponsePostsDto(it, commentRepository.countByPostAndDeleteCommentIsFalse(it)) }
+        return postRepository.findAllByLectureAndTypeEqualsAndDeletePostIsFalse(lecture, type, PostPage(page)).map { ResponsePostsDto(it) }
     }
 
     fun searchPostsByKeyword(keyword: String, type: PostType?, page: Int): List<ResponsePostsDto> {
@@ -26,13 +26,13 @@ class FindPostFunction(private val postRepository: PostRepository, private val c
         }
         if (posts.isEmpty())
             throw PostNotExistsException()
-        return posts.map { ResponsePostsDto(it, commentRepository.countByPostAndDeleteCommentIsFalse(it)) }
+        return posts.map { ResponsePostsDto(it) }
     }
 
     fun getPostDetails(postId: Long): ResponsePostsDto {
         val post = postRepository.findByIdAndDeletePostIsFalse(postId).orElseThrow { throw PostNotExistsException() }
         if (post.deletePost)
             throw DeletedPostException()
-        return ResponsePostsDto(post, commentRepository.countByPostAndDeleteCommentIsFalse(post))
+        return ResponsePostsDto(post)
     }
 }
