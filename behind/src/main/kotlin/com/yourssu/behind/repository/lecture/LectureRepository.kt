@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository
 @Repository
 interface LectureRepository : JpaRepository<Lecture, Long>{
     fun findByCourseNameContains(courseName: String): List<Lecture>
+    fun findAllByProfessorId(id: Long?): List<Lecture>
+    fun existsByLectureCode(lectureCode: Long): Boolean
 }

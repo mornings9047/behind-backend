@@ -11,8 +11,8 @@ class ResponsePostsDto(post: Post, commentNum: Int) {
     @ApiModelProperty(value = "게시글 Id")
     val postId: Long? = post.id
 
-    @ApiModelProperty(value = "강의 Id")
-    val lectureId: Long? = post.lecture.id
+    @ApiModelProperty(value = "과목코드")
+    val lectureCode: Long? = post.lecture.lectureCode
 
     @ApiModelProperty(value = "게시글 제목")
     val title: String = post.title

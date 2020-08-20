@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -26,9 +29,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3a7fd033-6b74-4fc7-8f4e-f81fe24564a9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/controller/lecture/LectureController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/controller/lecture/LectureController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/controller/user/UserController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/controller/user/UserController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/model/dto/lecture/LectureDto.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/model/dto/lecture/LectureDto.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/model/dto/lecture/ReturnLectureDto.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/model/dto/lecture/ReturnLectureDto.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/model/dto/post/response/ResponsePostsDto.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/model/dto/post/response/ResponsePostsDto.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/model/entity/lecture/Lecture.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/model/entity/lecture/Lecture.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/repository/lecture/LectureRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/repository/lecture/LectureRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/lecture/LectureService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/lecture/LectureService.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/lecture/function/FindLectureFunction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/behind/src/main/kotlin/com/yourssu/behind/service/lecture/function/FindLectureFunction.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/behind/src/main/resources/import.sql" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,7 +107,8 @@
     <property name="TODO_SCOPE" value="All Places" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="dynamic.classpath" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/behind/Lecture_Excel" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -110,9 +122,6 @@
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\82102\Desktop\2020_behind_backend" />
-    </key>
     <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
       <recent name="com.yourssu.behind.service.user" />
       <recent name="com.yourssu.behind.model.dto.user.request" />
@@ -121,11 +130,14 @@
       <recent name="com.yourssu.behind.exception.lecture" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\2020_behind_backend\behind\Lecture_Excel" />
       <recent name="C:\Users\82102\Desktop\2020_behind_backend\behind\src\main\kotlin\com\yourssu\behind\service" />
       <recent name="C:\Users\82102\Desktop\2020_behind_backend\behind\src\main\kotlin\com\yourssu\behind\repository" />
       <recent name="C:\Users\82102\Desktop\2020_behind_backend\behind\src\main\kotlin\com\yourssu\behind\config" />
       <recent name="C:\Users\82102\Desktop\2020_behind_backend\behind\src\main\kotlin\com\yourssu\behind\controller" />
-      <recent name="C:\Users\82102\Desktop\2020_behind_backend\behind\src\main\kotlin\com\yourssu\behind\exception" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\82102\Desktop\2020_behind_backend" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -248,7 +260,7 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -661,25 +673,25 @@
     </state>
     <state x="493" y="163" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1597023200252" />
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1596451177572" />
-    <state width="1237" height="147" key="GridCell.Tab.0.bottom" timestamp="1597027555091">
+    <state width="1237" height="181" key="GridCell.Tab.0.bottom" timestamp="1597902686259">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="147" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1597027555091" />
+    <state width="1237" height="181" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1597902686259" />
     <state width="1149" height="312" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1596452956513" />
-    <state width="1237" height="147" key="GridCell.Tab.0.center" timestamp="1597027555091">
+    <state width="1237" height="181" key="GridCell.Tab.0.center" timestamp="1597902686259">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="147" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1597027555091" />
+    <state width="1237" height="181" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1597902686259" />
     <state width="1149" height="312" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1596452956513" />
-    <state width="1237" height="147" key="GridCell.Tab.0.left" timestamp="1597027555091">
+    <state width="1237" height="181" key="GridCell.Tab.0.left" timestamp="1597902686259">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="147" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1597027555091" />
+    <state width="1237" height="181" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1597902686259" />
     <state width="1149" height="312" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1596452956513" />
-    <state width="1237" height="147" key="GridCell.Tab.0.right" timestamp="1597027555091">
+    <state width="1237" height="181" key="GridCell.Tab.0.right" timestamp="1597902686259">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="147" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1597027555091" />
+    <state width="1237" height="181" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1597902686259" />
     <state width="1149" height="312" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1596452956513" />
     <state width="1328" height="286" key="GridCell.Tab.1.bottom" timestamp="1596288460130">
       <screen x="0" y="0" width="1920" height="1040" />
