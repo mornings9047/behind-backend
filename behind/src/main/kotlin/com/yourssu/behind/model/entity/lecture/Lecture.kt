@@ -33,7 +33,6 @@ data class Lecture(
     @Override
     override fun toString(): String {
         return ToStringBuilder
-                .reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
-
+                .reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE)
     }
 }
