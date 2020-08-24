@@ -21,7 +21,7 @@ class CommentFunction(private val commentRepository: CommentRepository,
         val comment = commentRepository.findById(commentId).orElseThrow { CommentNotExistsException() }
         val post = postRepository.findByComments(comment).orElseThrow { PostNotExistsException() }
         val user = jwtService.getUser()
-        if (post.user.id != user.id)
+        if (comment.user.id != user.id)
             throw CommentOwnerNotMatchedException()
 
         comment.deleteComment = true
