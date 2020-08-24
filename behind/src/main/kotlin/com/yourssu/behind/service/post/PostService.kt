@@ -31,7 +31,7 @@ class PostService @Autowired constructor(private val postRepository: PostReposit
     private val findPostFunction = FindPostFunction(postRepository)
     private val scrapFunction = ScrapFunction(jwtService, postRepository, scrapRepository)
     private val reportFunction = ReportPostFunction(postRepository, scrapRepository, reportRepository)
-    private val deleteFunction = DeletePostFunction(postRepository, scrapRepository)
+    private val deleteFunction = DeletePostFunction(postRepository, scrapRepository, jwtService)
 
     @Transactional
     fun createPost(createOrUpdateRequestPostDto: CreateOrUpdateRequestPostDto, imgFile: Array<MultipartFile>?) {

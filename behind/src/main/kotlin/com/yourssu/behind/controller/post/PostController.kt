@@ -35,7 +35,6 @@ class PostController @Autowired constructor(val postService: PostService) {
         return postService.searchPosts(keyword, type, page)
     }
 
-
     @ApiOperation("스크랩 하기")
     @GetMapping("/{postId}/scrap")
     @ResponseStatus(HttpStatus.OK)
