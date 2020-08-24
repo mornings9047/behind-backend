@@ -7,14 +7,13 @@ import javax.persistence.Id
 import javax.persistence.ManyToOne
 
 @Entity
-data class Scrap(@Id
-                 @GeneratedValue
-                 val id: Long? = null,
+data class Scrap(
+        @Id @GeneratedValue
+        val id: Long? = null,
 
-                 @ManyToOne
-                 val scrapUser: User,
+        @ManyToOne
+        val scrapUser: User,
 
-                 @ManyToOne
-                 val scrapPost: Post
+        @ManyToOne
+        val scrapPost: Post
 )
-

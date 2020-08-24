@@ -13,4 +13,5 @@ data class CreateOrUpdateRequestPostDto(
         @ApiModelProperty(value = "본문")
         val content: String,
         @ApiModelProperty(value = "강의 Id")
-        val lectureId: Long)
+        val lectureId: Long
+)

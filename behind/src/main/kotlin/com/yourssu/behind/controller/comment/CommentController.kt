@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/comments")
 class CommentController @Autowired constructor(val commentService: CommentService) {
-
     @ApiOperation(value = "댓글 작성")
     @PostMapping("/post/{postId}")
     @ResponseStatus(HttpStatus.CREATED)

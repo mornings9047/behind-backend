@@ -6,7 +6,6 @@ import com.yourssu.behind.model.dto.post.response.ResponsePostsDto
 import com.yourssu.behind.model.entity.post.Image
 import com.yourssu.behind.model.entity.post.Post
 import com.yourssu.behind.model.entity.post.PostType
-import com.yourssu.behind.repository.comment.CommentRepository
 import com.yourssu.behind.repository.lecture.LectureRepository
 import com.yourssu.behind.repository.post.ImageRepository
 import com.yourssu.behind.repository.post.PostRepository
@@ -27,20 +26,19 @@ class PostService @Autowired constructor(private val postRepository: PostReposit
                                          scrapRepository: ScrapRepository,
                                          val imageRepository: ImageRepository,
                                          val userRepository: UserRepository,
-                                         val reportRepository: ReportRepository,
-                                         val imgUploadFunction: ImgUploadFunction,
-                                         val commentRepository: CommentRepository) {
-    private val findPostFunction = FindPostFunction(postRepository, commentRepository)
+                                         reportRepository: ReportRepository,
+                                         val imgUploadFunction: ImgUploadFunction) {
+    private val findPostFunction = FindPostFunction(postRepository)
     private val scrapFunction = ScrapFunction(jwtService, postRepository, scrapRepository)
     private val reportFunction = ReportPostFunction(postRepository, scrapRepository, reportRepository)
     private val deleteFunction = DeletePostFunction(postRepository, scrapRepository)
 
     @Transactional
     fun createPost(createOrUpdateRequestPostDto: CreateOrUpdateRequestPostDto, imgFile: Array<MultipartFile>?) {
-        var imgUrl: List<Image>? = null
         val user = jwtService.getUser()
         val lecture = lectureRepository.findById(createOrUpdateRequestPostDto.lectureId).orElseThrow { LectureNotExistsException() }
-        var post: Post = Post(user = user,
+        val post = Post(
+                user = user,
                 type = createOrUpdateRequestPostDto.type,
                 title = createOrUpdateRequestPostDto.title,
                 content = createOrUpdateRequestPostDto.content,
@@ -50,7 +48,7 @@ class PostService @Autowired constructor(private val postRepository: PostReposit
         postRepository.save(post)
 
         if (imgFile != null) {
-            imgUrl = imgUploadFunction.s3StoreImg(imgFile).map { Image(URL = it, post = post) }
+            val imgUrl = imgUploadFunction.s3StoreImg(imgFile).map { Image(URL = it, post = post) }
             imgUrl.forEach { imageRepository.save(it) }
             post.imageURL = imgUrl
         }

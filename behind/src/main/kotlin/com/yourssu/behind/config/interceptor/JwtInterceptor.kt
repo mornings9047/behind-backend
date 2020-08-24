@@ -12,10 +12,8 @@ import javax.servlet.http.HttpServletResponse
 @Component
 class JwtInterceptor @Autowired constructor(val jwtService: JwtService,
                                             val redisService: RedisService) : HandlerInterceptor {
-
     @Override
     override fun preHandle(request: HttpServletRequest, response: HttpServletResponse, handler: Any): Boolean {
-        println("preHandler Working?")
         val token = jwtService.getToken()
         return if (jwtService.isValid(token)) {
             val user = jwtService.getUser()

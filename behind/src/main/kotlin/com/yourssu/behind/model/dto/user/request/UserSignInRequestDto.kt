@@ -8,4 +8,5 @@ class UserSignInRequestDto(
         @ApiModelProperty(value = "학번")
         val schoolId: String,
         @ApiModelProperty(value = "비밀번호")
-        val password: String)
+        val password: String
+)

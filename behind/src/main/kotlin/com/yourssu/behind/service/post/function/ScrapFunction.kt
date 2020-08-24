@@ -12,10 +12,7 @@ import com.yourssu.behind.service.auth.JwtService
 class ScrapFunction(private val jwtService: JwtService,
                     private val postRepository: PostRepository,
                     private val scrapRepository: ScrapRepository) {
-
-
     fun createScrapPost(postId: Long) {
-
         val post: Post = postRepository.findById(postId).orElseThrow { PostNotExistsException() }
         val user: User = jwtService.getUser()
         val scrap = scrapRepository.findByScrapUserAndScrapPost(user, post).orElse(null)

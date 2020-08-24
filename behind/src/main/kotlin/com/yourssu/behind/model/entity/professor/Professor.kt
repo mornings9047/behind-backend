@@ -7,8 +7,7 @@ import javax.persistence.*
 
 @Entity
 data class Professor(
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @Id @GeneratedValue
         val id: Long? = null,
 
         val name: String,

@@ -9,7 +9,6 @@ import java.util.concurrent.TimeUnit
 @Service
 class RedisService @Autowired constructor(val redisTemplate: RedisTemplate<String, Any>,
                                           val jwtService: JwtService) {
-
     fun save(schoolId: String, refreshToken: String) {
         redisTemplate.opsForValue().set(schoolId, refreshToken, jwtService.ACCESS_TOKEN_EXPIRATION, TimeUnit.MILLISECONDS)
     }
@@ -21,5 +20,4 @@ class RedisService @Autowired constructor(val redisTemplate: RedisTemplate<Strin
     fun delete(schoolId: String) {
         redisTemplate.delete(schoolId)
     }
-
 }

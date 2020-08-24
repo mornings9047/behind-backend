@@ -11,5 +11,4 @@ data class Image(
         val URL: String,
         @ManyToOne
         val post: Post
-) {
-}
+)

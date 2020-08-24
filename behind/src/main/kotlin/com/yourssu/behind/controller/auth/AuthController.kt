@@ -23,6 +23,13 @@ class AuthController @Autowired constructor(val authService: AuthService,
         return authService.signUp(signUpRequestDto)
     }
 
+    @PostMapping("/check/{schoolId}")
+    @ApiOperation(value = "아이디 유효검사")
+    @ResponseStatus(HttpStatus.OK)
+    fun checkSchoolId(@PathVariable schoolId: String): Boolean {
+        return authService.checkSchoolId(schoolId)
+    }
+
     @PostMapping("/signIn")
     @ApiOperation(value = "로그인")
     @ResponseStatus(HttpStatus.OK)

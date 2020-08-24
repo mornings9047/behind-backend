@@ -27,6 +27,7 @@ class RedisConfig @Autowired constructor(@Value("\${spring.redis.host}")
         redisStandaloneConfiguration.password = password
         return LettuceConnectionFactory(redisStandaloneConfiguration)
     }
+
     @Bean
     fun redisTemplate(): RedisTemplate<String, Any> {
         val redisTemplate = RedisTemplate<String, Any>()

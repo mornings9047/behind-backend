@@ -14,16 +14,17 @@ import java.io.File
 import java.io.FileInputStream
 
 @Service
-class LectureService @Autowired constructor(val lectureRepository: LectureRepository, val professorRepository: ProfessorRepository) {
+class LectureService @Autowired constructor(val lectureRepository: LectureRepository,
+                                            val professorRepository: ProfessorRepository) {
     fun saveLecture(lectureDto: LectureDto) {
-            lectureRepository.save(Lecture(
-                    lectureCode = lectureDto.lectureCode,
-                    courseName = lectureDto.courseName,
-                    major = lectureDto.major,
-                    professor = lectureDto.professor,
-                    year = lectureDto.year,
-                    semester = lectureDto.semester
-            ))
+        lectureRepository.save(Lecture(
+                lectureCode = lectureDto.lectureCode,
+                courseName = lectureDto.courseName,
+                major = lectureDto.major,
+                professor = lectureDto.professor,
+                year = lectureDto.year,
+                semester = lectureDto.semester
+        ))
     }
 
     fun readExcel() {
@@ -57,13 +58,14 @@ class LectureService @Autowired constructor(val lectureRepository: LectureReposi
         }
 
         for (i in 0 until rows - 1) {
-            if(!lectureRepository.existsByLectureCode(lectureCodes[i].toLong())){
+            if (!lectureRepository.existsByLectureCode(lectureCodes[i].toLong())) {
                 saveLecture(LectureDto(lectureCodes[i].toLong(), courseNames[i], majors[i],
                         professorRepository.save(Professor(name = professors[i])), year = "2020",
                         semester = LectureSemester.FALL))
             }
         }
     }
+
     fun readRow(fieldName: String, path: String): ArrayList<String> {
         val result = arrayListOf<String>()
         val filePath = FileInputStream(path)
@@ -102,11 +104,11 @@ class LectureService @Autowired constructor(val lectureRepository: LectureReposi
         return fileNames
     }
 
-    fun parseName(name: String) : String{
+    fun parseName(name: String): String {
         val temp = name.split("\n")
         var result = ""
-        for(i in temp){
-            if(!result.contains(i)) result = result.plus(i).plus(" ")
+        for (i in temp) {
+            if (!result.contains(i)) result = result.plus(i).plus(" ")
         }
         return result
     }
