@@ -6,4 +6,5 @@ import io.swagger.annotations.ApiModelProperty
 @ApiModel
 class CreateOrUpdateRequestCommentDto(
         @ApiModelProperty(value = "댓글 본문")
-        val content: String)
+        val content: String
+)

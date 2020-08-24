@@ -5,11 +5,14 @@ import com.yourssu.behind.exception.auth.TokenExpiredException
 import com.yourssu.behind.exception.auth.TokenNotFoundException
 import com.yourssu.behind.exception.auth.UnAuthorizedException
 import com.yourssu.behind.exception.comment.CommentNotExistsException
+import com.yourssu.behind.exception.lecture.LectureAlreadyExistsException
 import com.yourssu.behind.exception.lecture.LectureNotExistsException
 import com.yourssu.behind.exception.post.DeletedPostException
 import com.yourssu.behind.exception.post.InvalidFileTypeException
 import com.yourssu.behind.exception.post.PostNotExistsException
 import com.yourssu.behind.exception.post.WriterScrapException
+import com.yourssu.behind.exception.report.CommentAlreadyReportedException
+import com.yourssu.behind.exception.report.PostAlreadyReportedException
 import com.yourssu.behind.exception.user.*
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -19,11 +22,16 @@ import org.springframework.web.bind.annotation.RestControllerAdvice
 
 @RestControllerAdvice
 class GlobalRestExceptionHandler {
-
-    @ExceptionHandler(value = [InvalidSchoolIdException::class, InvalidPasswordException::class, PasswordNotMatchedException::class, UserAlreadyExistsException::class])
+    @ExceptionHandler(value = [InvalidSchoolIdException::class, InvalidPasswordException::class, PasswordNotMatchedException::class])
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     fun userException(e: Exception): ResponseEntity<String> {
         return ResponseEntity(e.message, HttpStatus.BAD_REQUEST)
+    }
+
+    @ExceptionHandler(value = [UserAlreadyExistsException::class, LectureAlreadyExistsException::class, PostAlreadyReportedException::class, CommentAlreadyReportedException::class])
+    @ResponseStatus(HttpStatus.CONFLICT)
+    fun conflictException(e: Exception): ResponseEntity<String> {
+        return ResponseEntity(e.message, HttpStatus.CONFLICT)
     }
 
     @ExceptionHandler(value = [InvalidFileTypeException::class, WriterScrapException::class, DeletedPostException::class])
@@ -37,10 +45,9 @@ class GlobalRestExceptionHandler {
         return ResponseEntity(e.message, HttpStatus.UNAUTHORIZED)
     }
 
-    @ExceptionHandler(value = [UserNotExistsException::class, PostNotExistsException::class, CommentNotExistsException::class, LectureNotExistsException::class, TokenNotFoundException::class])
+    @ExceptionHandler(value = [TokenNotFoundException::class, UserNotExistsException::class, PostNotExistsException::class, CommentNotExistsException::class, LectureNotExistsException::class])
     @ResponseStatus(HttpStatus.NOT_FOUND)
     fun notFoundException(e: Exception): ResponseEntity<String> {
         return ResponseEntity(e.message, HttpStatus.NOT_FOUND)
     }
-
 }

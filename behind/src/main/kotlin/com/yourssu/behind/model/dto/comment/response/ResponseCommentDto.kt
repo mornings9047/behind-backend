@@ -29,6 +29,4 @@ class ResponseCommentDto(comment: Comment) {
     constructor(comment: Comment, reCommentList: List<Comment>) : this(comment) {
         reComment = reCommentList.map { ResponseCommentDto(it) }
     }
-
-
 }

@@ -8,12 +8,10 @@ import javax.persistence.*
 
 @Entity
 data class Report(
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @Id @GeneratedValue
         val id: Long? = null,
         @ManyToOne val user: User,
         @ManyToOne val comment: Comment?,
         @ManyToOne val post: Post?,
         val reportDate: LocalDateTime = LocalDateTime.now()
-
 )

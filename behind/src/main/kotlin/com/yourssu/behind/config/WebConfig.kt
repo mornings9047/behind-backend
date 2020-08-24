@@ -11,12 +11,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 @Configuration
 @EnableWebMvc
 class WebConfig @Autowired constructor(val jwtInterceptor: JwtInterceptor) : WebMvcConfigurer {
-
     override fun addInterceptors(registry: InterceptorRegistry) {
         super.addInterceptors(registry)
         registry.addInterceptor(jwtInterceptor)
-                .addPathPatterns("/**")   // 기본 적용 경로
-                .excludePathPatterns("/auth/**")    // 예외 적용 경로
+                .addPathPatterns("/**")
+                .excludePathPatterns("/auth/**")
 //                .excludePathPatterns("/swagger-ui.html")
                 .excludePathPatterns("/swagger-resources/**")
                 .excludePathPatterns("/webjars/**")

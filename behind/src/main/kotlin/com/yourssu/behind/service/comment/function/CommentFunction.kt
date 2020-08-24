@@ -8,15 +8,15 @@ import com.yourssu.behind.model.entity.post.Post
 import com.yourssu.behind.repository.comment.CommentRepository
 import com.yourssu.behind.repository.post.PostRepository
 
-class CommentFunction(private val commentRepository: CommentRepository, private val postRepository: PostRepository) {
-
+class CommentFunction(private val commentRepository: CommentRepository,
+                      private val postRepository: PostRepository) {
     fun createComment(comment: Comment) {
         commentRepository.save(comment)
     }
 
     fun deleteComment(commentId: Long) {
         val comment = commentRepository.findById(commentId).orElseThrow { CommentNotExistsException() }
-        val post = postRepository.findByComments(comment).orElseThrow{PostNotExistsException()}
+        val post = postRepository.findByComments(comment).orElseThrow { PostNotExistsException() }
 
         comment.deleteComment = true
         if (comment.parent != null)
@@ -38,5 +38,4 @@ class CommentFunction(private val commentRepository: CommentRepository, private 
                         ResponseCommentDto(it)
                 }
     }
-
 }

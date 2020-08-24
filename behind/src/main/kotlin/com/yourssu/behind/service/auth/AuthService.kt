@@ -1,6 +1,8 @@
 package com.yourssu.behind.service.auth
 
+import com.yourssu.behind.exception.user.InvalidSchoolIdException
 import com.yourssu.behind.exception.user.PasswordNotMatchedException
+import com.yourssu.behind.exception.user.UserAlreadyExistsException
 import com.yourssu.behind.exception.user.UserNotExistsException
 import com.yourssu.behind.model.dto.user.request.UserSignInRequestDto
 import com.yourssu.behind.model.dto.user.request.UserSignUpRequestDto
@@ -34,6 +36,14 @@ class AuthService @Autowired constructor(private val userRepository: UserReposit
         if (!checkPassword(userSignInRequestDto.password, user.password))
             throw PasswordNotMatchedException()
         return user
+    }
+
+    fun checkSchoolId(schoolId: String): Boolean {
+        if (!authValidFunction.isSchoolIdValid(schoolId))
+            throw InvalidSchoolIdException()
+        if (userRepository.existsBySchoolId(schoolId))
+            throw UserAlreadyExistsException()
+        return true
     }
 
     fun checkPassword(password: String, encryptedPassword: String): Boolean {

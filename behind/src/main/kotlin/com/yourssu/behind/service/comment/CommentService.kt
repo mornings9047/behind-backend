@@ -59,7 +59,7 @@ class CommentService @Autowired constructor(private val postRepository: PostRepo
 
     @Transactional
     fun reportComment(commentId: Long) {
-        return reportFunction.reportComment(jwtService.getUser(),commentId)
+        return reportFunction.reportComment(jwtService.getUser(), commentId)
     }
 
     @Transactional

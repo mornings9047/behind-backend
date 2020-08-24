@@ -5,7 +5,8 @@ import com.yourssu.behind.model.entity.lecture.SearchType
 import com.yourssu.behind.repository.lecture.LectureRepository
 import com.yourssu.behind.repository.professor.ProfessorRepository
 
-class FindLectureFunction(private val lectureRepository: LectureRepository, private val professorRepository: ProfessorRepository) {
+class FindLectureFunction(private val lectureRepository: LectureRepository,
+                          private val professorRepository: ProfessorRepository) {
     fun searchLectureByKeyword(keyword: String, type: SearchType): Collection<ReturnLectureDto> {
         val lectures: MutableList<ReturnLectureDto> = mutableListOf()
         when (type) {
@@ -15,10 +16,9 @@ class FindLectureFunction(private val lectureRepository: LectureRepository, priv
             }
             SearchType.Professor -> {
                 val professors = professorRepository.findByNameContains(keyword)
-                for (professor in professors) {
+                for (professor in professors)
                     for (lecture in lectureRepository.findAllByProfessorId(professor.id))
                         lectures.add(ReturnLectureDto(lecture))
-                }
             }
         }
         return lectures

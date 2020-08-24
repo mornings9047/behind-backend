@@ -21,7 +21,6 @@ class ImgUploadFunction(@Value("\${cloud.aws.credentials.accessKey}") private va
                         @Value("\${cloud.aws.credentials.secretKey}") private val secretKey: String,
                         @Value("\${cloud.aws.s3.bucket}") private val bucket: String,
                         @Value("\${cloud.aws.region.static}") private val region: String) {
-
     private val credentials: AWSCredentials = BasicAWSCredentials(this.accessKey, this.secretKey)
     private val s3Client: AmazonS3 = AmazonS3ClientBuilder.standard()
             .withCredentials(AWSStaticCredentialsProvider(credentials))
@@ -30,23 +29,23 @@ class ImgUploadFunction(@Value("\${cloud.aws.credentials.accessKey}") private va
 
     fun s3StoreImg(file: Array<MultipartFile>): List<String> {
 
-        val UrlList:MutableList<String> = mutableListOf();
+        val urlList: MutableList<String> = mutableListOf()
         file.forEach {
-            var fileName: String? = it.originalFilename
+            var fileName = it.originalFilename
             val ext = FilenameUtils.getExtension(fileName)
             val bytes: ByteArray = com.amazonaws.util.IOUtils.toByteArray(it.inputStream)
-            var metaData = ObjectMetadata()
-            var byteArrayInputStream = ByteArrayInputStream(bytes)
+            val metaData = ObjectMetadata()
+            val byteArrayInputStream = ByteArrayInputStream(bytes)
             metaData.contentLength = bytes.size.toLong()
             metaData.contentType = "image/jpeg"
-            fileName = UUID.randomUUID().toString()+fileName
+            fileName = UUID.randomUUID().toString() + fileName
 
             if (ext != "jpeg" && ext != "jpg" && ext != "png")
                 throw InvalidFileTypeException()
 
             s3Client.putObject(PutObjectRequest(bucket, fileName, byteArrayInputStream, metaData))
-            UrlList.add(s3Client.getUrl(bucket, fileName).toString())
+            urlList.add(s3Client.getUrl(bucket, fileName).toString())
         }
-        return UrlList;
+        return urlList
     }
 }

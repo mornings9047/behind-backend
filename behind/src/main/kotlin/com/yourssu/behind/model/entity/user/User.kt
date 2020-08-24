@@ -31,7 +31,6 @@ data class User(
 
         @OneToMany(mappedBy = "user")
         var comments: MutableList<Comment> = mutableListOf()
-
 ) {
     @Override
     override fun toString(): String {

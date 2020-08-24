@@ -6,7 +6,6 @@ import java.time.LocalDateTime
 
 class UserDeleteFunction(private val userRepository: UserRepository,
                          private val jwtService: JwtService) {
-
     fun deleteUser() {
         val user = jwtService.getUser()
         user.schoolId = "DeleteUser_${user.schoolId}_${LocalDateTime.now()}"

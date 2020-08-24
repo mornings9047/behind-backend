@@ -31,5 +31,4 @@ class ResponsePostsDto(post: Post) {
 
     @ApiModelProperty(value = "댓글 갯수")
     val commentsNum = post.commentNum
-
 }

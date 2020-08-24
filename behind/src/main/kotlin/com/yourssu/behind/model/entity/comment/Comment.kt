@@ -10,7 +10,6 @@ import javax.persistence.*
 
 @Entity
 data class Comment(
-
         @Id @GeneratedValue
         val id: Long? = null,
 
@@ -32,7 +31,7 @@ data class Comment(
         val parent: Comment?,
 
         @OneToMany(mappedBy = "parent")
-        var children: MutableList<Comment> = mutableListOf<Comment>(),
+        var children: MutableList<Comment> = mutableListOf(),
 
         @ManyToOne
         val user: User,
