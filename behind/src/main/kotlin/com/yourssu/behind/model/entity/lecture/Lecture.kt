@@ -10,8 +10,7 @@ import javax.persistence.*
 @Entity
 data class Lecture(
         @Id
-        @GeneratedValue
-        val id: Long? = null,
+        val lectureCode: Long? = null,
 
         val major: String,
 
