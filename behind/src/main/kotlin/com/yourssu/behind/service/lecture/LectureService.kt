@@ -74,10 +74,8 @@ class LectureService @Autowired constructor(val lectureRepository: LectureReposi
 
         when (fieldName) {
             "lectureCodes" -> {
-                for (i in 1 until sheet.physicalNumberOfRows) {
-                    println(sheet.getRow(i).getCell(5).numericCellValue.toLong().toString())
+                for (i in 1 until sheet.physicalNumberOfRows)
                     result.add(sheet.getRow(i).getCell(5).numericCellValue.toLong().toString())
-                }
             }
             "courseNames" -> {
                 for (i in 1 until sheet.physicalNumberOfRows)
