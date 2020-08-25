@@ -1,6 +1,6 @@
 package com.yourssu.behind.service.lecture
 
-import com.yourssu.behind.model.dto.lecture.LectureDto
+import com.yourssu.behind.model.dto.lecture.LectureCreateDto
 import com.yourssu.behind.model.entity.lecture.Lecture
 import com.yourssu.behind.model.entity.lecture.LectureSemester
 import com.yourssu.behind.model.entity.professor.Professor
@@ -8,6 +8,7 @@ import com.yourssu.behind.repository.lecture.LectureRepository
 import com.yourssu.behind.repository.professor.ProfessorRepository
 import org.apache.poi.hssf.usermodel.HSSFRow
 import org.apache.poi.hssf.usermodel.HSSFWorkbook
+import org.apache.poi.poifs.filesystem.POIFSFileSystem
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.io.File
@@ -16,7 +17,7 @@ import java.io.FileInputStream
 @Service
 class LectureService @Autowired constructor(val lectureRepository: LectureRepository,
                                             val professorRepository: ProfessorRepository) {
-    fun saveLecture(lectureDto: LectureDto) {
+    fun saveLecture(lectureDto: LectureCreateDto) {
         lectureRepository.save(Lecture(
                 lectureCode = lectureDto.lectureCode,
                 courseName = lectureDto.courseName,
@@ -33,7 +34,7 @@ class LectureService @Autowired constructor(val lectureRepository: LectureReposi
     }
 
     fun readColumn(path: String) {
-        val filePath = FileInputStream(path)
+        val filePath = POIFSFileSystem(FileInputStream(path))
         val sheet = HSSFWorkbook(filePath).getSheetAt(0)
         var columnIndex = 0
         val rows = sheet.physicalNumberOfRows
@@ -59,7 +60,7 @@ class LectureService @Autowired constructor(val lectureRepository: LectureReposi
 
         for (i in 0 until rows - 1) {
             if (!lectureRepository.existsByLectureCode(lectureCodes[i].toLong())) {
-                saveLecture(LectureDto(lectureCodes[i].toLong(), courseNames[i], majors[i],
+                saveLecture(LectureCreateDto(lectureCodes[i].toLong(), courseNames[i], majors[i],
                         professorRepository.save(Professor(name = professors[i])), year = "2020",
                         semester = LectureSemester.FALL))
             }
@@ -68,13 +69,15 @@ class LectureService @Autowired constructor(val lectureRepository: LectureReposi
 
     fun readRow(fieldName: String, path: String): ArrayList<String> {
         val result = arrayListOf<String>()
-        val filePath = FileInputStream(path)
+        val filePath = POIFSFileSystem(FileInputStream(path))
         val sheet = HSSFWorkbook(filePath).getSheetAt(0)
 
         when (fieldName) {
             "lectureCodes" -> {
-                for (i in 1 until sheet.physicalNumberOfRows)
-                    result.add(sheet.getRow(i).getCell(5).stringCellValue)
+                for (i in 1 until sheet.physicalNumberOfRows) {
+                    println(sheet.getRow(i).getCell(5).numericCellValue.toLong().toString())
+                    result.add(sheet.getRow(i).getCell(5).numericCellValue.toLong().toString())
+                }
             }
             "courseNames" -> {
                 for (i in 1 until sheet.physicalNumberOfRows)
