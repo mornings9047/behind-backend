@@ -2,6 +2,7 @@ package com.yourssu.behind.service.post.function
 
 import com.yourssu.behind.exception.post.DeletedPostException
 import com.yourssu.behind.exception.post.PostNotExistsException
+import com.yourssu.behind.model.dto.post.response.ResponseDetailPostsDto
 import com.yourssu.behind.model.dto.post.response.ResponsePostsDto
 import com.yourssu.behind.model.entity.lecture.Lecture
 import com.yourssu.behind.model.entity.post.PostPage
@@ -28,10 +29,10 @@ class FindPostFunction(private val postRepository: PostRepository) {
         return posts.map { ResponsePostsDto(it) }
     }
 
-    fun getPostDetails(postId: Long): ResponsePostsDto {
+    fun getPostDetails(postId: Long): ResponseDetailPostsDto {
         val post = postRepository.findByIdAndDeletePostIsFalse(postId).orElseThrow { throw PostNotExistsException() }
         if (post.deletePost)
             throw DeletedPostException()
-        return ResponsePostsDto(post)
+        return ResponseDetailPostsDto(post)
     }
 }

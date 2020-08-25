@@ -15,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile
 import java.io.ByteArrayInputStream
 import java.util.*
 
-
+/*
 @Component
 class ImgUploadFunction(@Value("\${cloud.aws.credentials.accessKey}") private val accessKey: String,
                         @Value("\${cloud.aws.credentials.secretKey}") private val secretKey: String,
@@ -49,3 +49,4 @@ class ImgUploadFunction(@Value("\${cloud.aws.credentials.accessKey}") private va
         return urlList
     }
 }
+*/

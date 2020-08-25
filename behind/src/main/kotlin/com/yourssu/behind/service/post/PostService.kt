@@ -2,6 +2,7 @@ package com.yourssu.behind.service.post
 
 import com.yourssu.behind.exception.lecture.LectureNotExistsException
 import com.yourssu.behind.model.dto.post.request.CreateOrUpdateRequestPostDto
+import com.yourssu.behind.model.dto.post.response.ResponseDetailPostsDto
 import com.yourssu.behind.model.dto.post.response.ResponsePostsDto
 import com.yourssu.behind.model.entity.post.Image
 import com.yourssu.behind.model.entity.post.Post
@@ -26,8 +27,8 @@ class PostService @Autowired constructor(private val postRepository: PostReposit
                                          scrapRepository: ScrapRepository,
                                          val imageRepository: ImageRepository,
                                          val userRepository: UserRepository,
-                                         reportRepository: ReportRepository,
-                                         val imgUploadFunction: ImgUploadFunction) {
+                                         reportRepository: ReportRepository
+                                         /*,val imgUploadFunction: ImgUploadFunction*/) {
     private val findPostFunction = FindPostFunction(postRepository)
     private val scrapFunction = ScrapFunction(jwtService, postRepository, scrapRepository)
     private val reportFunction = ReportPostFunction(postRepository, scrapRepository, reportRepository)
@@ -48,9 +49,9 @@ class PostService @Autowired constructor(private val postRepository: PostReposit
         postRepository.save(post)
 
         if (imgFile != null) {
-            val imgUrl = imgUploadFunction.s3StoreImg(imgFile).map { Image(URL = it, post = post) }
+            /*val imgUrl = imgUploadFunction.s3StoreImg(imgFile).map { Image(URL = it, post = post) }
             imgUrl.forEach { imageRepository.save(it) }
-            post.imageURL = imgUrl
+            post.imageURL = imgUrl*/
         }
     }
 
@@ -74,7 +75,7 @@ class PostService @Autowired constructor(private val postRepository: PostReposit
     }
 
     @Transactional
-    fun getPostDetails(postId: Long): ResponsePostsDto {
+    fun getPostDetails(postId: Long): ResponseDetailPostsDto {
         return findPostFunction.getPostDetails(postId)
     }
 

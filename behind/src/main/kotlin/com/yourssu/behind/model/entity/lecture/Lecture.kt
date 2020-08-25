@@ -8,9 +8,13 @@ import org.apache.commons.lang3.builder.ToStringStyle
 import javax.persistence.*
 
 @Entity
+@SequenceGenerator(name = "id_seq", sequenceName = "seq", initialValue = 1, allocationSize = 1)
 data class Lecture(
         @Id
         val lectureCode: Long? = null,
+
+        @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_seq")
+        val id: Long? = null,
 
         val major: String,
 

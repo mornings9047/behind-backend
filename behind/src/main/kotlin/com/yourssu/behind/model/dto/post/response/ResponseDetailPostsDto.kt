@@ -7,7 +7,7 @@ import io.swagger.annotations.ApiModelProperty
 import java.time.LocalDateTime
 
 @ApiModel
-class ResponsePostsDto(post: Post) {
+class ResponseDetailPostsDto(post: Post) {
     @ApiModelProperty(value = "게시글 Id")
     val postId: Long? = post.id
 
