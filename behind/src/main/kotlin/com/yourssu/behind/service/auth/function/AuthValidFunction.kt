@@ -23,7 +23,6 @@ class AuthValidFunction(private val userRepository: UserRepository) {
     }
 
     private fun isPasswordValid(password: String): Boolean {
-        val regex = Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,20}$")
-        return regex.matches(password)
+        return password.length == 64
     }
 }
