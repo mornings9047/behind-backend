@@ -24,4 +24,3 @@ class FindLectureFunction(private val lectureRepository: LectureRepository,
         return lectures
     }
 }
-

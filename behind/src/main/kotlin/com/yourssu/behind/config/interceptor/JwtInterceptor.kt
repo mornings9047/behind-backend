@@ -18,14 +18,5 @@ class JwtInterceptor @Autowired constructor(val jwtService: JwtService,
         if (redisService.get(user.schoolId).isNullOrBlank())
             throw UnAuthorizedException()
         return true
-
-//        val token = jwtService.getToken()
-//        return if (jwtService.isValid(token)) {
-//            val user = jwtService.getUser()
-//            if (redisService.get(user.schoolId).isNullOrBlank())
-//                throw UnAuthorizedException()
-//            true
-//        } else
-//            false
     }
 }

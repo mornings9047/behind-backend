@@ -17,17 +17,17 @@ import java.io.FileInputStream
 @Service
 class LectureService @Autowired constructor(val lectureRepository: LectureRepository,
                                             val professorRepository: ProfessorRepository) {
-
     @Transactional
     fun saveLecture(lectureDto: LectureCreateDto) {
-        lectureRepository.save(Lecture(
-                lectureCode = lectureDto.lectureCode,
-                courseName = lectureDto.courseName,
-                major = lectureDto.major,
-                professor = lectureDto.professor,
-                year = lectureDto.year,
-                semester = lectureDto.semester
-        ))
+        if (!lectureRepository.existsByLectureCode(lectureDto.lectureCode))
+            lectureRepository.save(Lecture(
+                    lectureCode = lectureDto.lectureCode,
+                    courseName = lectureDto.courseName,
+                    major = lectureDto.major,
+                    professor = lectureDto.professor,
+                    year = lectureDto.year,
+                    semester = lectureDto.semester
+            ))
     }
 
     @Transactional
@@ -76,14 +76,13 @@ class LectureService @Autowired constructor(val lectureRepository: LectureReposi
         val result = arrayListOf<String>()
         val filePath = FileInputStream(path)
         val sheet = HSSFWorkbook(filePath).getSheetAt(0)
-        
-        
+
+
         when (fieldName) {
             "lectureCodes" -> {
-                for (i in 1 until sheet.physicalNumberOfRows){
-                    if(sheet.getRow(i).getCell(5).cellType == CellType.STRING)
+                for (i in 1 until sheet.physicalNumberOfRows) {
+                    if (sheet.getRow(i).getCell(5).cellType == CellType.STRING)
                         result.add(sheet.getRow(i).getCell(5).stringCellValue)
-
                     else result.add(sheet.getRow(i).getCell(5).numericCellValue.toLong().toString())
                 }
             }
