@@ -6,35 +6,39 @@ import com.yourssu.behind.model.entity.lecture.LectureSemester
 import com.yourssu.behind.model.entity.professor.Professor
 import com.yourssu.behind.repository.lecture.LectureRepository
 import com.yourssu.behind.repository.professor.ProfessorRepository
-import org.apache.poi.hssf.usermodel.HSSFRow
-import org.apache.poi.hssf.usermodel.HSSFWorkbook
-import org.apache.poi.poifs.filesystem.POIFSFileSystem
+import org.apache.poi.hssf.usermodel.*
+import org.apache.poi.ss.usermodel.CellType
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import java.io.File
 import java.io.FileInputStream
 
 @Service
 class LectureService @Autowired constructor(val lectureRepository: LectureRepository,
                                             val professorRepository: ProfessorRepository) {
+    @Transactional
     fun saveLecture(lectureDto: LectureCreateDto) {
-        lectureRepository.save(Lecture(
-                lectureCode = lectureDto.lectureCode,
-                courseName = lectureDto.courseName,
-                major = lectureDto.major,
-                professor = lectureDto.professor,
-                year = lectureDto.year,
-                semester = lectureDto.semester
-        ))
+        if (!lectureRepository.existsByLectureCode(lectureDto.lectureCode))
+            lectureRepository.save(Lecture(
+                    lectureCode = lectureDto.lectureCode,
+                    courseName = lectureDto.courseName,
+                    major = lectureDto.major,
+                    professor = lectureDto.professor,
+                    year = lectureDto.year,
+                    semester = lectureDto.semester
+            ))
     }
 
+    @Transactional
     fun readExcel() {
         for (path in getFileList())
             readColumn(path)
     }
 
+    @Transactional
     fun readColumn(path: String) {
-        val filePath = POIFSFileSystem(FileInputStream(path))
+        val filePath = FileInputStream(path)
         val sheet = HSSFWorkbook(filePath).getSheetAt(0)
         var columnIndex = 0
         val rows = sheet.physicalNumberOfRows
@@ -59,23 +63,28 @@ class LectureService @Autowired constructor(val lectureRepository: LectureReposi
         }
 
         for (i in 0 until rows - 1) {
-            if (!lectureRepository.existsByLectureCode(lectureCodes[i].toLong())) {
-                saveLecture(LectureCreateDto(lectureCodes[i].toLong(), courseNames[i], majors[i],
+            if (!lectureRepository.existsByLectureCode(lectureCodes[i])) {
+                saveLecture(LectureCreateDto(lectureCodes[i], courseNames[i], majors[i],
                         professorRepository.save(Professor(name = professors[i])), year = "2020",
                         semester = LectureSemester.FALL))
             }
         }
     }
 
+    @Transactional
     fun readRow(fieldName: String, path: String): ArrayList<String> {
         val result = arrayListOf<String>()
-        val filePath = POIFSFileSystem(FileInputStream(path))
+        val filePath = FileInputStream(path)
         val sheet = HSSFWorkbook(filePath).getSheetAt(0)
+
 
         when (fieldName) {
             "lectureCodes" -> {
-                for (i in 1 until sheet.physicalNumberOfRows)
-                    result.add(sheet.getRow(i).getCell(5).numericCellValue.toLong().toString())
+                for (i in 1 until sheet.physicalNumberOfRows) {
+                    if (sheet.getRow(i).getCell(5).cellType == CellType.STRING)
+                        result.add(sheet.getRow(i).getCell(5).stringCellValue)
+                    else result.add(sheet.getRow(i).getCell(5).numericCellValue.toLong().toString())
+                }
             }
             "courseNames" -> {
                 for (i in 1 until sheet.physicalNumberOfRows)
@@ -93,6 +102,7 @@ class LectureService @Autowired constructor(val lectureRepository: LectureReposi
         return result
     }
 
+    @Transactional
     @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
     fun getFileList(): List<String> {
         val path = "behind/Lecture_Excel/"
@@ -105,6 +115,7 @@ class LectureService @Autowired constructor(val lectureRepository: LectureReposi
         return fileNames
     }
 
+    @Transactional
     fun parseName(name: String): String {
         val temp = name.split("\n")
         var result = ""
