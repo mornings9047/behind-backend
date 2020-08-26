@@ -7,7 +7,6 @@ import com.yourssu.behind.model.entity.professor.Professor
 import com.yourssu.behind.repository.lecture.LectureRepository
 import com.yourssu.behind.repository.professor.ProfessorRepository
 import org.apache.poi.hssf.usermodel.*
-import org.apache.poi.poifs.filesystem.POIFSFileSystem
 import org.apache.poi.ss.usermodel.CellType
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -39,7 +38,7 @@ class LectureService @Autowired constructor(val lectureRepository: LectureReposi
 
     @Transactional
     fun readColumn(path: String) {
-        val filePath = POIFSFileSystem(FileInputStream(path))
+        val filePath = FileInputStream(path)
         val sheet = HSSFWorkbook(filePath).getSheetAt(0)
         var columnIndex = 0
         val rows = sheet.physicalNumberOfRows
@@ -75,7 +74,7 @@ class LectureService @Autowired constructor(val lectureRepository: LectureReposi
     @Transactional
     fun readRow(fieldName: String, path: String): ArrayList<String> {
         val result = arrayListOf<String>()
-        val filePath = POIFSFileSystem(FileInputStream(path))
+        val filePath = FileInputStream(path)
         val sheet = HSSFWorkbook(filePath).getSheetAt(0)
         
         
@@ -83,22 +82,22 @@ class LectureService @Autowired constructor(val lectureRepository: LectureReposi
             "lectureCodes" -> {
                 for (i in 1 until sheet.physicalNumberOfRows){
                     if(sheet.getRow(i).getCell(5).cellType == CellType.STRING)
-                        result.add(sheet.getRow(i).getCell(5).stringCellValue.toString())
+                        result.add(sheet.getRow(i).getCell(5).stringCellValue)
 
                     else result.add(sheet.getRow(i).getCell(5).numericCellValue.toLong().toString())
                 }
             }
             "courseNames" -> {
                 for (i in 1 until sheet.physicalNumberOfRows)
-                    result.add(sheet.getRow(i).getCell(6).stringCellValue.toString())
+                    result.add(sheet.getRow(i).getCell(6).stringCellValue)
             }
             "professors" -> {
                 for (i in 1 until sheet.physicalNumberOfRows)
-                    result.add(parseName(sheet.getRow(i).getCell(8).stringCellValue.toString()))
+                    result.add(parseName(sheet.getRow(i).getCell(8).stringCellValue))
             }
             "majors" -> {
                 for (i in 1 until sheet.physicalNumberOfRows)
-                    result.add(sheet.getRow(i).getCell(9).stringCellValue.toString())
+                    result.add(sheet.getRow(i).getCell(9).stringCellValue)
             }
         }
         return result

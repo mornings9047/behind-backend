@@ -6,7 +6,7 @@ import io.swagger.annotations.ApiModelProperty
 
 class LectureCreateDto(
         @ApiModelProperty(value = "과목코드(PK)")
-        val lectureCode : String,
+        val lectureCode: String,
 
         @ApiModelProperty(value = "과목이름")
         val courseName: String,
@@ -19,7 +19,7 @@ class LectureCreateDto(
 
         @ApiModelProperty(value = "년도")
         val year: String,
-        
+
         @ApiModelProperty(value = "학기")
         val semester: LectureSemester
 )

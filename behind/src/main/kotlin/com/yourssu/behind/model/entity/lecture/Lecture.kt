@@ -15,7 +15,7 @@ data class Lecture(
         @Column(length = 20)
         val lectureCode: String,
 
-        @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_seq")
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         val id: Long? = null,
 
         val major: String,

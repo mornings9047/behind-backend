@@ -10,6 +10,5 @@ interface LectureRepository : JpaRepository<Lecture, String> {
     fun findByCourseNameContains(courseName: String): List<Lecture>
     fun findAllByProfessorId(id: Long?): List<Lecture>
     fun existsByLectureCode(lectureCode: String): Boolean
-    fun findByLectureCode(lectureCode: String): Optional<Lecture>
     fun findById(lectureId: Long): Optional<Lecture>
 }
