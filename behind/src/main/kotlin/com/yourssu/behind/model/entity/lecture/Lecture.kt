@@ -6,12 +6,14 @@ import com.yourssu.behind.model.entity.user.User
 import org.apache.commons.lang3.builder.ToStringBuilder
 import org.apache.commons.lang3.builder.ToStringStyle
 import javax.persistence.*
+import javax.validation.constraints.Size
 
 @Entity
-@SequenceGenerator(name = "id_seq", sequenceName = "seq", initialValue = 1, allocationSize = 1)
+@SequenceGenerator(name = "id_seq", sequenceName = "id_seq", initialValue = 1, allocationSize = 1)
 data class Lecture(
         @Id
-        val lectureCode: Long? = null,
+        @Column(length = 20)
+        val lectureCode: String,
 
         @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_seq")
         val id: Long? = null,

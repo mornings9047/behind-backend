@@ -7,9 +7,10 @@ import io.swagger.annotations.ApiModelProperty
 
 @ApiModel
 class ReturnLectureDto(lecture: Lecture) {
-    val lectureCode: Long? = lecture.lectureCode
+    @ApiModelProperty("과목코드(PK)")
+    val lectureCode: String = lecture.lectureCode
 
-    @ApiModelProperty("전곻")
+    @ApiModelProperty("전공")
     val major: String = lecture.major
 
     @ApiModelProperty(value = "년도")
