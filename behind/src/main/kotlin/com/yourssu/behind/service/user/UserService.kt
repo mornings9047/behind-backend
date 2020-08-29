@@ -23,16 +23,12 @@ import org.springframework.transaction.annotation.Transactional
 
 @Service
 class UserService @Autowired constructor(userRepository: UserRepository,
-                                         lectureRepository: LectureRepository,
-                                         professorRepository: ProfessorRepository,
                                          val commentRepository: CommentRepository,
                                          private val postRepository: PostRepository,
                                          val scrapRepository: ScrapRepository,
                                          private val jwtService: JwtService) {
+
     private val deleteFunction = UserDeleteFunction(userRepository, jwtService)
-    private val findLectureFunction = FindLectureFunction(lectureRepository, professorRepository)
-    private val userLectureFunction = UserLectureFunction(jwtService, lectureRepository)
-    private val getNewPostFeedFunction = GetNewPostFeedFunction(jwtService, postRepository)
 
     @Transactional
     fun findUserRelatedPost(type: PostSearch, page: Int): Collection<ResponsePostsDto> {
@@ -60,28 +56,5 @@ class UserService @Autowired constructor(userRepository: UserRepository,
         deleteFunction.deleteUser()
     }
 
-    @Transactional
-    fun searchLecture(keyword: String, type: SearchType): Collection<ReturnLectureDto> {
-        return findLectureFunction.searchLectureByKeyword(keyword, type)
-    }
 
-    @Transactional
-    fun addUserLecture(lectureId: Long) {
-        userLectureFunction.addUserLecture(lectureId)
-    }
-
-    @Transactional
-    fun deleteUserLecture(lectureId: Long) {
-        userLectureFunction.removeUserLecture(lectureId)
-    }
-
-    @Transactional
-    fun getAllUserLecture(): Collection<ReturnLectureDto> {
-        return userLectureFunction.getUserLectures()
-    }
-
-    @Transactional
-    fun newPostFeed(page: Int): Collection<ResponsePostsDto> {
-        return getNewPostFeedFunction.getNewPostFeed(page)
-    }
 }
