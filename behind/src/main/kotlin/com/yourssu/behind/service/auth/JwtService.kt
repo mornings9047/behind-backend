@@ -46,7 +46,13 @@ class JwtService @Autowired constructor(val userRepository: UserRepository) {
     }
 
     fun decodeToken(): Claims {
-        return Jwts.parser().setSigningKey("A".toByteArray()).parseClaimsJws(getToken()).body
+        try {
+            return Jwts.parser().setSigningKey("A".toByteArray()).parseClaimsJws(getToken()).body
+        } catch (e: MalformedJwtException) {
+            throw InvalidTokenException()
+        } catch (e: IllegalArgumentException) {
+            throw TokenNotFoundException()
+        }
     }
 
     @Throws(InterruptedException::class)

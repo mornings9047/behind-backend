@@ -14,6 +14,9 @@ class ResponsePostsDto(post: Post) {
     @ApiModelProperty(value = "담당교수")
     val professor: String = post.lecture.professor.name
 
+    @ApiModelProperty(value = "과목명")
+    val courseName: String = post.lecture.courseName
+
     @ApiModelProperty(value = "게시글 제목")
     val title: String = post.title
 
