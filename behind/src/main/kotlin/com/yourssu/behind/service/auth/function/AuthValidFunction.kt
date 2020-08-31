@@ -18,7 +18,7 @@ class AuthValidFunction(private val userRepository: UserRepository) {
     }
 
     fun isSchoolIdValid(schoolId: String): Boolean {
-        val regex = Regex("^(20)([0-9]){6}$")
+        val regex = Regex("20\\d{6}")
         return regex.matches(schoolId)
     }
 
