@@ -1,6 +1,5 @@
 package com.yourssu.behind.model.entity.post
 
-import com.yourssu.behind.model.entity.comment.Comment
 import com.yourssu.behind.model.entity.lecture.Lecture
 import com.yourssu.behind.model.entity.user.User
 import org.apache.commons.lang3.builder.ToStringBuilder
@@ -34,13 +33,10 @@ data class Post(
         @OneToMany(mappedBy = "post")
         var imageURL: List<Image> = mutableListOf(),
 
-        @OneToMany(mappedBy = "post", cascade = [CascadeType.ALL])
-        var comments: MutableList<Comment> = mutableListOf(),
-
-        @ManyToOne
+        @ManyToOne(fetch = FetchType.LAZY)
         var lecture: Lecture,
 
-        @ManyToOne
+        @ManyToOne(fetch = FetchType.LAZY)
         var user: User
 ) {
     @Override

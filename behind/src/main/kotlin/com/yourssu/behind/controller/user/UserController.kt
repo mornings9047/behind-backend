@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/user")
 class UserController @Autowired constructor(val userService: UserService, val lectureService: LectureService) {
-    @GetMapping("/post")
+    @GetMapping("/article")
     @ApiOperation("유저와 연관된 게시물 가져오기(댓글 작성한 글, 작성한 글, 스크랩 한 글")
     @ResponseStatus(HttpStatus.OK)
     fun getUserRelatedPost(@RequestParam type: PostSearch, page: Int): Collection<ResponsePostsDto> {

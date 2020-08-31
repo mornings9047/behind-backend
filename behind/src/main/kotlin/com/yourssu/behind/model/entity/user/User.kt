@@ -27,9 +27,6 @@ data class User(
         var lectures: MutableList<Lecture> = mutableListOf(),
 
         @OneToMany(mappedBy = "user")
-        var posts: MutableList<Post> = mutableListOf(),
-
-        @OneToMany(mappedBy = "user")
         var comments: MutableList<Comment> = mutableListOf()
 ) {
     @Override

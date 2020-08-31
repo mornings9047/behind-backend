@@ -16,7 +16,7 @@ import javax.validation.Valid
 class AuthController @Autowired constructor(val authService: AuthService,
                                             val jwtService: JwtService,
                                             val redisService: RedisService) {
-    @PostMapping("/signUp")
+    @PostMapping("/signup")
     @ApiOperation(value = "회원가입")
     @ResponseStatus(HttpStatus.CREATED)
     fun signUpNewUser(@Valid @RequestBody signUpRequestDto: UserSignUpRequestDto) {
@@ -30,7 +30,7 @@ class AuthController @Autowired constructor(val authService: AuthService,
         return authService.checkSchoolId(schoolId)
     }
 
-    @PostMapping("/signIn")
+    @PostMapping("/signin")
     @ApiOperation(value = "로그인")
     @ResponseStatus(HttpStatus.OK)
     fun signIn(@Valid @RequestBody signInRequestDto: UserSignInRequestDto): String {
@@ -40,7 +40,7 @@ class AuthController @Autowired constructor(val authService: AuthService,
         return token
     }
 
-    @PostMapping("/signOut")
+    @PostMapping("/signout")
     @ApiOperation(value = "로그아웃")
     @ResponseStatus(HttpStatus.OK)
     fun signOut() {

@@ -9,24 +9,25 @@ import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/comments")
+@RequestMapping("/article/{postId}/comment")
 class CommentController @Autowired constructor(val commentService: CommentService) {
+
     @ApiOperation(value = "댓글 작성")
-    @PostMapping("/post/{postId}")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     fun createComment(@PathVariable postId: Long, @RequestBody createOrUpdateRequestCommentDto: CreateOrUpdateRequestCommentDto) {
         return commentService.createComment(postId, createOrUpdateRequestCommentDto)
     }
 
     @ApiOperation(value = "대 댓글 작성")
-    @PostMapping("/post/{postId}/recomment/{commentId}")
+    @PostMapping("/{commentId}")
     @ResponseStatus(HttpStatus.CREATED)
     fun createReComment(@PathVariable postId: Long, @PathVariable commentId: Long, @RequestBody createOrUpdateRequestCommentDto: CreateOrUpdateRequestCommentDto) {
         commentService.createRecomment(postId, createOrUpdateRequestCommentDto, commentId)
     }
 
     @ApiOperation("게시물의 댓글 가져오기")
-    @GetMapping("/post/{postId}")
+    @GetMapping
     fun getComment(@PathVariable postId: Long): List<ResponseCommentDto> {
         return commentService.getComment(postId)
     }
