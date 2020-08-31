@@ -14,8 +14,8 @@ class JwtInterceptor @Autowired constructor(val jwtService: JwtService,
                                             val redisService: RedisService) : HandlerInterceptor {
     @Override
     override fun preHandle(request: HttpServletRequest, response: HttpServletResponse, handler: Any): Boolean {
-        val user = jwtService.getUser()
-        if (redisService.get(user.schoolId).isNullOrBlank())
+        val schoolId = jwtService.decodeToken()["schoolId"] as String
+        if (redisService.get(schoolId).isNullOrBlank())
             throw UnAuthorizedException()
         return true
     }
