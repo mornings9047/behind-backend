@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
 
 @RestController
-@RequestMapping("/articles")
+@RequestMapping("/article")
 class PostController @Autowired constructor(val postService: PostService) {
     @ApiOperation("게시글 작성", consumes = (MediaType.MULTIPART_FORM_DATA_VALUE))
-    @PostMapping("/", consumes = [MediaType.MULTIPART_FORM_DATA_VALUE])
+    @PostMapping(consumes = [MediaType.MULTIPART_FORM_DATA_VALUE])
     @ResponseStatus(HttpStatus.CREATED)
     fun createPost(@RequestPart(required = false) imgFile: Array<MultipartFile>?, @RequestPart createOrUpdateRequestPostDto: CreateOrUpdateRequestPostDto) {
         postService.createPost(createOrUpdateRequestPostDto, imgFile)
@@ -37,7 +37,7 @@ class PostController @Autowired constructor(val postService: PostService) {
     }
 
     @ApiOperation("스크랩 하기")
-    @GetMapping("/{postId}/scrap")
+    @GetMapping("/scrap/{postId}")
     @ResponseStatus(HttpStatus.OK)
     fun scrapPost(@PathVariable postId: Long) {
         return postService.scrapPost(postId)

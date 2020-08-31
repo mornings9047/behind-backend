@@ -33,10 +33,10 @@ data class Comment(
         @OneToMany(mappedBy = "parent")
         var children: MutableList<Comment> = mutableListOf(),
 
-        @ManyToOne
+        @ManyToOne(fetch = FetchType.LAZY)
         val user: User,
 
-        @ManyToOne
+        @ManyToOne(fetch = FetchType.LAZY)
         val post: Post
 ) {
     @Override

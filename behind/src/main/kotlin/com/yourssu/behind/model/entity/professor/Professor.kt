@@ -10,10 +10,7 @@ data class Professor(
         @Id @GeneratedValue
         val id: Long? = null,
 
-        val name: String,
-
-        @OneToMany(mappedBy = "professor")
-        var lectures: MutableList<Lecture> = mutableListOf()
+        val name: String
 ) {
     @Override
     override fun toString(): String {
