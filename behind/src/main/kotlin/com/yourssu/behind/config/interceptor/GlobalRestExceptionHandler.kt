@@ -1,9 +1,6 @@
 package com.yourssu.behind.config.interceptor
 
-import com.yourssu.behind.exception.auth.InvalidTokenException
-import com.yourssu.behind.exception.auth.TokenExpiredException
-import com.yourssu.behind.exception.auth.TokenNotFoundException
-import com.yourssu.behind.exception.auth.UnAuthorizedException
+import com.yourssu.behind.exception.auth.*
 import com.yourssu.behind.exception.comment.CommentNotExistsException
 import com.yourssu.behind.exception.lecture.LectureAlreadyExistsException
 import com.yourssu.behind.exception.lecture.LectureNotExistsException

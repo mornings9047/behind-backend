@@ -1,7 +1,7 @@
 package com.yourssu.behind.service.auth.function
 
-import com.yourssu.behind.exception.user.InvalidPasswordException
-import com.yourssu.behind.exception.user.InvalidSchoolIdException
+import com.yourssu.behind.exception.auth.InvalidPasswordException
+import com.yourssu.behind.exception.auth.InvalidSchoolIdException
 import com.yourssu.behind.exception.user.UserAlreadyExistsException
 import com.yourssu.behind.model.dto.user.request.UserSignUpRequestDto
 import com.yourssu.behind.repository.user.UserRepository

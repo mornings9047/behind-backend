@@ -1,6 +1,6 @@
 package com.yourssu.behind.service.authTest
 
-import com.yourssu.behind.exception.user.PasswordNotMatchedException
+import com.yourssu.behind.exception.auth.PasswordNotMatchedException
 import com.yourssu.behind.exception.user.UserNotExistsException
 import com.yourssu.behind.model.dto.user.request.UserSignInRequestDto
 import com.yourssu.behind.model.dto.user.request.UserSignUpRequestDto
