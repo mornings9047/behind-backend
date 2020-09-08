@@ -23,7 +23,7 @@ class CommentService @Autowired constructor(private val postRepository: PostRepo
                                             reportRepository: ReportRepository,
                                             val userRepository: UserRepository) {
     private val commentFunction = CommentFunction(commentRepository, postRepository, jwtService)
-    private val reportFunction = ReportCommentFunction(postRepository, commentRepository, reportRepository)
+    private val reportFunction = ReportCommentFunction(postRepository, commentRepository, reportRepository, jwtService)
 
     @Transactional
     fun createComment(postId: Long, createOrUpdateRequestCommentDto: CreateOrUpdateRequestCommentDto) {
@@ -58,12 +58,12 @@ class CommentService @Autowired constructor(private val postRepository: PostRepo
     }
 
     @Transactional
-    fun reportComment(commentId: Long) {
-        return reportFunction.reportComment(jwtService.getUser(), commentId)
+    fun reportComment(postId: Long, commentId: Long) {
+        return reportFunction.reportComment(postId, commentId)
     }
 
     @Transactional
-    fun deleteComment(commentId: Long) {
-        return commentFunction.deleteComment(commentId)
+    fun deleteComment(postId: Long, commentId: Long) {
+        return commentFunction.deleteComment(postId, commentId)
     }
 }

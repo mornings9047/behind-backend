@@ -34,13 +34,13 @@ class CommentController @Autowired constructor(val commentService: CommentServic
 
     @ApiOperation("댓글 신고하기")
     @GetMapping("/report/{commentId}")
-    fun reportComment(@PathVariable commentId: Long) {
-        return commentService.reportComment(commentId)
+    fun reportComment(@PathVariable postId: Long, @PathVariable commentId: Long) {
+        return commentService.reportComment(postId, commentId)
     }
 
     @ApiOperation("댓글 삭제하기")
     @DeleteMapping("/{commentId}")
-    fun deleteComment(@PathVariable commentId: Long) {
-        return commentService.deleteComment(commentId)
+    fun deleteComment(@PathVariable postId: Long, @PathVariable commentId: Long) {
+        return commentService.deleteComment(postId, commentId)
     }
 }

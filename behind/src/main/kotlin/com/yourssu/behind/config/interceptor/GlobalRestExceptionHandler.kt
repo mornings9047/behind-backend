@@ -4,10 +4,7 @@ import com.yourssu.behind.exception.auth.*
 import com.yourssu.behind.exception.comment.CommentNotExistsException
 import com.yourssu.behind.exception.lecture.LectureAlreadyExistsException
 import com.yourssu.behind.exception.lecture.LectureNotExistsException
-import com.yourssu.behind.exception.post.DeletedPostException
-import com.yourssu.behind.exception.post.InvalidFileTypeException
-import com.yourssu.behind.exception.post.PostNotExistsException
-import com.yourssu.behind.exception.post.WriterScrapException
+import com.yourssu.behind.exception.post.*
 import com.yourssu.behind.exception.report.CommentAlreadyReportedException
 import com.yourssu.behind.exception.report.PostAlreadyReportedException
 import com.yourssu.behind.exception.user.*
@@ -25,13 +22,14 @@ class GlobalRestExceptionHandler {
         return ExceptionResponseDto(HttpStatus.BAD_REQUEST, e)
     }
 
-    @ExceptionHandler(value = [UserAlreadyExistsException::class, LectureAlreadyExistsException::class, PostAlreadyReportedException::class, CommentAlreadyReportedException::class])
+    @ExceptionHandler(value = [UserAlreadyExistsException::class, LectureAlreadyExistsException::class, PostAlreadyReportedException::class, CommentAlreadyReportedException::class, PostNotContainsCommentException::class])
     @ResponseStatus(HttpStatus.CONFLICT)
     fun conflictException(e: Exception): ExceptionResponseDto {
         return ExceptionResponseDto(HttpStatus.CONFLICT, e)
     }
 
-    @ExceptionHandler(value = [InvalidFileTypeException::class, WriterScrapException::class, DeletedPostException::class])
+    @ExceptionHandler(value = [InvalidFileTypeException::class, WriterScrapException::class, PostAlreadyDeletedException::class])
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     fun postException(e: Exception): ExceptionResponseDto {
         return ExceptionResponseDto(HttpStatus.BAD_REQUEST, e)
     }
@@ -48,4 +46,3 @@ class GlobalRestExceptionHandler {
         return ExceptionResponseDto(HttpStatus.NOT_FOUND, e)
     }
 }
-

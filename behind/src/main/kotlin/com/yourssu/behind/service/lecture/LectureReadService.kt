@@ -35,11 +35,11 @@ class LectureReadService @Autowired constructor(val lectureRepository: LectureRe
             readSheet(path)
     }
 
-    fun readSheet(path: String){
+    fun readSheet(path: String) {
         val filePath = FileInputStream(path)
         val sheetCount = HSSFWorkbook(filePath).numberOfSheets
-        for(i in 0 until sheetCount)
-            readColumn(path,i)
+        for (i in 0 until sheetCount)
+            readColumn(path, i)
     }
 
     fun readColumn(path: String, sheetAt: Int) {
@@ -49,7 +49,7 @@ class LectureReadService @Autowired constructor(val lectureRepository: LectureRe
         val rows = sheet.physicalNumberOfRows
         val row: HSSFRow = sheet.getRow(0)
         var courseNames = arrayListOf<String>()
-        var majors = arrayListOf<String>()
+        val majors: ArrayList<String>
         var professors = arrayListOf<String>()
         var lectureCodes = arrayListOf<String>()
 
@@ -90,11 +90,11 @@ class LectureReadService @Autowired constructor(val lectureRepository: LectureRe
             }
             "courseNames" -> {
                 for (i in 1 until sheet.physicalNumberOfRows)
-                        result.add(sheet.getRow(i).getCell(6).stringCellValue)
+                    result.add(sheet.getRow(i).getCell(6).stringCellValue)
             }
             "professors" -> {
                 for (i in 1 until sheet.physicalNumberOfRows)
-                    if(sheet.getRow(i).getCell(8).stringCellValue == "")
+                    if (sheet.getRow(i).getCell(8).stringCellValue == "")
                         result.add("")
                     else result.add(parseName(sheet.getRow(i).getCell(8).stringCellValue))
             }
@@ -108,7 +108,7 @@ class LectureReadService @Autowired constructor(val lectureRepository: LectureRe
 
     @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
     fun getFileList(): List<String> {
-        val path = "behind/Lecture_Excel/"
+        val path = "Lecture_Excel/"
         val dir = File(path)
         val fileList = dir.listFiles()
         val fileNames = arrayListOf<String>()
@@ -126,5 +126,4 @@ class LectureReadService @Autowired constructor(val lectureRepository: LectureRe
         }
         return result
     }
-
 }

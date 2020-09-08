@@ -2,6 +2,7 @@ package com.yourssu.behind.service.comment.function
 
 import com.yourssu.behind.exception.comment.CommentNotExistsException
 import com.yourssu.behind.exception.comment.CommentOwnerNotMatchedException
+import com.yourssu.behind.exception.post.PostNotContainsCommentException
 import com.yourssu.behind.exception.post.PostNotExistsException
 import com.yourssu.behind.model.dto.comment.response.ResponseCommentDto
 import com.yourssu.behind.model.entity.comment.Comment
@@ -17,10 +18,12 @@ class CommentFunction(private val commentRepository: CommentRepository,
         commentRepository.save(comment)
     }
 
-    fun deleteComment(commentId: Long) {
-        val comment = commentRepository.findById(commentId).orElseThrow { CommentNotExistsException() }
-        val post = postRepository.findByComments(comment).orElseThrow { PostNotExistsException() }
+    fun deleteComment(postId: Long, commentId: Long) {
         val user = jwtService.getUser()
+        val post = postRepository.findById(postId).orElseThrow { PostNotExistsException() }
+        val comment = commentRepository.findById(commentId).orElseThrow { CommentNotExistsException() }
+        if (!post.comments.contains(comment))
+            throw PostNotContainsCommentException()
         if (comment.user.id != user.id)
             throw CommentOwnerNotMatchedException()
 
